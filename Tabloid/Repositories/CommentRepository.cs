@@ -110,11 +110,11 @@ namespace TabloidMVC.Repositories
                 {
                     cmd.CommandText = @"
                         INSERT INTO Comment (
-                             Content, CreateDateTime, PostId, UserProfileId )
+                             Subject, Content, CreateDateTime, PostId, UserProfileId )
                         OUTPUT INSERTED.ID
                         VALUES (
-                             @Content, @CreateDateTime, @PostId, @UserProfileId )";
-            
+                             @Subject, @Content, @CreateDateTime, @PostId, @UserProfileId )";
+                    cmd.Parameters.AddWithValue("@Subject", comment.Subject);
                     cmd.Parameters.AddWithValue("@Content", comment.Content);
                     cmd.Parameters.AddWithValue("@CreateDateTime", comment.CreateDateTime);
                     cmd.Parameters.AddWithValue("@PostId", comment.PostId);
@@ -135,12 +135,13 @@ namespace TabloidMVC.Repositories
                     cmd.CommandText = @"
                             UPDATE Comment
                             SET
+                                Subject = @Subject,
                                 Content = @Content, 
                                 CreateDateTime = @createDateTime,
                                 PostId = @postId,
                                 UserProfileId = @UserProfileId
                             WHERE Id = @id";
-
+                    cmd.Parameters.AddWithValue("@Subject", comment.Subject);
                     cmd.Parameters.AddWithValue("@Content", comment.Content);
                     cmd.Parameters.AddWithValue("@CreateDateTime", comment.CreateDateTime);
                     cmd.Parameters.AddWithValue("@PostId", comment.PostId);

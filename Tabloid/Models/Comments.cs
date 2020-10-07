@@ -10,6 +10,8 @@ namespace Tabloid.Models.cs
         public int Id { get; set; }
 
         public int PostId { get; set; }
+
+        public int Subject { get; set; }
         public int UserProfileId { get; set; }
         public string Content { get; set; }
         
