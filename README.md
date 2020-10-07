@@ -25,3 +25,8 @@
 1. Rename the `.env.local.example` file to remove the `.example` extension. This file should now just be called `.env.local`
 
 1. Install your dependencies by running `npm install` from the same directory as your `package.json` file
+
+### ERD
+[Link to DBDiagram](https://dbdiagram.io/d/5f7de4e43a78976d7b76bccd)
+![Title](https://res.cloudinary.com/dhduglm4j/image/upload/v1602085969/TabloidERD_wbp2ya.png)
+
