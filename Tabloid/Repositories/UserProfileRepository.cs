@@ -81,8 +81,8 @@ namespace Tabloid.Repositories
             }
         }
 
-        /*
-        public UserProfile GetByFirebaseUserId(string firebaseUserId)
+        
+      /*  public UserProfile GetByFirebaseUserId(string firebaseUserId)
         {
             return _context.UserProfile
                        .Include(up => up.UserType) 
@@ -93,7 +93,7 @@ namespace Tabloid.Repositories
         {
             _context.Add(userProfile);
             _context.SaveChanges();
-        }
-        */
+        }*/
+        
     }
 }
