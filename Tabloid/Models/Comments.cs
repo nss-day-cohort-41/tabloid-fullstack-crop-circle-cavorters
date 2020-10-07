@@ -13,7 +13,7 @@ namespace Tabloid.Models.cs
         public int UserProfileId { get; set; }
         public string Content { get; set; }
         
-        public bool CreateDateTime { get; set; }
+        public DateTime CreateDateTime { get; set; }
         
        
     }
