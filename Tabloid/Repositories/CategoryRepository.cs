@@ -5,31 +5,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Tabloid.Models;
+using Tabloid.Utils;
 
 namespace Tabloid.Repositories
 {
 
     public class CategoryRepository : ICategoryRepository
     {
-        private readonly string _connectionString;
-        public CategoryRepository(IConfiguration configuration)
-        {
-            _connectionString = configuration.GetConnectionString("DefaultConnection");
-        }
+        public CategoryRepository(IConfiguration configuration) : base(configuration) { }
 
-        private SqlConnection Connection
-        {
-            get { return new SqlConnection(_connectionString); }
-        }
-        private Category NewCategoryFromReader(SqlDataReader reader)
-        {
-            return new Category()
-            {
-                Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                Name = reader.GetString(reader.GetOrdinal("Name"))
-
-            };
-        }
         public List<Category> GetAllCategories()
         {
             using (var conn = Connection)
@@ -37,7 +21,7 @@ namespace Tabloid.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = /*"SELECT Id, Title, BeanVarietyId FROM Coffee;";*/
+                    cmd.CommandText = 
 
                     "SELECT Id, Name " +
                     "FROM Category";
@@ -49,10 +33,8 @@ namespace Tabloid.Repositories
                         var category = new Category()
                         {
                             Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                            Name = reader.GetString(reader.GetOrdinal("Name")),
-
+                            Name = reader.GetString(reader.GetOrdinal("Name"))
                         };
-
 
                         categories.Add(category);
                     }

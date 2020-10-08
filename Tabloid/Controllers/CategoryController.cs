@@ -5,11 +5,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
+using Tabloid.Models;
 using Tabloid.Repositories;
 
 namespace Tabloid.Controllers
 {
-    public class CategoryController : Controller 
+    public class CategoryController : ControllerBase
     {
 
         private readonly ICategoryRepository _categoryRepo;
@@ -23,6 +24,12 @@ namespace Tabloid.Controllers
 
         }
 
+/*        [HttpGet]
+        public IActionResult Get()
+        {
+            var posts = _categoryRepository.GetAllCategories();
+            return Ok(posts);
+        }*/
 
         // GET: CategoryController
         public ActionResult Index()
@@ -82,6 +89,11 @@ namespace Tabloid.Controllers
         public ActionResult Delete(int id)
         {
             return View();
+        }
+
+        private ActionResult View()
+        {
+            throw new NotImplementedException();
         }
 
         // POST: CategoryController/Delete/5
