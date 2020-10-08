@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Tabloid.Repositories;
+using Tabloid.Models;
 
 namespace Tabloid.Controllers
 {
@@ -26,8 +27,16 @@ namespace Tabloid.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var tags = _tagRepository.GetAll();
+            var tags = _tagRepository.GetAllTags();
             return Ok(tags);
+        }
+
+
+        [HttpPost]
+        public IActionResult Post(Tag tag)
+        {
+            _tagRepository.AddTag(tag);
+            return CreatedAtAction("Get", new { id = tag.Id }, tag);
         }
 
         //// GET: TagController/Details/5

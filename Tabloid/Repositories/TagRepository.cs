@@ -10,14 +10,14 @@ namespace Tabloid.Repositories
     public class TagRepository : BaseRepository, ITagRepository
     {
         public TagRepository(IConfiguration config) : base(config) { }
-        public List<Tag> GetAll()
+        public List<Tag> GetAllTags()
         {
             using (var conn = Connection)
             {
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = "SELECT id, [name] FROM Tag ORDER BY [name]";
+                    cmd.CommandText = "SELECT Id, name FROM Tag ORDER BY name";
 
                     var reader = cmd.ExecuteReader();
 
@@ -46,7 +46,7 @@ namespace Tabloid.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        SELECT Id, [name] 
+                        SELECT Id, name
                         FROM Tag
                         WHERE Id = @id";
 
@@ -73,7 +73,7 @@ namespace Tabloid.Repositories
             }
         }
 
-        public void Add(Tag tag)
+        public void AddTag(Tag tag)
         {
             using (var conn = Connection)
             {
@@ -81,18 +81,22 @@ namespace Tabloid.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        INSERT INTO Tag (
-                            [Name] )
+                        INSERT INTO Tag (Name)
                         OUTPUT INSERTED.ID
-                        VALUES ( @Name )";
+                        VALUES ( @name )";
 
-                    cmd.Parameters.AddWithValue("@Name", tag.Name);
-                    tag.Id = (int)cmd.ExecuteScalar();
+                    cmd.Parameters.AddWithValue("@name", tag.Name);
+
+                    //int newlyCreatedId = (int)cmd.ExecuteScalar();
+                    //category.Id = newlyCreatedId;
+
+                    int id = (int)cmd.ExecuteScalar();
+                    tag.Id = id;
                 }
             }
         }
 
-        public void Update(Tag tag)
+        public void UpdateTag(Tag tag)
         {
             using (var conn = Connection)
             {
@@ -101,7 +105,7 @@ namespace Tabloid.Repositories
                 {
                     cmd.CommandText = @"
                             UPDATE Tag
-                            SET [Name] = @name
+                            SET Name = @name
                             WHERE Id = @id";
 
                     cmd.Parameters.AddWithValue("@name", tag.Name);
@@ -111,7 +115,7 @@ namespace Tabloid.Repositories
             }
         }
 
-        public void Delete(int tagId)
+        public void DeleteTag(int tagId)
         {
             using (var conn = Connection)
             {

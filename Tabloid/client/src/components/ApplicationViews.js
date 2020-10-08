@@ -1,3 +1,4 @@
+
 import React, { useContext } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { UserProfileContext } from "../providers/UserProfileProvider";
@@ -31,8 +32,13 @@ export default function ApplicationViews() {
         {isLoggedIn ? <PostList /> : <Redirect to="/login" />}
         </Route>
         
-        <Route path="/tags">
+        <Route path="/tags" exact>
         {isLoggedIn ? <TagList /> : <Redirect to="/login" />}
+        </Route>
+
+        
+        <Route path="/tags/add">
+          {isLoggedIn ? <TagForm /> : <Redirect to="/login" />}
         </Route>
 
       </Switch>

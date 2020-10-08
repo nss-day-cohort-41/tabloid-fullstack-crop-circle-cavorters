@@ -7,6 +7,7 @@ import { TagContext } from "../../providers/TagProvider";
 
 export default function TagList() {
   const { tags, getAllTags } = useContext(TagContext);
+  
 
   useEffect(() => {
     getAllTags();
@@ -14,6 +15,7 @@ export default function TagList() {
 
   return (
     <section>
+   {/* <button onClick={() => { history.push("/tags/add") }}> New Tag? </button> */}
       {tags.map(t =>
         <Tag key={t.id} tag={t}/>
       )}

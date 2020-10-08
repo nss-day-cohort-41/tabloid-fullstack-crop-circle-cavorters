@@ -8,7 +8,7 @@ export const TagProvider = (props) => {
     const { getToken } = useContext(UserProfileContext);
 
     const [tags, setTags] = useState([]);
-    
+
 //Method for pulling all the current tags
     const getAllTags = () =>
         getToken().then((token) =>
@@ -34,7 +34,7 @@ export const TagProvider = (props) => {
                 if (resp.ok) {
                     return resp.json();
                 }
-                throw new Error("Unauthorized");
+              //  throw new Error("Unauthorized");
             }));
 
 

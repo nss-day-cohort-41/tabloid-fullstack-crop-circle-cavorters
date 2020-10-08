@@ -7,7 +7,6 @@ export default function Tag({ tag }) {
       <CardBody>
           <h2>Tag Name:</h2>
           <p>{tag.name}</p>
-
       </CardBody>
     </Card>
   );
