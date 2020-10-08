@@ -8,9 +8,12 @@ import Hello from "./Hello";
 import PostList from "./Posts/PostList";
 import TagList from "./Tags/TagList";
 import TagForm from "./Tags/TagForm";
+import TagEditForm from "./Tags/TagEditForm";
+
 
 export default function ApplicationViews() {
   const { isLoggedIn } = useContext(UserProfileContext);
+
 
   return (
     <main>
@@ -29,18 +32,21 @@ export default function ApplicationViews() {
         </Route>
 
         <Route path="/posts">
-        {isLoggedIn ? <PostList /> : <Redirect to="/login" />}
-        </Route>
-        
-        <Route path="/tags" exact>
-        {isLoggedIn ? <TagList /> : <Redirect to="/login" />}
+          {isLoggedIn ? <PostList /> : <Redirect to="/login" />}
         </Route>
 
-        
+        {/* TAGS ROUTES */}
+        <Route path="/tags" exact>
+          {isLoggedIn ? <TagList /> : <Redirect to="/login" />}
+        </Route>
         <Route path="/tags/add">
           {isLoggedIn ? <TagForm /> : <Redirect to="/login" />}
         </Route>
-
+        <Route path= "/tags/:tagId(\d+)">
+        {/* <Route path= "`/api/tags/edit/${id}`"> */}
+          {isLoggedIn ? <TagEditForm /> : <Redirect to="/login" />}
+        </Route>
+        {/* END TAGS ROUTES */}
       </Switch>
     </main>
   );

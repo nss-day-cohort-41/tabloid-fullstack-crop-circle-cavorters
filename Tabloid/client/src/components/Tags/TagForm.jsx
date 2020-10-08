@@ -36,17 +36,7 @@ const TagForm = () => {
       history.push("/");
     });
   };
-//   export default function TagForm() {
-//     const history = useHistory();
-//     const { addTag } = useContext(TagContext);
-//     const [tagName, setTagName] = useState();
-  
-    // const submitForm = (e) => {
-    //   e.preventDefault();
-    //   addTag({ name: tagName })
-    //     .then(() => history.push("/"))
-    //     //.catch((err) => alert(`An error ocurred: ${err.message}`));
-    // };
+
   // const submitForm = (e) => {
   //   e.preventDefault();
   //   addQuote({ text: quoteText })
@@ -80,15 +70,6 @@ const TagForm = () => {
       </div>
     </div>
 
-// <Form onSubmit={submitForm}>
-// <FormGroup>
-//   <Label for="Name">Tag</Label>
-//   <Input id="Name" type="textarea" onChange={e => setTagName(e.target.value)} />
-// </FormGroup>
-// <FormGroup>
-//   <Button>Save</Button>
-// </FormGroup>
-// </Form>
   );
 };
  export default TagForm;

@@ -41,18 +41,7 @@ export default function Header() {
             </NavItem>
             <NavItem>
               <NavLink tag={RRNavLink} to="/tags">Tag</NavLink>
-              <NavLink tag={RRNavLink} to="/tags/add">Add Tag</NavLink>
             </NavItem>
-              {/* <UncontrolledDropdown nav inNavbar>
-              <DropdownToggle nav caret>
-              <NavLink tag={RRNavLink} to="/tags">Tags</NavLink>
-              </DropdownToggle>
-              <DropdownMenu>
-                <DropdownItem>
-                <NavLink tag={RRNavLink} to="/tags/add">Add a Tag</NavLink>
-                </DropdownItem>
-              </DropdownMenu>
-            </UncontrolledDropdown> */}
             </>
             }
 
