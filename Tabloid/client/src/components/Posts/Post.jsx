@@ -2,6 +2,11 @@ import React from "react";
 import { Card, CardBody, Button } from "reactstrap";
 
 export default function Post({ post }) {
+  let id = post.id;
+  const viewDetails = () => {
+    alert("DETAILS!!!!", id);
+  }
+
   return (
     <Card className="m-4">
       <CardBody>
@@ -10,8 +15,8 @@ export default function Post({ post }) {
         <p>{post.categoryId}</p>
         <p>{post.isApproved}</p>
         <p>{post.publishDateTime}</p>
-        <Button 
-          type="">View Post</Button>
+        <Button
+          onClick={viewDetails}>View Post</Button>
 
       </CardBody>
     </Card>
