@@ -68,6 +68,16 @@ export function UserProfileProvider(props) {
       }).then(resp => resp.json()));
   };
 
+  const getUserId = (id) => {
+    return getToken().then((token) =>
+      fetch(`${apiUrl}/user/${id}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }).then(resp => resp.json()));
+  };
+
   const saveUser = (userProfile) => {
     return getToken().then((token) =>
       fetch(apiUrl, {
@@ -80,8 +90,20 @@ export function UserProfileProvider(props) {
       }).then(resp => resp.json()));
   };
 
+  const updateUser = (user) => {
+    return getToken().then((token) =>
+      fetch(`${apiUrl}/${user.id}`, {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(user)
+      }));
+  };
+
   return (
-    <UserProfileContext.Provider value={{ users, isLoggedIn, login, logout, register, getToken, setUsers, getAllUsers, getUserProfile }}>
+    <UserProfileContext.Provider value={{ users, isLoggedIn, login, logout, register, getToken, setUsers, getAllUsers, getUserProfile, updateUser, getUserId }}>
       {isFirebaseReady
         ? props.children
         : <Spinner className="app-spinner dark"/>}
