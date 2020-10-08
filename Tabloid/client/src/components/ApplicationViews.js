@@ -27,6 +27,10 @@ export default function ApplicationViews() {
         <Route path="/posts">
         {isLoggedIn ? <PostList /> : <Redirect to="/login" />}
         </Route>
+
+        <Route path="/posts/details">
+        {isLoggedIn ? <PostList /> : <Redirect to="/login" />}
+        </Route>
       </Switch>
     </main>
   );
