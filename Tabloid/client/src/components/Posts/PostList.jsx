@@ -12,7 +12,7 @@ export default function PostList() {
   return (
     <section>
       {posts.map(p =>
-        <Post key={p.id} post={p}/>
+        <Post key={p.id} post={p} />
       )}
     </section>
   );
