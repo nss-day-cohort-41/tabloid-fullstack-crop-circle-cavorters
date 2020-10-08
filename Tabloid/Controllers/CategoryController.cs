@@ -4,11 +4,26 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
+using Tabloid.Repositories;
 
 namespace Tabloid.Controllers
 {
-    public class CategoryController : Controller
+    public class CategoryController : Controller 
     {
+
+        private readonly ICategoryRepository _categoryRepo;
+
+        public SqlConnection Connection { get; private set; }
+
+        public CategoryController(
+            ICategoryRepository categoryRepository)
+        {
+            _categoryRepo = categoryRepository;
+
+        }
+
+
         // GET: CategoryController
         public ActionResult Index()
         {
