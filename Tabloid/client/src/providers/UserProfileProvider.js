@@ -29,12 +29,28 @@ export function UserProfileProvider(props) {
       }).then(resp => resp.json())
         .then(setUsers));
 
+  const getAllInactiveUsers = () =>
+    getToken().then((token) =>
+      fetch(`${apiUrl}/inactive`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }).then(resp => resp.json())
+        .then(setUsers));
+
   const login = (email, pw) => {
     return firebase.auth().signInWithEmailAndPassword(email, pw)
       .then((signInResponse) => getUserProfile(signInResponse.user.uid))
       .then((userProfile) => {
-        sessionStorage.setItem("userProfile", JSON.stringify(userProfile));
-        setIsLoggedIn(true);
+        {console.log(userProfile)}
+        if (userProfile.isActive == true) {
+          sessionStorage.setItem("userProfile", JSON.stringify(userProfile));
+          setIsLoggedIn(true);
+        }
+        else {
+          alert("This account has been deactivated by an administrator.")
+        }
       });
   };
 
@@ -103,7 +119,7 @@ export function UserProfileProvider(props) {
   };
 
   return (
-    <UserProfileContext.Provider value={{ users, isLoggedIn, login, logout, register, getToken, setUsers, getAllUsers, getUserProfile, updateUser, getUserId }}>
+    <UserProfileContext.Provider value={{ users, isLoggedIn, login, logout, register, getToken, setUsers, getAllUsers, getUserProfile, updateUser, getUserId, getAllInactiveUsers }}>
       {isFirebaseReady
         ? props.children
         : <Spinner className="app-spinner dark"/>}

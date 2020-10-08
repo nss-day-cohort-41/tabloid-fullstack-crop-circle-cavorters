@@ -23,6 +23,12 @@ namespace Tabloid.Controllers
             return Ok(_userProfileRepository.GetAllActive());
         }
 
+        [HttpGet("inactive")]
+        public IActionResult GetInactive()
+        {
+            return Ok(_userProfileRepository.GetAllInactive());
+        }
+
         [HttpGet("{firebaseUserId}")]
         public IActionResult GetUserProfile(string firebaseUserId)
         {

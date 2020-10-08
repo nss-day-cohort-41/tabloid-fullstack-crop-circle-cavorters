@@ -10,5 +10,6 @@ namespace Tabloid.Repositories
         UserProfile GetUserProfileById(int id);
         void UpdateUserProfile(UserProfile userProfile);
         List<UserProfile> GetAllActive();
+        List<UserProfile> GetAllInactive();
     }
 }

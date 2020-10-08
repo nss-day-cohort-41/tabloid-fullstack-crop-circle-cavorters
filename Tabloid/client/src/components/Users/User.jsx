@@ -14,9 +14,13 @@ export default function User({ user }) {
             <p>{user.userType.name}</p>
           </div>
           <div className="status">
+          {user.isActive == true ?
               <Link to={`/users/deactivate/${user.id}`}>
                 Deactivate
-              </Link>
+              </Link> :
+              <Link to={`/inactive/${user.id}`}>
+                Reactivate
+              </Link> }
           </div>
       </div>
     </Card>

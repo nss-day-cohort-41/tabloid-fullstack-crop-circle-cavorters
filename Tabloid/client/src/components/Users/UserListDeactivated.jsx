@@ -3,16 +3,16 @@ import User from "./User";
 import { Link } from "react-router-dom";
 import { UserProfileContext } from "../../providers/UserProfileProvider";
 
-export default function UserList() {
-  const { users, getAllUsers } = useContext(UserProfileContext);
+export default function UserListDeactivated() {
+  const { users, getAllInactiveUsers } = useContext(UserProfileContext);
 
   useEffect(() => {
-    getAllUsers();
+    getAllInactiveUsers();
   }, []);
 
   return (
     <section>
-    <Link to="/inactive">View Deactivated</Link>
+    <Link to="/users">View Active Users</Link>
       {users.map(u =>
         <User key={u.id} user={u}/>
       )}
