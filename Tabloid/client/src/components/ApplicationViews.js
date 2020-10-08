@@ -5,6 +5,8 @@ import Login from "./Login";
 import Register from "./Register";
 import Hello from "./Hello";
 import PostList from "./Posts/PostList";
+import TagList from "./Tags/TagList";
+import TagForm from "./Tags/TagForm";
 
 export default function ApplicationViews() {
   const { isLoggedIn } = useContext(UserProfileContext);
@@ -15,6 +17,7 @@ export default function ApplicationViews() {
         <Route path="/" exact>
           {isLoggedIn ? <Hello /> : <Redirect to="/login" />}
         </Route>
+
 
         <Route path="/login">
           <Login />
@@ -27,6 +30,11 @@ export default function ApplicationViews() {
         <Route path="/posts">
         {isLoggedIn ? <PostList /> : <Redirect to="/login" />}
         </Route>
+        
+        <Route path="/tags">
+        {isLoggedIn ? <TagList /> : <Redirect to="/login" />}
+        </Route>
+
       </Switch>
     </main>
   );
