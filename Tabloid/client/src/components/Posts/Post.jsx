@@ -1,5 +1,6 @@
 import React from "react";
 import { Card, CardBody, Button } from "reactstrap";
+import { Link } from "react-router-dom";
 
 export default function Post({ post }) {
   let id = post.id;
@@ -15,8 +16,8 @@ export default function Post({ post }) {
         <p>{post.categoryId}</p>
         <p>{post.isApproved}</p>
         <p>{post.publishDateTime}</p>
-        <Button
-          onClick={viewDetails}>View Post</Button>
+        <Link
+          to={`/posts/details/${post.id}`}>View Post</Link>
 
       </CardBody>
     </Card>
