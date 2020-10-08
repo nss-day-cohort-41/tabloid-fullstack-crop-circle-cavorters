@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Tabloid.Models.cs;
 
-namespace TabloidMVC.Repositories
+namespace Tabloid.Repositories
 {
     public interface ICommentRepository
     {

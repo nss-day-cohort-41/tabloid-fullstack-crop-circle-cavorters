@@ -10,7 +10,7 @@ using Tabloid.Utils;
 using Tabloid.Repositories;
 using Tabloid.Models.cs;
 
-namespace TabloidMVC.Repositories
+namespace Tabloid.Repositories
 {
     public class CommentRepository : BaseRepository, ICommentRepository 
     {
