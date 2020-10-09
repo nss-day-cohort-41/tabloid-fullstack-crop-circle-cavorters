@@ -4,6 +4,7 @@ import { UserProfileProvider } from "./providers/UserProfileProvider";
 import { PostProvider } from "./providers/PostProvider";
 import Header from "./components/Header";
 import ApplicationViews from "./components/ApplicationViews";
+import "./main.css"
 
 function App() {
   return (
@@ -11,7 +12,7 @@ function App() {
       <UserProfileProvider>
         <PostProvider>
           <Header />
-        <ApplicationViews />
+          <ApplicationViews />
         </PostProvider>
       </UserProfileProvider>
     </Router>

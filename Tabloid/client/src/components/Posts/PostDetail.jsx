@@ -20,7 +20,7 @@ export default function PostDetail() {
         <Card className="m-4">
             <CardBody>
                 <h2>{post.title}</h2>
-                {/* <p>{post.userProfile.displayName}</p> */}
+                <p>{post.userProfile.displayName}</p>
                 <p>{post.imageLocation}</p>
                 <p>{post.categoryId}</p>
                 <p>{post.isApproved}</p>

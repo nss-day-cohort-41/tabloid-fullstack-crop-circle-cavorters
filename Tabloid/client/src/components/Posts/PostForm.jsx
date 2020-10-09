@@ -9,9 +9,9 @@ export default function PostForm() {
     const [post, setPost] = useState({
         title: "",
         content: "",
-        categoryId: 2,
-        // imageLocation: "",
-        // dateCreated: ""
+        categoryId: 2
+        // // imageLocation: "",
+        // // dateCreated: ""
     });
 
     const [isLoading, setIsLoading] = useState(false);
@@ -38,7 +38,7 @@ export default function PostForm() {
     return (
         <>
             <Form>
-                <fieldset>
+                <FormGroup>
                     <div >
                         <Input
                             type="text"
@@ -48,14 +48,14 @@ export default function PostForm() {
                             placeholder="Title"
                             value={post.title}
                         />
-                        {/* <Input
+                        <Input
                             type="text"
                             required
                             onChange={handleFieldChange}
                             id="imageLocation"
                             placeholder="Url"
                             value={post.imageLocation}
-                        /> */}
+                        />
                         <Input
                             type="text"
                             required
@@ -64,14 +64,14 @@ export default function PostForm() {
                             placeholder="Content"
                             value={post.content}
                         />
-                        {/* <Input
+                        <Input
                             type="datetime-local"
                             required
                             onChange={handleFieldChange}
                             id="publicationDate"
                             placeholder="Publication Date"
                             value={post.publicationDate}
-                        /> */}
+                        />
                         <div>
                             <Button
                                 className="newPostSubmitButton"
@@ -81,7 +81,7 @@ export default function PostForm() {
                             >Submit</Button>
                         </div>
                     </div>
-                </fieldset>
+                </FormGroup>
             </Form>
         </>
     )
