@@ -6,7 +6,7 @@ using Tabloid.Models;
 
 namespace Tabloid.Repositories
 {
-    public class ICategoryRepository
+    public interface ICategoryRepository
     {
         List<Category> GetAllCategories();
 

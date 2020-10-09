@@ -10,7 +10,7 @@ using Tabloid.Utils;
 namespace Tabloid.Repositories
 {
 
-    public class CategoryRepository : ICategoryRepository
+    public class CategoryRepository : BaseRepository, ICategoryRepository
     {
         public CategoryRepository(IConfiguration configuration) : base(configuration) { }
 
