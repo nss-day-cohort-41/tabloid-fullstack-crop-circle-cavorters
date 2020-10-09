@@ -1,4 +1,3 @@
-
 import React, { useState, useContext, useEffect } from "react";
 import {
   Form,
@@ -16,7 +15,9 @@ import { useHistory, useParams } from "react-router-dom";
 
 
 const TagForm = () => {
+//Bringing in my fetch methods via UseContext
   const { getTagById, updateTag } = useContext(TagContext);
+//Creating a new object with state to update the exisiting DB's value with
   const [editedTag, setEditedTag] = useState("");
   const [tag, setTag] = useState("");
  //UseParams pulls in the id information from applications view 
@@ -26,6 +27,7 @@ const TagForm = () => {
 
 
 //Setup found in Grace&Wisdom (new object and target values)...PreventDefault seems to break everything...might be needed later
+//https://stackoverflow.com/questions/30727837/react-change-input-defaultvalue-by-passing-props
   const editTag = (e) => {
     //e.preventDefault();
     updateTag({ name: editedTag.name, id: tag.id})
@@ -34,50 +36,23 @@ const TagForm = () => {
   }
 
   const handleFieldChange = evt => {
+    //Pullin in props from the new object and targetting the name as the value to change
     const stateToChange = { ...editedTag };
     stateToChange[evt.target.name] = evt.target.value;
     setEditedTag(stateToChange);
 };
 
-//const id = useParams();
-
-
-//   const submit = (e) => {
-//     const tag = {
-//       name
-//     };
-
-    // const submit = evt => {
-
-    //     const tag = {
-    //         name
-    //     };
-    //     updateTag(tag).then((t) => {
-    //         // Navigate the user back to the home route
-    //         history.push("/");
-  
-    //  })} }
+//TESTING to see that useParams is pullin what I need...
 console.log(id);
 //console.log(idTag);
 
 
+//Getting the ID information and then setting my Tag
   useEffect(() => {
     getTagById(id)
-    .then(setTag);
-    
+    .then(setTag);   
 }, []);
 
-//     updateTag(editedTag).then((t) => {
-//       // Navigate the user back to the home route
-//       history.push("/");
-//     });
-//   };
-  // const submitForm = (e) => {
-  //   e.preventDefault();
-  //   addQuote({ text: quoteText })
-  //     .then(() => history.push("/"))
-  //     .catch((err) => alert(`An error ocurred: ${err.message}`));
-  // };
 
   return (
     <div className="container pt-4">
@@ -87,9 +62,7 @@ console.log(id);
   
             <Form>
               <FormGroup>
-                {/*
-                USED FOR TESTING: <div>{tag.id}</div> 
-                */}
+                {/* USED FOR TESTING: <div>{tag.id}</div> */}
                 <Input
                   id= {tag.id}
                   onChange={handleFieldChange}

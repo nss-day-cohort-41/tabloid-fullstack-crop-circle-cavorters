@@ -9,14 +9,15 @@ import {
   Input,
   Button,
 } from "reactstrap";
-import Tag from "./Tag";
 import { TagContext } from "../../providers/TagProvider";
 import { useHistory } from "react-router-dom";
 
+//Gifter was my source example on the process of post
 
 const TagForm = () => {
   const { addTag } = useContext(TagContext);
-  //const [userProfileId, setUserProfileId] = useState("");
+
+  
   const [name, setName] = useState("");
 
 
@@ -37,26 +38,12 @@ const TagForm = () => {
     });
   };
 
-  // const submitForm = (e) => {
-  //   e.preventDefault();
-  //   addQuote({ text: quoteText })
-  //     .then(() => history.push("/"))
-  //     .catch((err) => alert(`An error ocurred: ${err.message}`));
-  // };
-
   return (
     <div className="container pt-4">
       <div className="row justify-content-center">
         <Card className="col-sm-12 col-lg-6">
           <CardBody>
             <Form>
-              {/* <FormGroup>
-                <Label for="userId">User Id (For Now...)</Label>
-                <Input
-                  id="userId"
-                  onChange={(e) => setUserProfileId(e.target.value)}
-                />
-              </FormGroup> */}
               <FormGroup>
                 <Label for="name">Name</Label>
                 <Input id="name" onChange={(e) => setName(e.target.value)} />
