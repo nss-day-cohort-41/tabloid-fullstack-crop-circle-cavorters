@@ -13,23 +13,23 @@ namespace Tabloid.Controllers
     public class CategoryController : ControllerBase
     {
 
-        private readonly ICategoryRepository _categoryRepo;
+        private readonly ICategoryRepository _categoryRepository;
 
         public SqlConnection Connection { get; private set; }
 
         public CategoryController(
             ICategoryRepository categoryRepository)
         {
-            _categoryRepo = categoryRepository;
+            _categoryRepository = categoryRepository;
 
         }
 
-/*        [HttpGet]
+        [HttpGet]
         public IActionResult Get()
         {
-            var posts = _categoryRepository.GetAllCategories();
-            return Ok(posts);
-        }*/
+            var categories = _categoryRepository.GetAllCategories();
+            return Ok(categories);
+        }
 
         // GET: CategoryController
         public ActionResult Index()
