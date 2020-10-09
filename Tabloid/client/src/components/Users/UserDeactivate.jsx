@@ -5,23 +5,40 @@ import { useHistory, useParams, Link } from "react-router-dom";
 const UserDeactivate = () => {
   const history = useHistory();
   const [ user, setUser ] = useState();
-  const { updateUser, getUserId } = useContext(UserProfileContext);
+  const { users, updateUser, getUserId, getAllUsers } = useContext(UserProfileContext);
   const { id } = useParams();
+
+
+  const adminCount = () => {
+    getAllUsers()
+    let count = 0;
+    for(let admin of users) {
+      if (admin.userTypeId === 1) {
+        count++
+      }
+    }
+    return count;
+  }
 
   const deactivateUser = (e) => {
     e.preventDefault();
-    user.isActive = false;
-    updateUser(user)
-        .then(() => history.push("/users"));
-  }
+    const count = adminCount();
 
-  console.log(id)
-  console.log(user)
+    if (count < 2) {
+      alert("This is the last admin user. Assign new admin before deactivating")
+      return null;
+    }
+    else {
+      user.isActive = false;
+      updateUser(user)
+        .then(() => history.push("/users"));
+    } 
+  }
   
   useEffect(() => {
     getUserId(id)
     .then((user) => {
-        setUser(user)
+      setUser(user)        
     })
   }, []);
 

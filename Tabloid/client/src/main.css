@@ -1,8 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap');
+
+html, #root {
+    background-color: cornsilk;
+    font-family: 'comic-sans', cursive
+}
+
 .card-container {
     display: flex;
     justify-content: space-between;
 }
 
 .status {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.userCard {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+}
+
+.details-container {
+    display: flex;
+}
+
+.userimg {
     padding-right: 20px;
+}
+
+.userimg > img {
+    height: 70px;
+    width: auto;
+    border-radius: 50%;
+    border: 1px solid black;
+    box-shadow: 3px 3px 5px ;
+}
+
+.user-container {
+    display: flex;
+    justify-content: space-between;
+    width: 40%;
+    border: 1px solid #373737;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 1px 1px 2px 1px #747272;
+    background: white;
+}
+
+.buttons > a {
+    text-decoration-style: none;
+}
+
+.std-btn {
+    display: block;
+    color: black;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    background-color: lightgoldenrodyellow;
+    width: 125px;
+    height: 30px;
+    border-radius: 30px;
+    font-size: .8rem;
+    font-weight: 500;
+    box-shadow: 1px 1px 2px 1px #747272;
+    margin-bottom: 15px;
+  }
+  
+  .std-btn:hover {
+    background-color: goldenrod;
+  }
+
+  .displayName {
+      color:goldenrod;
+      text-decoration: none;
+      margin: 0;
+      font-family: 'Oswald', sans-serif;
+  }
+
+  .admin {
+      color: red;
+  }
+
+  .view {
+	box-shadow:inset 0px 1px 0px 0px #373737;
+	background-color:#000000;
+	border-radius:39px;
+	border:1px solid #000000;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:8px 33px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #373737;
+}
+.view:hover {
+	background-color:#161616;
+}
+.view:active {
+	position:relative;
+	top:1px;
+}
+
+.status-button {
+    text-align: center;
 }

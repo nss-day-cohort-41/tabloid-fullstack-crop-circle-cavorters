@@ -12,7 +12,7 @@ const UserDeactivate = () => {
     e.preventDefault();
     user.isActive = true;
     updateUser(user)
-        .then(() => history.push("/users"));
+        .then(() => history.push("/inactive"));
   }
 
   console.log(id)
@@ -41,7 +41,7 @@ const UserDeactivate = () => {
                     <div className="col-md-4">
                         <div className="form-group">
                             <input type="submit" onClick={activateUser} value="Confirm" className="btn btn-primary" />&nbsp;&nbsp;|&nbsp;&nbsp;
-                            <Link to="/users">
+                            <Link to="/inactive">
                                 Cancel
                             </Link>
                         </div>
@@ -49,7 +49,6 @@ const UserDeactivate = () => {
                 </div>
             </section>
         </main>
-      
     </>
   );
 }

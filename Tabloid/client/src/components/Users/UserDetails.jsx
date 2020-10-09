@@ -26,8 +26,8 @@ const UserDetails = () => {
           <img src="https://robohash.org/numquamutut.png?size=150x150&set=set1" alt="DefaultImage"/>
           }
           <p><strong>Display Name:</strong> {user.displayName}</p>
-          <p><strong>Email:</strong> {user.userType.name}</p>
-          <p><strong>Creation Date:</strong> {user.userType.name}</p>
+          <p><strong>Email:</strong> {user.email}</p>
+          <p><strong>User Since:</strong> {user.createDateTime}</p>
           <p><strong>User Type:</strong> {user.userType.name}</p>
         </div>
       </div>
