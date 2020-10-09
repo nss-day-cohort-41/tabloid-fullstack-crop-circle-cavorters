@@ -1,0 +1,8 @@
+.card-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.status {
+    padding-right: 20px;
+}
