@@ -32,9 +32,26 @@ export const PostProvider = (props) => {
       .then(setPost);
   };
 
+  const addPost = (post) => {
+    getToken().then((token) =>
+      fetch("/api/post", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(post)
+      }).then(resp => {
+        if (resp.ok) {
+          return resp.json();
+        }
+        throw new Error("Unauthorized");
+      }))
+  };
+
   return (
     <PostContext.Provider value={{
-      post, posts, getAllPosts, getById
+      post, posts, getAllPosts, getById, addPost
     }}>
       {props.children}
     </PostContext.Provider>

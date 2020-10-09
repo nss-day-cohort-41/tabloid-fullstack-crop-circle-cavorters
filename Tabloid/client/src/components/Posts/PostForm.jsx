@@ -4,14 +4,14 @@ import { useHistory } from "react-router-dom";
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
 export default function PostForm() {
-    // const history = useHistory();
+    const history = useHistory();
     const { addPost, getAllPosts } = useContext(PostContext);
     const [post, setPost] = useState({
         title: "",
         content: "",
         categoryId: 2,
-        imageLocation: "",
-        dateCreated: "",
+        // imageLocation: "",
+        // dateCreated: ""
     });
 
     const [isLoading, setIsLoading] = useState(false);
@@ -48,14 +48,14 @@ export default function PostForm() {
                             placeholder="Title"
                             value={post.title}
                         />
-                        <Input
+                        {/* <Input
                             type="text"
                             required
                             onChange={handleFieldChange}
                             id="imageLocation"
                             placeholder="Url"
                             value={post.imageLocation}
-                        />
+                        /> */}
                         <Input
                             type="text"
                             required
@@ -64,16 +64,17 @@ export default function PostForm() {
                             placeholder="Content"
                             value={post.content}
                         />
-                        <Input
-                            type="date"
+                        {/* <Input
+                            type="datetime-local"
                             required
                             onChange={handleFieldChange}
                             id="publicationDate"
                             placeholder="Publication Date"
                             value={post.publicationDate}
-                        />
+                        /> */}
                         <div>
                             <Button
+                                className="newPostSubmitButton"
                                 type="submit"
                                 disabled={isLoading}
                                 onClick={createNewPost}
