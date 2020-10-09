@@ -10,11 +10,11 @@ import {
 } from "reactstrap";
 import Tag from "./Tag";
 import { TagContext } from "../../providers/TagProvider";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams, Link } from "react-router-dom";
 //import { useParamas } from "react-router-dom";
 
 
-const TagForm = () => {
+const TagEditForm = () => {
 //Bringing in my fetch methods via UseContext
   const { getTagById, updateTag } = useContext(TagContext);
 //Creating a new object with state to update the exisiting DB's value with
@@ -83,7 +83,8 @@ console.log(id);
                 />
               </FormGroup>
             </Form>
-            <Button  type="button" onClick={e => {editTag()}}>Submit</Button>
+            <Button  type="button" color="success" onClick={e => {editTag()}}>Submit</Button>
+            <Link to={`/tags`}><Button type="button" color="warning">Cancel</Button></Link>
           </CardBody>
         </Card>
       </div>
@@ -91,4 +92,4 @@ console.log(id);
 
   );
  };
- export default TagForm;
+ export default TagEditForm;

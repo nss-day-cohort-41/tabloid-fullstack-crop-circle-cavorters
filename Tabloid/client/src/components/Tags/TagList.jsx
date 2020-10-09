@@ -13,7 +13,7 @@ import {
 
 
 export default function TagList() {
-    const { tags, getAllTags } = useContext(TagContext);
+    const { tags, getAllTags} = useContext(TagContext);
 
 
     useEffect(() => {
@@ -25,10 +25,8 @@ export default function TagList() {
 
             <section>
                 <div>
-                    <Link to={`/tags/add`}><Button color="info">Add New Tag</Button></Link>
+                    <Link to={`/tags/add`}><Button color="primary">Add New Tag</Button></Link>
                 </div>
-
-                {/* <button onClick={() => { history.push("/tags/add") }}> New Tag? </button> */}
                 {tags.map(t =>
                     <Tag key={t.id} tag={t} />
                 )}

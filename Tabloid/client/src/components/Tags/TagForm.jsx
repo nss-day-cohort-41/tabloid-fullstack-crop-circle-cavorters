@@ -16,8 +16,6 @@ import { useHistory } from "react-router-dom";
 
 const TagForm = () => {
   const { addTag } = useContext(TagContext);
-
-  
   const [name, setName] = useState("");
 
 
@@ -34,7 +32,7 @@ const TagForm = () => {
 
     addTag(tag).then((t) => {
       // Navigate the user back to the home route
-      history.push("/");
+      history.push("/tags");
     });
   };
 
@@ -49,7 +47,7 @@ const TagForm = () => {
                 <Input id="name" onChange={(e) => setName(e.target.value)} />
               </FormGroup>
             </Form>
-            <Button color="info" onClick={submit}>
+            <Button color="success" onClick={submit}>
               SUBMIT
             </Button>
           </CardBody>

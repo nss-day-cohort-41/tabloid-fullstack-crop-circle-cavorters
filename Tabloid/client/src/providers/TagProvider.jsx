@@ -6,10 +6,8 @@ export const TagContext = React.createContext();
 export const TagProvider = (props) => {
     const apiUrl = "/api/tag";
     const { getToken } = useContext(UserProfileContext);
-
     const [tags, setTags] = useState([]);
     
-   // const [idTag, setIdTags] = useState([]);
 
     //Method for pulling all the current tags
     const getAllTags = () =>
@@ -34,7 +32,7 @@ export const TagProvider = (props) => {
         //.then(setTags));
         
 
-    //Method for adding a tag
+  
     const addTag = (tag) =>
         getToken().then((token) =>
             fetch(apiUrl, {
@@ -51,17 +49,6 @@ export const TagProvider = (props) => {
                 throw new Error("Unauthorized");
             }));
 
-    // const updateTag = (tag) =>
-    //     getToken().then((token) =>
-    //         fetch(`/api/tag/${tag.id}`, {
-    //             method: "PUT",
-    //             headers: {
-    //                 Authorization: `Bearer ${token}`,
-    //                 "Content-Type": "application/json"
-    //             }
-    //             , body: JSON.stringify(tag)
-    //         })
-    //     );
         const updateTag = (tag) =>
         getToken().then((token) =>
         fetch(`/api/tag/${tag.id}`, {
@@ -72,13 +59,27 @@ export const TagProvider = (props) => {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(tag)
-        }))
+        }));
+
+
+        const deleteTag = (id) =>
+        getToken().then((token) =>
+        fetch(`/api/tag/${id}`, {
+        //fetch(`${apiUrl}/${tag.id}`, {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json"
+            },
+           
+        }))     //.then(result => result.json())
+   
 
 
 
     return (
         <TagContext.Provider value={{
-            tags, getTagById, getAllTags, addTag, updateTag
+            tags, getTagById, getAllTags, addTag, updateTag, deleteTag
         }}>
             {props.children}
         </TagContext.Provider>

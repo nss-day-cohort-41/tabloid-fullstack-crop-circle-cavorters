@@ -1,4 +1,3 @@
-
 import React, { useContext } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { UserProfileContext } from "../providers/UserProfileProvider";
@@ -9,6 +8,7 @@ import PostList from "./Posts/PostList";
 import TagList from "./Tags/TagList";
 import TagForm from "./Tags/TagForm";
 import TagEditForm from "./Tags/TagEditForm";
+import DeleteTagPrompt from "./Tags/DeleteTagPrompt";
 import UserList from "./Users/UserList";
 import UserDetails from "./Users/UserDetails";
 import UserDeactivate from "./Users/UserDeactivate";
@@ -37,7 +37,7 @@ export default function ApplicationViews() {
           <Register />
         </Route>
 
-        <Route path="/posts">
+        <Route path="/posts" exact>
           {isLoggedIn ? <PostList /> : <Redirect to="/login" />}
         </Route>
 
@@ -48,9 +48,12 @@ export default function ApplicationViews() {
         <Route path="/tags/add">
           {isLoggedIn ? <TagForm /> : <Redirect to="/login" />}
         </Route>
-        <Route path= "/tags/:id">
+        <Route path= "/tags/:id" exact>
         {/* <Route path= "`/api/tags/edit/${id}`"> */}
           {isLoggedIn ? <TagEditForm /> : <Redirect to="/login" />}
+        </Route>
+        <Route path="/tags/delete/:id" exact>
+        {isLoggedIn ? <DeleteTagPrompt /> : <Redirect to="/login" />}
         </Route>
         {/* END TAGS ROUTES */}
 

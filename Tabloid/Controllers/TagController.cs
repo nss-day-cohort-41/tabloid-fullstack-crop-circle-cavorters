@@ -67,15 +67,14 @@ namespace Tabloid.Controllers
             return NoContent();
             // return CreatedAtAction("Get", new { id = tag.Id }, tag);
         }
-        //// POST: TagController/Edit/5
-        //[HttpPost("{id}")]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Put(int id, Tag tag)
-        //{
 
-        //        _tagRepository.UpdateTag(tag);
-        //        return Ok(tag);
 
-        //}
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            _tagRepository.DeleteTag(id);
+            return NoContent();
+        }
+
     }
 }
