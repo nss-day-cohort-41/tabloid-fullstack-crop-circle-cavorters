@@ -9,10 +9,16 @@ import PostList from "./Posts/PostList";
 import TagList from "./Tags/TagList";
 import TagForm from "./Tags/TagForm";
 import TagEditForm from "./Tags/TagEditForm";
+import UserList from "./Users/UserList";
+import UserDetails from "./Users/UserDetails";
+import UserDeactivate from "./Users/UserDeactivate";
+import UserActivate from "./Users/UserActivate";
+import UserListDeactivated from "./Users/UserListDeactivated";
 
 
 export default function ApplicationViews() {
   const { isLoggedIn } = useContext(UserProfileContext);
+  const sessionUser = JSON.parse(sessionStorage.getItem("userProfile"));
 
 
   return (
@@ -47,6 +53,27 @@ export default function ApplicationViews() {
           {isLoggedIn ? <TagEditForm /> : <Redirect to="/login" />}
         </Route>
         {/* END TAGS ROUTES */}
+
+
+        <Route path="/users" exact>
+        {isLoggedIn && sessionUser.userTypeId === 1 ? <UserList /> : <Redirect to="/login" />}
+        </Route>
+
+        <Route path="/users/:id" exact>
+        {isLoggedIn && sessionUser.userTypeId === 1 ? <UserDetails /> : <Redirect to="/login" />}
+        </Route>
+
+        <Route path="/users/deactivate/:id">
+        {isLoggedIn && sessionUser.userTypeId === 1 ? <UserDeactivate /> : <Redirect to="/login" />}
+        </Route>
+
+        <Route path="/inactive" exact>
+        {isLoggedIn && sessionUser.userTypeId === 1 ? <UserListDeactivated /> : <Redirect to="/login" />}
+        </Route>
+
+        <Route path="/inactive/:id" exact>
+        {isLoggedIn && sessionUser.userTypeId === 1 ? <UserActivate /> : <Redirect to="/login" />}
+        </Route>
       </Switch>
     </main>
   );
