@@ -46,11 +46,15 @@ const UserEdit = () => {
                 <h4>Select a user type for {user.fullName}?</h4>
                 <hr />
 
-                <select value={userTypeId} onChange={handleChange}> 
+                <select onChange={handleChange}> 
                 {userTypes.map(userType =>
+                    user.userTypeId === userType.id ?
+                    <option selected value={userType.id}>
+                        {userType.name}
+                    </option> :    
                     <option value={userType.id}>
                         {userType.name}
-                    </option>
+                    </option>            
                 )}
                 </select>
                 <div className="row">
