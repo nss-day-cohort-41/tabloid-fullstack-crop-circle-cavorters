@@ -15,6 +15,38 @@ namespace Tabloid.Repositories
     public class CommentRepository : BaseRepository, ICommentRepository 
     {
         public CommentRepository(IConfiguration config) : base(config) { }
+
+
+        public List<Comment> GetAll()
+        {
+
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                     SELECT c.Id AS CommentId, c.Subject, c.Content, c.CreateDateTime,
+                     c.PostId, c.UserProfileId
+                     FROM comment c
+                     WHERE PostId = @id
+                     ORDER BY c.CreateDateTime DESC";
+
+                    var reader = cmd.ExecuteReader();
+
+                    var comments = new List<Comment>();
+
+                    while (reader.Read())
+                    {
+                        comments.Add(new Comment()
+
+                        {
+
+                        });
+                    }
+                }
+            }
+                }
         public List<Comment> GetAllPostComments(int postId)
         {
             using (var conn = Connection)
@@ -177,10 +209,12 @@ namespace Tabloid.Repositories
             return new Comment()
             {
                 Id = reader.GetInt32(reader.GetOrdinal("CommentId")),
+                Subject = reader.GetString(reader.GetOrdinal("Subject")),
                 Content = reader.GetString(reader.GetOrdinal("Content")),
                 CreateDateTime = reader.GetDateTime(reader.GetOrdinal("CreateDateTime")),
                 UserProfileId = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
-                /*UserProfile = new UserProfile()
+                UserProfile = new UserProfile()
+
                 {
                     Id = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
                     FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
@@ -211,7 +245,7 @@ namespace Tabloid.Repositories
                         Id = reader.GetInt32(reader.GetOrdinal("CategoryId")),
                         Name = reader.GetString(reader.GetOrdinal("CategoryName"))
                     }
-                }*/
+                }
             };
         }
     }

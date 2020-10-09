@@ -7,7 +7,7 @@ export function CommentProvider(props) {
     const apiUrl = "/api/comment";
     const { getToken } = useContext(UserProfileContext);
 
-    const [comments, setComment] = useState([]);
+    const [comments, setComments] = useState([]);
 
     const refreshComments = () =>
         getToken().then((token) =>

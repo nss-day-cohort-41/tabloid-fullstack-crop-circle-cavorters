@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import { CommentContext } from "../providers/CommentProvider";
+import { CommentContext } from "../../providers/CommentProvider";
 
 export default function CommentAddForm() {
     const history = useHistory();
