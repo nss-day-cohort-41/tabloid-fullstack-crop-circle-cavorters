@@ -11,7 +11,7 @@ using Tabloid.Repositories;
 
 namespace Tabloid.Controllers
 {
-    /*[Authorize]*/
+
     [Route("api/[controller]")]
     [ApiController]
     public class CategoryController : ControllerBase
@@ -19,7 +19,7 @@ namespace Tabloid.Controllers
 
         private readonly ICategoryRepository _categoryRepository;
 
-        /*public SqlConnection Connection { get; private set; }*/
+
 
         public CategoryController(
             ICategoryRepository categoryRepository)
