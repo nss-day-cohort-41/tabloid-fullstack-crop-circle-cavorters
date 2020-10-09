@@ -8,11 +8,11 @@ export default function CategoryList() {
     useEffect(() => {
         GetAllCategories();
     }, []);
-
+    console.log(categories);
     return (
         <section>
-            {categories.map(c =>
-                <Category key={c.id} category={c} />
+            {categories.map(category =>
+                <Category key={category.id} category={category} />
             )}
         </section>
     );
