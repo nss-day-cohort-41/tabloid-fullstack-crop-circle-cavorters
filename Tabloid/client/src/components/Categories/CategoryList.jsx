@@ -11,8 +11,8 @@ export default function CategoryList() {
 
     return (
         <section>
-            {categories.map(p =>
-                <Category key={ca.id} category={ca} />
+            {categories.map(c =>
+                <Category key={c.id} category={c} />
             )}
         </section>
     );

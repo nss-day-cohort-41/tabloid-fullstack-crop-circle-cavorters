@@ -6,6 +6,7 @@ import Register from "./Register";
 import Hello from "./Hello";
 import PostList from "./Posts/PostList";
 import UserList from "./Users/UserList";
+import CategoryList from "./Categories/CategoryList";
 import UserDetails from "./Users/UserDetails";
 import UserDeactivate from "./Users/UserDeactivate";
 import UserActivate from "./Users/UserActivate";
@@ -31,27 +32,31 @@ export default function ApplicationViews() {
         </Route>
 
         <Route path="/posts">
-        {isLoggedIn ? <PostList /> : <Redirect to="/login" />}
+          {isLoggedIn ? <PostList /> : <Redirect to="/login" />}
+        </Route>
+
+        <Route path="/categories">
+          {isLoggedIn ? <CategoryList /> : <Redirect to="/login" />}
         </Route>
 
         <Route path="/users" exact>
-        {isLoggedIn && sessionUser.userTypeId === 1 ? <UserList /> : <Redirect to="/login" />}
+          {isLoggedIn && sessionUser.userTypeId === 1 ? <UserList /> : <Redirect to="/login" />}
         </Route>
 
         <Route path="/users/:id" exact>
-        {isLoggedIn && sessionUser.userTypeId === 1 ? <UserDetails /> : <Redirect to="/login" />}
+          {isLoggedIn && sessionUser.userTypeId === 1 ? <UserDetails /> : <Redirect to="/login" />}
         </Route>
 
         <Route path="/users/deactivate/:id">
-        {isLoggedIn && sessionUser.userTypeId === 1 ? <UserDeactivate /> : <Redirect to="/login" />}
+          {isLoggedIn && sessionUser.userTypeId === 1 ? <UserDeactivate /> : <Redirect to="/login" />}
         </Route>
 
         <Route path="/inactive" exact>
-        {isLoggedIn && sessionUser.userTypeId === 1 ? <UserListDeactivated /> : <Redirect to="/login" />}
+          {isLoggedIn && sessionUser.userTypeId === 1 ? <UserListDeactivated /> : <Redirect to="/login" />}
         </Route>
 
         <Route path="/inactive/:id" exact>
-        {isLoggedIn && sessionUser.userTypeId === 1 ? <UserActivate /> : <Redirect to="/login" />}
+          {isLoggedIn && sessionUser.userTypeId === 1 ? <UserActivate /> : <Redirect to="/login" />}
         </Route>
       </Switch>
     </main>

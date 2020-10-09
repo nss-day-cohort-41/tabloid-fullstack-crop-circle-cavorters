@@ -1,13 +1,15 @@
 import React, { useState, useContext } from "react";
-import { CategoryContext } from "./CategoryProvider";
+import { UserProfileContext } from "./UserProfileProvider";
+// import { CategoryContext } from "./CategoryProvider";
 
-export const PostContext = React.createContext();
+export const CategoryContext = React.createContext();
 
 export const CategoryProvider = (props) => {
     const apiUrl = "/api/category";
-    const { getToken } = useContext(CatgoryContext);
+    // const { getToken } = useContext(CategoryContext);
+    const { getToken } = useContext(UserProfileContext);
 
-    const [posts, setPosts] = useState([]);
+    const [categories, setCategories] = useState([]);
 
     const GetAllCategories = () =>
         getToken().then((token) =>
@@ -17,7 +19,7 @@ export const CategoryProvider = (props) => {
                     Authorization: `Bearer ${token}`
                 }
             }).then(resp => resp.json())
-                .then(setPosts));
+                .then(setCategories));
 
     return (
         <CategoryContext.Provider value={{
@@ -27,3 +29,4 @@ export const CategoryProvider = (props) => {
         </CategoryContext.Provider>
     );
 };
+
