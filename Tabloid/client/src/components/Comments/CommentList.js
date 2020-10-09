@@ -4,16 +4,16 @@ import { CommentContext } from "../../providers/CommentProvider";
 
 
 export default function CommentList() {
-    const { comments, refreshComments } = useContext(CommentContext);
+    const { comments, getAllPostComments } = useContext(CommentContext);
 
     useEffect(() => {
-        refreshComments();
+        getAllPostComments();
     }, []);
 
     return (
         <section>
-            {comments.map(q =>
-                <Comment key={q.id} Comment={q} />
+            {comments.map(c =>
+                <Post key={c.id} comment={c} />
             )}
         </section>
     );

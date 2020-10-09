@@ -9,34 +9,18 @@ export function CommentProvider(props) {
 
     const [comments, setComments] = useState([]);
 
-    const refreshComments = () =>
-        getToken().then((token) =>
-            fetch(apiUrl, {
-                method: "GET",
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            }).then(resp => resp.json())
-                .then(setComments));
-
-    const addComment = (comment) =>
-        getToken().then((token) =>
-            fetch(apiUrl, {
-                method: "POST",
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(comment)
-            }).then(resp => {
-                if (resp.ok) {
-                    return resp.json();
-                }
-                throw new Error("Unauthorized");
-            }));
-
+    const getAllComments = () =>
+    getToken().then((token) =>
+      fetch(apiUrl, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }).then(resp => resp.json())
+        .then(setComments));
+  
     return (
-        <CommentContext.Provider value={{ comments, refreshComments, addComment }}>
+        <CommentContext.Provider value={{ comments, getAllComments}}>
             {props.children}
         </CommentContext.Provider>
     );
