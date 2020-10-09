@@ -8,7 +8,8 @@ export const TagProvider = (props) => {
     const { getToken } = useContext(UserProfileContext);
 
     const [tags, setTags] = useState([]);
-    const [setIdTags] = useState([]);
+    
+   // const [idTag, setIdTags] = useState([]);
 
     //Method for pulling all the current tags
     const getAllTags = () =>
@@ -23,13 +24,14 @@ export const TagProvider = (props) => {
 
     const getTagById = (id) =>
         getToken().then((token) =>
-            fetch(`${apiUrl}/tag/${id}`, {
+            fetch(`/api/tag/${id}`, {
+           // fetch(`${apiUrl}/tag/${id}`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
-            }).then(resp => resp.json())
-        .then(setIdTags));
+            }).then(resp => resp.json()))
+        //.then(setTags));
         
 
     //Method for adding a tag
@@ -49,32 +51,30 @@ export const TagProvider = (props) => {
                 throw new Error("Unauthorized");
             }));
 
-    const updateTag = (tag) =>
+    // const updateTag = (tag) =>
+    //     getToken().then((token) =>
+    //         fetch(`/api/tag/${tag.id}`, {
+    //             method: "PUT",
+    //             headers: {
+    //                 Authorization: `Bearer ${token}`,
+    //                 "Content-Type": "application/json"
+    //             }
+    //             , body: JSON.stringify(tag)
+    //         })
+    //     );
+        const updateTag = (tag) =>
         getToken().then((token) =>
-            fetch(`/api/tag/${tag.id}`, {
-                method: "PUT",
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    "Content-Type": "application/json"
-                }
-                , body: JSON.stringify(tag)
-            })
-        );
-    //     const updateTag = (tag) =>
-    // getToken().then((token) =>
-    //     fetch(`/api/tags/${tag.id}`, {
-    //         method: "PUT",
-    //         headers: {
-    //             Authorization: `Bearer ${token}`,
-    //             "Content-Type": "application/json"
-    //         }
-    //          ,body: JSON.stringify(tag)
-    //     }).then(resp => {
-    //         if (resp.ok) {
-    //             return resp.json();
-    //         }
-    //        //  throw new Error("Unauthorized");
-    //     }));
+        fetch(`/api/tag/${tag.id}`, {
+        //fetch(`${apiUrl}/${tag.id}`, {
+            method: "PUT",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(tag)
+        }))
+
+
 
     return (
         <TagContext.Provider value={{

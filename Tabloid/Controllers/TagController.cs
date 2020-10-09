@@ -15,12 +15,14 @@ namespace Tabloid.Controllers
     public class TagController : ControllerBase
     {
         private readonly ITagRepository _tagRepository;
-        private readonly IUserProfileRepository _userProfileRepository;
+       // private readonly IUserProfileRepository _userProfileRepository;
 
-        public TagController(ITagRepository tagRepository, IUserProfileRepository userProfileRepository)
+        public TagController(ITagRepository tagRepository
+            //,  IUserProfileRepository userProfileRepository
+            )
         {
             _tagRepository = tagRepository;
-            _userProfileRepository = userProfileRepository;
+            //_userProfileRepository = userProfileRepository;
 
         }
 
@@ -32,8 +34,8 @@ namespace Tabloid.Controllers
         }
 
 
-     
-        [HttpGet("tag/{id}")]
+
+        [HttpGet("{id}")]
         public ActionResult Get(int id)
         {
             Tag tag = _tagRepository.GetTagById(id);
@@ -44,7 +46,6 @@ namespace Tabloid.Controllers
             }
             return Ok(tag);
         }
-
 
         [HttpPost]
         public IActionResult Post(Tag tag)
@@ -64,6 +65,7 @@ namespace Tabloid.Controllers
 
             _tagRepository.UpdateTag(tag);
             return NoContent();
+            // return CreatedAtAction("Get", new { id = tag.Id }, tag);
         }
         //// POST: TagController/Edit/5
         //[HttpPost("{id}")]

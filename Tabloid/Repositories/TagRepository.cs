@@ -47,7 +47,7 @@ namespace Tabloid.Repositories
                 {
                     cmd.CommandText = @"
                         SELECT Id, name
-                        FROM Tag
+                        FROM Tag 
                         WHERE Id = @id";
 
                     cmd.Parameters.AddWithValue("@id", id);
@@ -96,7 +96,7 @@ namespace Tabloid.Repositories
             }
         }
 
-        public void UpdateTag(Tag tag)
+        public void UpdateTag( Tag tag)
         {
             using (var conn = Connection)
             {
@@ -105,7 +105,8 @@ namespace Tabloid.Repositories
                 {
                     cmd.CommandText = @"
                             UPDATE Tag
-                            SET Name = @name
+                            SET 
+                                Name = @name,
                             WHERE Id = @id";
 
                     cmd.Parameters.AddWithValue("@name", tag.Name);

@@ -9,7 +9,7 @@ namespace Tabloid.Repositories
         Tag GetTagById(int id);
         void AddTag(Tag tag);
         void DeleteTag(int tagId);   
-        void UpdateTag(Tag tag);
+        void UpdateTag( Tag tag);
 
     }
 }

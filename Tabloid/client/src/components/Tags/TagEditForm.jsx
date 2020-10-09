@@ -17,25 +17,27 @@ import { useHistory, useParams } from "react-router-dom";
 
 const TagForm = () => {
   const { getTagById, updateTag } = useContext(TagContext);
+  const [editedTag, setEditedTag] = useState("");
   const [tag, setTag] = useState("");
+ //UseParams pulls in the id information from applications view 
   const { id } = useParams();
- const [name, setName] = useState("");
-
-
-  // Use this hook to allow us to programatically redirect users
+// Use this hook to allow us to programatically redirect users
   const history = useHistory();
 
+
+//Setup found in Grace&Wisdom (new object and target values)...PreventDefault seems to break everything...might be needed later
   const editTag = (e) => {
-    e.preventDefault();
-    updateTag(tag)
-        .then(() => history.push("/tags"));
+    //e.preventDefault();
+    updateTag({ name: editedTag.name, id: tag.id})
+      .then(() => history.push("/tags"))
+      .catch((err) => alert(`An error ocurred: ${err.message}`));
   }
 
-//   const handleFieldChange = evt => {
-//     const stateToChange = { ...tag };
-//     stateToChange[evt.target.id] = evt.target.value;
-//     setTag(stateToChange);
-// };
+  const handleFieldChange = evt => {
+    const stateToChange = { ...editedTag };
+    stateToChange[evt.target.name] = evt.target.value;
+    setEditedTag(stateToChange);
+};
 
 //const id = useParams();
 
@@ -55,11 +57,14 @@ const TagForm = () => {
     //         history.push("/");
   
     //  })} }
-console.log(id)
+console.log(id);
+//console.log(idTag);
+
 
   useEffect(() => {
     getTagById(id)
-    .then(tag=>{setTag(tag)});
+    .then(setTag);
+    
 }, []);
 
 //     updateTag(editedTag).then((t) => {
@@ -82,28 +87,30 @@ console.log(id)
   
             <Form>
               <FormGroup>
-                <div>{tag.name}</div>
+                {/*
+                USED FOR TESTING: <div>{tag.id}</div> 
+                */}
                 <Input
                   id= {tag.id}
-                 //onChange={handleFieldChange}
-                //onChange={(e) => setTag(e.target.value)}
+                  onChange={handleFieldChange}
                   type= "hidden"
                   value={tag.id}
-
                 />
               </FormGroup>
               <FormGroup>
                 <Label for="name">Name</Label>
-                <Input id="name"  
-                value={tag.name} 
-               onChange={(e) => setName(e.target.value)} 
-               // onChange={handleFieldChange}
+                <Input 
+                type="textarea" 
+                id="name"  
+                required
+                defaultValue={tag.name}
+                name="name"
+                //onChange={(e) => setTag(e.target.value)}
+               onChange={handleFieldChange}
                 />
               </FormGroup>
             </Form>
-            <Button color="info" onClick={editTag}>
-              SUBMIT
-            </Button>
+            <Button  type="button" onClick={e => {editTag()}}>Submit</Button>
           </CardBody>
         </Card>
       </div>
