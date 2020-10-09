@@ -25,6 +25,11 @@ namespace Tabloid.Utils
             return reader.GetString(ordinal);
         }
 
+        public static object ValueOrDBNull(object value)
+        {
+            return value ?? DBNull.Value;
+        }
+
         public static string GetNullableString(SqlDataReader reader, string column)
         {
             var ordinal = reader.GetOrdinal(column);

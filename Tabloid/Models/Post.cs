@@ -29,7 +29,7 @@ namespace Tabloid.Models
         [DataType(DataType.Date)]
         public DateTime? PublishDateTime { get; set; }
 
-        public bool isApproved { get; set; }
+        public bool IsApproved { get; set; }
 
         [Required]
         [DisplayName("Category")]
