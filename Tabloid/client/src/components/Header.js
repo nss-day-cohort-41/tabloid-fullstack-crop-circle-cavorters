@@ -15,6 +15,7 @@ export default function Header() {
   const { isLoggedIn, logout } = useContext(UserProfileContext);
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
+  const sessionUser = JSON.parse(sessionStorage.getItem("userProfile"));
 
   return (
     <div>
@@ -37,6 +38,11 @@ export default function Header() {
             {isLoggedIn &&
               <NavItem>
                 <NavLink tag={RRNavLink} to="/comments">Comments</NavLink>
+              </NavItem>
+            }
+            {isLoggedIn && sessionUser.userTypeId === 1 &&
+              <NavItem>
+                <NavLink tag={RRNavLink} to="/users">Users</NavLink>
               </NavItem>
             }
 

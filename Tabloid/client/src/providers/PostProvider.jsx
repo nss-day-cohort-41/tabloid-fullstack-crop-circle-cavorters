@@ -9,12 +9,6 @@ export const PostProvider = (props) => {
 
   const [posts, setPosts] = useState([]);
 
-  //   const getAllPosts = () => {
-  //     return fetch(apiUrl)
-  //       .then((res) => res.json())
-  //       .then(setPosts);
-  //   };
-
   const getAllPosts = () =>
     getToken().then((token) =>
       fetch(apiUrl, {
