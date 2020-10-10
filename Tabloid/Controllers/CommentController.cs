@@ -25,10 +25,10 @@ namespace Tabloid.Controllers
             _userRepo = userRepository;
         }
 
-        [HttpGet]
-        public IActionResult Get(int id)
+        [HttpGet("{postId}")]
+        public IActionResult GetAllPostComments(int postId)
         {
-            var comments = _commentRepository.GetAllPostComments(id);
+            var comments = _commentRepository.GetAllPostComments(postId);
             return Ok(comments);
         }
 

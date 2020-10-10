@@ -6,7 +6,7 @@ namespace Tabloid.Repositories
     public interface ICommentRepository
     {
         void Add(Comment comment);
-        void Delete(int id);
+        void Delete(int postId);
         
         List<Comment> GetAllPostComments(int postId);
         

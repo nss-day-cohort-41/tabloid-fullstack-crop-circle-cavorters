@@ -44,7 +44,7 @@ namespace Tabloid.Repositories
                     cmd.Parameters.AddWithValue("@id", postId);
                     var reader = cmd.ExecuteReader();
 
-                    var comments = new List<Comment>();
+                    List<Comment>comments = new List<Comment>();
 
                     while (reader.Read())
                     {
@@ -53,7 +53,7 @@ namespace Tabloid.Repositories
 
                     reader.Close();
 
-                    return comments;
+                    return (comments);
                 }
             }
         }

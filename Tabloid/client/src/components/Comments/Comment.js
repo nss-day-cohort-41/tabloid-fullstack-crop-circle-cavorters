@@ -1,26 +1,16 @@
-import React, { useState, useEffect } from "react"
-import { ListGroupItem } from "reactstrap"
+import React from "react";
+import { Card, CardBody } from "reactstrap";
 
-const Comment = ({ comment }) => {
-
-    const [userProfile, setUserProfile] = useState({})
-
-    useEffect(() => {
-        const getUser = async () => {
-            const userData = await fetch(`/api/userprofile/${comment.userProfileId}`)
-            const dataJson = await userData.json()
-            setUserProfile(dataJson)
-        }
-        getUser()
-    }, [])
-
-
+export default function Comment({ comment }) {
     return (
-        <ListGroupItem>
-            <blockquote>{comment.message}</blockquote>
-            <cite>{userProfile.name}</cite>
-        </ListGroupItem>
-    )
+        <Card className="m-4">
+            <CardBody>
+                <h2>{comment.subject}</h2>
+                <p>{comment.userProfile}</p>
+                <p>{comment.content}</p>
+                <p>{comment.postid}</p>
+                <p>{comment.createDateTime}</p>
+            </CardBody>
+        </Card>
+    );
 }
-
-export default Comment;

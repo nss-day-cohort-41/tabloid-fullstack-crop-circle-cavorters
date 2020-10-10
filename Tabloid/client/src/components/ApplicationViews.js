@@ -36,8 +36,7 @@ export default function ApplicationViews() {
           {isLoggedIn ? <PostList /> : <Redirect to="/login" />}
         </Route>
 
-
-
+       
         <Route path="/comments" exact>
           {isLoggedIn ? <CommentList /> : <Redirect to="/login" />}
         </Route>
