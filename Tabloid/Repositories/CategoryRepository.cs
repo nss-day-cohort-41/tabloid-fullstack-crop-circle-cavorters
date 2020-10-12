@@ -2,10 +2,8 @@
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Tabloid.Models;
-using Tabloid.Utils;
+
 
 namespace Tabloid.Repositories
 {
@@ -46,7 +44,7 @@ namespace Tabloid.Repositories
             }
         }
 
-        public void CreateCategory(Category category)
+        public void AddCategory(Category category)
         {
             using (var conn = Connection)
             {

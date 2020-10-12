@@ -14,7 +14,7 @@ export default function CategoryList() {
     console.log(categories);
     return (
         <section>
-            <Link to={`/categories/add`}><Button color="primary">Add New Category</Button></Link>
+            <Link to={`/categories/add`}><Button>Add New Category</Button></Link>
             {categories.map(category =>
                 <Category key={category.id} category={category} />
             )}

@@ -1,12 +1,11 @@
 import React, { useState, useContext } from "react";
 import { UserProfileContext } from "./UserProfileProvider";
-// import { CategoryContext } from "./CategoryProvider";
 
 export const CategoryContext = React.createContext();
 
 export const CategoryProvider = (props) => {
     const apiUrl = "/api/category";
-    // const { getToken } = useContext(CategoryContext);
+
     const { getToken } = useContext(UserProfileContext);
 
     const [categories, setCategories] = useState([]);
@@ -21,7 +20,7 @@ export const CategoryProvider = (props) => {
             }).then(resp => resp.json())
                 .then(setCategories));
 
-    const addCategory = (category) =>
+    const AddCategory = (category) =>
         getToken().then((token) =>
             fetch(apiUrl, {
                 method: "POST",
