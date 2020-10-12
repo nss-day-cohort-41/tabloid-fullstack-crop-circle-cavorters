@@ -7,7 +7,8 @@ import Hello from "./Hello";
 import PostList from "./Posts/PostList";
 import UserList from "./Users/UserList";
 import CategoryList from "./Categories/CategoryList";
-// import CategoryForm from "./Categories/CategoryForm";
+import CategoryAddForm from "./Categories/CategoryAddForm";
+// import CategoryProvider from "../providers/CategoryProvider";
 import UserDetails from "./Users/UserDetails";
 import UserDeactivate from "./Users/UserDeactivate";
 import UserActivate from "./Users/UserActivate";
@@ -38,6 +39,10 @@ export default function ApplicationViews() {
 
         <Route path="/categories">
           {isLoggedIn ? <CategoryList /> : <Redirect to="/login" />}
+        </Route>
+
+        <Route path="/categories/add">
+          {isLoggedIn ? <CategoryAddForm /> : <Redirect to="/login" />}
         </Route>
 
         <Route path="/users" exact>
