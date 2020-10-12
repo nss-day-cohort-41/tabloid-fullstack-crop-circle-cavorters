@@ -183,7 +183,7 @@ namespace Tabloid.Repositories
         }
 
         public UserProfile GetUserProfileById(int id)
-<<<<<<< HEAD
+
         {
             using (var conn = Connection)
             {
@@ -268,95 +268,5 @@ namespace Tabloid.Repositories
                 }
             }
         }
-
-        /*
-        public UserProfile GetByFirebaseUserId(string firebaseUserId)
-=======
->>>>>>> 869f04ac4412e4585fb35e3d7a0c67074bb216ab
-        {
-            using (var conn = Connection)
-            {
-                conn.Open();
-                using (var cmd = conn.CreateCommand())
-                {
-                    {
-                        cmd.CommandText = @"SELECT 
-                              u.id, u.FirebaseUserId, u.FirstName, u.LastName, u.DisplayName, u.Email, 
-                              u.IsActive, u.CreateDateTime, u.ImageLocation, u.UserTypeId,
-                              ut.[Name] AS UserTypeName
-                         FROM UserProfile u
-                              LEFT JOIN UserType ut ON u.UserTypeId = ut.id
-                        WHERE u.Id = @id";
-
-                        cmd.Parameters.AddWithValue("@id", id);
-                        var reader = cmd.ExecuteReader();
-
-
-                        if (reader.Read())
-                        {
-                            UserProfile userProfile = new UserProfile
-                            {
-                                Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                                FirebaseUserId = reader.GetString(reader.GetOrdinal("FirebaseUserId")),
-                                Email = reader.GetString(reader.GetOrdinal("Email")),
-                                FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
-                                LastName = reader.GetString(reader.GetOrdinal("LastName")),
-                                DisplayName = reader.GetString(reader.GetOrdinal("DisplayName")),
-                                IsActive = reader.GetBoolean(reader.GetOrdinal("IsActive")),
-                                CreateDateTime = reader.GetDateTime(reader.GetOrdinal("CreateDateTime")),
-                                ImageLocation = DbUtils.GetNullableString(reader, "ImageLocation"),
-                                UserTypeId = reader.GetInt32(reader.GetOrdinal("UserTypeId")),
-                                UserType = new UserType()
-                                {
-                                    Id = reader.GetInt32(reader.GetOrdinal("UserTypeId")),
-                                    Name = reader.GetString(reader.GetOrdinal("UserTypeName"))
-                                },
-
-                            };
-                            reader.Close();
-                            return userProfile;
-                        }
-                        reader.Close();
-                        return null;
-                    }
-                }
-            }
-        }
-
-        public void UpdateUserProfile(UserProfile userProfile)
-        {
-            using (var conn = Connection)
-            {
-                conn.Open();
-                using (var cmd = conn.CreateCommand())
-                {
-                    cmd.CommandText = @"
-                            UPDATE UserProfile
-                            SET 
-                                Email = @email, 
-                                FirebaseUserId = @firebaseUserId,
-                                FirstName = @firstName, 
-                                LastName = @lastName,
-                                DisplayName = @displayName,
-                                CreateDateTime = @createDateTime,
-                                IsActive = @isActive,
-                                ImageLocation = @imageLocation, 
-		                        UserTypeId = @userTypeId
-                            WHERE Id = @id";
-                    cmd.Parameters.AddWithValue("@id", userProfile.Id);
-                    cmd.Parameters.AddWithValue("@email", userProfile.Email);
-                    cmd.Parameters.AddWithValue("@firebaseUserId", userProfile.FirebaseUserId);
-                    cmd.Parameters.AddWithValue("@firstName", userProfile.FirstName);
-                    cmd.Parameters.AddWithValue("@lastName", userProfile.LastName);
-                    cmd.Parameters.AddWithValue("@displayName", userProfile.DisplayName);
-                    cmd.Parameters.AddWithValue("@createDateTime", userProfile.CreateDateTime);
-                    cmd.Parameters.AddWithValue("@isActive", userProfile.IsActive);
-                    cmd.Parameters.AddWithValue("@imageLocation", DbUtils.ValueOrDBNull(userProfile.ImageLocation));
-                    cmd.Parameters.AddWithValue("@userTypeId", userProfile.UserTypeId);
-                    cmd.ExecuteNonQuery();
-                }
-            }
-        }
-
     }
 }
