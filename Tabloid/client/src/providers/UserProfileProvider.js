@@ -43,7 +43,7 @@ export function UserProfileProvider(props) {
     return firebase.auth().signInWithEmailAndPassword(email, pw)
       .then((signInResponse) => getUserProfile(signInResponse.user.uid))
       .then((userProfile) => {
-        {console.log(userProfile)}
+        { console.log(userProfile) }
         if (userProfile.isActive == true) {
           sessionStorage.setItem("userProfile", JSON.stringify(userProfile));
           setIsLoggedIn(true);
@@ -73,7 +73,7 @@ export function UserProfileProvider(props) {
 
   const getToken = () => firebase.auth().currentUser.getIdToken();
 
- 
+
   const getUserProfile = (firebaseUserId) => {
     return getToken().then((token) =>
       fetch(`${apiUrl}/${firebaseUserId}`, {
@@ -122,7 +122,7 @@ export function UserProfileProvider(props) {
     <UserProfileContext.Provider value={{ users, isLoggedIn, login, logout, register, getToken, setUsers, getAllUsers, getUserProfile, updateUser, getUserId, getAllInactiveUsers }}>
       {isFirebaseReady
         ? props.children
-        : <Spinner className="app-spinner dark"/>}
+        : <Spinner className="app-spinner dark" />}
     </UserProfileContext.Provider>
   );
 }

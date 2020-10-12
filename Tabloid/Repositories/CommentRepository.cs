@@ -6,6 +6,7 @@ using Tabloid.Models;
 using Tabloid.Utils;
 
 
+
 namespace Tabloid.Repositories
 {
     public class CommentRepository : BaseRepository, ICommentRepository

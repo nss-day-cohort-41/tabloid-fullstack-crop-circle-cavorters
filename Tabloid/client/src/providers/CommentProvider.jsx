@@ -10,19 +10,59 @@ export function CommentProvider(props) {
 
     const [comments, setComments] = useState([]);
 
-    const getAllComments = () =>
+    //Get all Comments by id,must match API
+    const getAllCommentsByPostId = (id) =>
         getToken().then((token) =>
-            fetch(apiUrl, {
+            fetch(apiUrl + "/" + id, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             }).then(resp => resp.json())
-                .then(setComments));
+                .then(setComments)); 
+                
+              //Add a new comment  
+                const addComment = (newComment) => {
+                    return getToken().then((token) => {
+                        fetch("/api/comment/", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                                Authorization: `Bearer ${token}`
+                            },
+                            body: JSON.stringify(newComment)
+                        })
+                    })
+                };
+
+    const editComment = (comment) => {
+        return getToken().then((token) => {
+            fetch(`/api/comment/${comment.id}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                },
+                body: JSON.stringify(comment)
+            })
+        })
+    }
+
+    const deleteComment = (commentId) => {
+        return getToken().then((token) => {
+            fetch(`/api/comment/${commentId}`, {
+                method: "DELETE",
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+        })
+    }
 
     return (
-        <CommentContext.Provider value={{ comments, getAllComments }}>
+
+        <CommentContext.Provider value={{ comments, getAllCommentsByPostId, addComment, editComment, deleteComment }}>
             {props.children}
         </CommentContext.Provider>
     );
-};
+}
