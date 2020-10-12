@@ -4,12 +4,13 @@ import { Card, CardBody } from "reactstrap";
 import { useParams } from "react-router-dom";
 
 export default function PostDetail() {
-    const { post, getById } = useContext(PostContext);
+    const { post, getById, setPost } = useContext(PostContext);
     const { id } = useParams();
     console.log("post:", post, "id:", id);
 
     useEffect(() => {
         getById(id)
+            .then(setPost)
             ;
     }, []);
 

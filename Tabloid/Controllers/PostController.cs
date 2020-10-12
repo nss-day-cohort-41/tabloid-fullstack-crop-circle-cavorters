@@ -45,8 +45,11 @@ namespace Tabloid.Controllers
         [HttpPost]
         public IActionResult Post(Post post)
         {
+            post.IsApproved = true;
+            post.CreateDateTime = DateTime.Now;
             _postRepository.Add(post);
             return CreatedAtAction("Get", new { id = post.Id }, post);
         }
+
     }
 }

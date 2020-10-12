@@ -9,6 +9,7 @@ export const PostProvider = (props) => {
 
   const [posts, setPosts] = useState([]);
   const [post, setPost] = useState({});
+  const [lastPost, setLastPost] = useState({});
 
   const getAllPosts = () => {
     getToken().then((token) =>
@@ -44,6 +45,7 @@ export const PostProvider = (props) => {
       }).then(resp => {
         if (resp.ok) {
           return resp.json();
+            
         }
         throw new Error("Unauthorized");
       }))

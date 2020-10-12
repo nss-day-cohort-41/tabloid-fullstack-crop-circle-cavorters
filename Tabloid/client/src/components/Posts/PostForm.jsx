@@ -1,19 +1,22 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { PostContext } from "../../providers/PostProvider";
 import { useHistory } from "react-router-dom";
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
 export default function PostForm() {
     const history = useHistory();
-    const { addPost, getAllPosts } = useContext(PostContext);
+    const { addPost } = useContext(PostContext);
+    const sessionUser = JSON.parse(sessionStorage.getItem("userProfile"));
     const [post, setPost] = useState({
         title: "",
         content: "",
-        categoryId: 2
-        // // imageLocation: "",
-        // // dateCreated: ""
-    });
+        categoryId: 2,
+        imageLocation: "",
+        publishDateTime: "",
+        userProfileId: sessionUser.id
 
+    });
+    console.log(sessionUser.id)
     const [isLoading, setIsLoading] = useState(false);
 
     const handleFieldChange = e => {
@@ -31,7 +34,9 @@ export default function PostForm() {
         }
 
         addPost(post)
-            .then(() => getAllPosts());
+            .then((p) => {
+                history.push(`/posts/details/${p.id}`)
+            })
 
     };
 
@@ -68,9 +73,9 @@ export default function PostForm() {
                             type="datetime-local"
                             required
                             onChange={handleFieldChange}
-                            id="publicationDate"
+                            id="publishDateTime"
                             placeholder="Publication Date"
-                            value={post.publicationDate}
+                            value={post.publishDateTime}
                         />
                         <div>
                             <Button

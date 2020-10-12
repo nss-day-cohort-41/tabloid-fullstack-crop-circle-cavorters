@@ -16,11 +16,39 @@ export default function PostList() {
 
   return (
     <section>
-      <Link
-        to={`/posts/add`}>New Post</Link>
-      {posts.map(p =>
-        <Post key={p.id} post={p} />
-      )}
+      <div class="postCard">
+        <div className="postHeader">
+          <h1>Posts</h1>
+          <p>
+            <Link class="btn btn-primary" to="/posts/add">New Post</Link>
+          </p>
+        </div>
+        <div className="post-container">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>
+                  Title
+              </th>
+                <th>
+                  Posted by
+              </th>
+                <th>
+                  Category
+              </th>
+                <th>
+                  Publish Date
+              </th>
+                <th></th>
+              </tr>
+            </thead>
+            {posts.map(p =>
+              <Post key={p.id} post={p} />
+            )}
+          </table>
+        </div>
+      </div>
     </section>
+
   );
 }

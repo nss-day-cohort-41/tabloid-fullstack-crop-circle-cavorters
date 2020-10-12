@@ -3,23 +3,36 @@ import { Card, CardBody, Button } from "reactstrap";
 import { Link } from "react-router-dom";
 
 export default function Post({ post }) {
-  let id = post.id;
-  const viewDetails = () => {
-    alert("DETAILS!!!!", id);
-  }
+
 
   return (
-    <Card className="m-4">
-      <CardBody>
-        <h2>{post.title}</h2>
-        <p>{post.userProfile.fullName}</p>
-        <p>{post.categoryId}</p>
-        <p>{post.isApproved}</p>
-        <p>{post.publishDateTime}</p>
-        <Link
-          to={`/posts/details/${post.id}`}>View Post</Link>
+    <tbody>
+      <tr>
+        <td>
+          {post.title}
+        </td>
+        <td>
+          {post.userProfile.fullName}
+        </td>
+        <td>
+          {post.categoryId}
+        </td>
+        <td>
+          {post.publishDateTime}
+        </td>
+        <td>
+          <Link style={{ textDecoration: 'none' }} to={`/posts/details/${post.id}`}>
+            <button className="std-btn">View Post</button>
+          </Link>
+          <Link style={{ textDecoration: 'none' }} to={`/posts/edit/${post.id}`}>
+            <button className="std-btn">Edit</button>
+          </Link>
+          <Link style={{ textDecoration: 'none' }} to={`/posts/delete/${post.id}`}>
+            <button className="std-btn">Delete</button>
+          </Link>
+        </td>
+      </tr>
+    </tbody>
 
-      </CardBody>
-    </Card>
   );
 }
