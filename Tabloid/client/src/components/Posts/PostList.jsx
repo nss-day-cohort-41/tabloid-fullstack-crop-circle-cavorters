@@ -1,4 +1,4 @@
-  
+
 import React, { useContext, useEffect } from "react";
 import Post from "./Post";
 import { PostContext } from "../../providers/PostProvider";

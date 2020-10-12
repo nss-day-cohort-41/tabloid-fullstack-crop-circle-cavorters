@@ -39,19 +39,19 @@ export default function ApplicationViews() {
           <Register />
         </Route>
 
-        <PostProvider>
-          <Route path="/posts" exact>
-            {isLoggedIn ? <PostList /> : <Redirect to="/login" />}
-          </Route>
 
-          <Route exact path="/posts/details/:id">
-            {isLoggedIn ? <PostDetail /> : <Redirect to="/login" />}
-          </Route>
+        <Route path="/posts" exact>
+          {isLoggedIn ? <PostList /> : <Redirect to="/login" />}
+        </Route>
 
-          <Route path="/posts/add">
-            {isLoggedIn ? <PostForm /> : <Redirect to="/login" />}
-          </Route>
-        </PostProvider>
+        <Route exact path="/posts/details/:id">
+          {isLoggedIn ? <PostDetail /> : <Redirect to="/login" />}
+        </Route>
+
+        <Route path="/posts/add">
+          {isLoggedIn ? <PostForm /> : <Redirect to="/login" />}
+        </Route>
+
 
         <Route path="/users" exact>
           {isLoggedIn && sessionUser.userTypeId === 1 ? <UserList /> : <Redirect to="/login" />}
@@ -72,6 +72,7 @@ export default function ApplicationViews() {
         <Route path="/inactive/:id" exact>
           {isLoggedIn && sessionUser.userTypeId === 1 ? <UserActivate /> : <Redirect to="/login" />}
         </Route>
+
 
         {/* TAGS ROUTES */}
         <Route path="/tags" exact>
