@@ -7,7 +7,12 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink
+  NavLink,
+  DropdownItem,
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+
 } from 'reactstrap';
 import { UserProfileContext } from "../providers/UserProfileProvider";
 
@@ -38,6 +43,10 @@ export default function Header() {
 
                 <NavItem>
                   <NavLink tag={RRNavLink} to="/categories">Categories</NavLink>
+                </NavItem>
+
+                <NavItem>
+                  <NavLink tag={RRNavLink} to="/tags">Tag</NavLink>
                 </NavItem>
               </>
             }
