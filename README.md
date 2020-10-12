@@ -1,3 +1,12 @@
+<br/>
+<p align="center">
+    <a >
+        <img width="60%" src="https://res.cloudinary.com/triggsumms/image/upload/v1602299129/rnggbd2lil1lquckptgh.jpg"  alt="TRACKER logo">
+    </a>
+</p>
+
+<br/>
+
 # Tabloid - Fullstack
 
 ## We have two sprints to implement a production ready Tabloid application.
