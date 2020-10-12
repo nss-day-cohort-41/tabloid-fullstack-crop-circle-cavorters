@@ -6,10 +6,10 @@ import { Button } from "reactstrap";
 
 
 export default function CategoryList() {
-    const { categories, GetAllCategories } = useContext(CategoryContext);
+    const { categories, getAllCategories } = useContext(CategoryContext);
 
     useEffect(() => {
-        GetAllCategories();
+        getAllCategories();
     }, []);
     // console.log(categories);
     return (

@@ -10,7 +10,7 @@ export const CategoryProvider = (props) => {
     const [categories, setCategories] = useState([]);
 
 
-    const GetAllCategories = () =>
+    const getAllCategories = () =>
         getToken().then((token) =>
             fetch(apiUrl, {
                 method: "GET",
@@ -51,7 +51,7 @@ export const CategoryProvider = (props) => {
 
     return (
         <CategoryContext.Provider value={{
-            categories, GetAllCategories, addCategory, editCategory
+            categories, getAllCategories, addCategory, editCategory
         }}>
             {props.children}
         </CategoryContext.Provider>

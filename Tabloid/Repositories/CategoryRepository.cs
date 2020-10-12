@@ -63,6 +63,39 @@ namespace Tabloid.Repositories
             }
         }
 
+        public Category GetCategoryById(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        SELECT Id, name
+                        FROM Category 
+                        WHERE Id = @id";
+
+                    cmd.Parameters.AddWithValue("@id", id);
+                    var reader = cmd.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        Category category = new Category()
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            Name = reader.GetString(reader.GetOrdinal("Name"))
+                        };
+
+                        reader.Close();
+                        return category;
+
+                    }
+                    reader.Close();
+                    return null;
+                }
+            }
+        }
+
         public void EditCategory(Category category)
         {
             using (var conn = Connection)
