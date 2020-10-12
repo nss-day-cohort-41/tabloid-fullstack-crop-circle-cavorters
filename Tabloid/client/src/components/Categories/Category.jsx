@@ -6,7 +6,7 @@ export default function Category({ category }) {
     return (
         <Card className="m-4">
             <CardBody>
-                <p>Category:{category.name}</p>
+                <p>Category: {category.name}</p>
                 <div className="categoryManagementButtons">
                     <Link to={`/categories/${category.id}`}><Button color="info">Edit</Button></Link>
                 </div>
