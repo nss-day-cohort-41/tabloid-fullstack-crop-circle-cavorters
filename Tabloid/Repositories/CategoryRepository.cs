@@ -58,7 +58,7 @@ namespace Tabloid.Repositories
                         OUTPUT INSERTED.ID
                         VALUES ( @name )";
 
-                    cmd.Parameters.AddWithValue("@name", Category.Name);
+                    cmd.Parameters.AddWithValue("@name", category.Name);
 
                     int id = (int)cmd.ExecuteScalar();
                     category.Id = id;

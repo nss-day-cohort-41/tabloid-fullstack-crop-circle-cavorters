@@ -48,9 +48,10 @@ namespace Tabloid.Controllers
         }
 
         // GET: CategoryController/Create
-        public ActionResult Create()
+        public IActionResult Post(Category category)
         {
-            return View();
+            _categoryRepository.CreateCategory(category);
+            return CreatedAtAction(nameof(Get), new { id = category.Id }, category);
         }
 
         // POST: CategoryController/Create
