@@ -18,7 +18,7 @@ export default function Post({ post }) {
           {post.categoryId}
         </td>
         <td>
-          {post.publishDateTime}
+          {new Intl.DateTimeFormat('en-US').format(new Date(post.publishDateTime))}
         </td>
         <td>
           <Link style={{ textDecoration: 'none' }} to={`/posts/details/${post.id}`}>

@@ -62,7 +62,7 @@ export default function PostForm() {
                             value={post.imageLocation}
                         />
                         <Input
-                            type="text"
+                            type="textarea"
                             required
                             onChange={handleFieldChange}
                             id="content"
