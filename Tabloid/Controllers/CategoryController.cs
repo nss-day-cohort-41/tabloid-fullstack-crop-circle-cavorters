@@ -19,8 +19,6 @@ namespace Tabloid.Controllers
 
         private readonly ICategoryRepository _categoryRepository;
 
-
-
         public CategoryController(
             ICategoryRepository categoryRepository)
         {
@@ -35,14 +33,18 @@ namespace Tabloid.Controllers
             return Ok(categories);
         }
 
-        // GET: CategoryController
-/*        public ActionResult Index()
+        [HttpGet("{id}")]
+        public ActionResult Get(int id)
         {
-            return View();
-        }
-*/
+            Category category = _categoryRepository.GetCategoryById(id);
 
-        // GET: CategoryController/Create
+            if (category == null)
+            {
+                return NotFound();
+            }
+            return Ok(category);
+        }
+
         [HttpPost]
         public IActionResult Post(Category category)
         {
@@ -76,7 +78,6 @@ namespace Tabloid.Controllers
             _categoryRepository.EditCategory(category);
             return NoContent();
         }
-
 
         // GET: CategoryController/Edit/5
         /*public ActionResult Edit(int id)
