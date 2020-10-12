@@ -37,7 +37,7 @@ export default function Header() {
             }
             {isLoggedIn &&
               <NavItem>
-                <NavLink tag={RRNavLink} to="/comments">Comments</NavLink>
+                <NavLink tag={RRNavLink} to="post/comments/id">Comments</NavLink>
               </NavItem>
             }
             {isLoggedIn && sessionUser.userTypeId === 1 &&
