@@ -18,12 +18,8 @@ const UserEdit = () => {
   }
 
   const handleChange = (e) => {
-    console.log("UserType Selected");
     setUserTypeId(e.target.value);
   }
-
-  console.log(id)
-  console.log(user)
   
   useEffect(() => {
     getUserId(id)

@@ -23,6 +23,14 @@ html, #root {
     margin: 10px;
 }
 
+.postCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+}
+
 .details-container {
     display: flex;
 }
@@ -50,6 +58,17 @@ html, #root {
     background: white;
 }
 
+.post-container {
+    display: flex;
+    justify-content: space-between;
+    width: 60%;
+    border: 1px solid #373737;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 1px 1px 2px 1px #747272;
+    background: white;
+}
+
 .buttons > a {
     text-decoration-style: none;
 }
@@ -68,24 +87,24 @@ html, #root {
     font-weight: 500;
     box-shadow: 1px 1px 2px 1px #747272;
     margin-bottom: 15px;
-  }
-  
-  .std-btn:hover {
+}
+
+.std-btn:hover {
     background-color: goldenrod;
-  }
+}
 
-  .displayName {
-      color:goldenrod;
-      text-decoration: none;
-      margin: 0;
-      font-family: 'Oswald', sans-serif;
-  }
+.displayName {
+    color:goldenrod;
+    text-decoration: none;
+    margin: 0;
+    font-family: 'Oswald', sans-serif;
+}
 
-  .admin {
-      color: red;
-  }
+.admin {
+    color: red;
+}
 
-  .view {
+.view {
 	box-shadow:inset 0px 1px 0px 0px #373737;
 	background-color:#000000;
 	border-radius:39px;
@@ -100,9 +119,11 @@ html, #root {
 	text-decoration:none;
 	text-shadow:0px 1px 0px #373737;
 }
+
 .view:hover {
 	background-color:#161616;
 }
+
 .view:active {
 	position:relative;
 	top:1px;

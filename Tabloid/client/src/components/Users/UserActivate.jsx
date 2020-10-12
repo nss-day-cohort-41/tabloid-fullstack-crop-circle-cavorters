@@ -14,9 +14,6 @@ const UserDeactivate = () => {
     updateUser(user)
         .then(() => history.push("/inactive"));
   }
-
-  console.log(id)
-  console.log(user)
   
   useEffect(() => {
     getUserId(id)
