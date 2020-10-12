@@ -31,19 +31,20 @@ export default function Header() {
               </NavItem>
             }
             {isLoggedIn &&
-              <NavItem>
-                <NavLink tag={RRNavLink} to="/posts">Posts</NavLink>
-              </NavItem>
+              <>
+                <NavItem>
+                  <NavLink tag={RRNavLink} to="/posts">Posts</NavLink>
+                </NavItem>
+
+                <NavItem>
+                  <NavLink tag={RRNavLink} to="/categories">Categories</NavLink>
+                </NavItem>
+              </>
             }
 
-            {isLoggedIn &&
-              <NavItem>
-                <NavLink tag={RRNavLink} to="/categories">Categories</NavLink>
-              </NavItem>
-            }
             {isLoggedIn && sessionUser.userTypeId === 1 &&
-            <NavItem>
-              <NavLink tag={RRNavLink} to="/users">Users</NavLink>
+              <NavItem>
+                <NavLink tag={RRNavLink} to="/users">Users</NavLink>
               </NavItem>
             }
 

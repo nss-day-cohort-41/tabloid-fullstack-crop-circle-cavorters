@@ -11,7 +11,7 @@ using Tabloid.Repositories;
 
 namespace Tabloid.Controllers
 {
-
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CategoryController : ControllerBase
@@ -36,27 +36,22 @@ namespace Tabloid.Controllers
         }
 
         // GET: CategoryController
-        public ActionResult Index()
+/*        public ActionResult Index()
         {
             return View();
         }
-
-        // GET: CategoryController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
+*/
 
         // GET: CategoryController/Create
         [HttpPost]
         public IActionResult Post(Category category)
         {
             _categoryRepository.AddCategory(category);
-            return CreatedAtAction(nameof(Get), new { id = category.Id }, category);
+            return CreatedAtAction("Get", new { id = category.Id }, category);
         }
 
         // POST: CategoryController/Create
-        [HttpPost]
+/*        [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
         {
@@ -68,16 +63,16 @@ namespace Tabloid.Controllers
             {
                 return View();
             }
-        }
+        }*/
 
         // GET: CategoryController/Edit/5
-        public ActionResult Edit(int id)
+        /*public ActionResult Edit(int id)
         {
             return View();
-        }
+        }*/
 
         // POST: CategoryController/Edit/5
-        [HttpPost]
+        /*[HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
         {
@@ -89,10 +84,10 @@ namespace Tabloid.Controllers
             {
                 return View();
             }
-        }
+        }*/
 
         // GET: CategoryController/Delete/5
-        public ActionResult Delete(int id)
+       /* public ActionResult Delete(int id)
         {
             return View();
         }
@@ -100,10 +95,10 @@ namespace Tabloid.Controllers
         private ActionResult View()
         {
             throw new NotImplementedException();
-        }
+        }*/
 
         // POST: CategoryController/Delete/5
-        [HttpPost]
+       /* [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
         {
@@ -115,6 +110,6 @@ namespace Tabloid.Controllers
             {
                 return View();
             }
-        }
+        }*/
     }
 }

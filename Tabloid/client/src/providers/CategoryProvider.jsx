@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { useEffect } from "react";
 import { UserProfileContext } from "./UserProfileProvider";
 
 export const CategoryContext = React.createContext();
@@ -9,6 +10,13 @@ export const CategoryProvider = (props) => {
     const { getToken } = useContext(UserProfileContext);
 
     const [categories, setCategories] = useState([]);
+
+    // useEffect(() => {
+    //     GetAllCategories()
+    //         .then(console.log(categories))
+    // }, []
+
+    // )
 
     const GetAllCategories = () =>
         getToken().then((token) =>
@@ -38,7 +46,7 @@ export const CategoryProvider = (props) => {
 
     return (
         <CategoryContext.Provider value={{
-            categories, GetAllCategories
+            categories, GetAllCategories, addCategory
         }}>
             {props.children}
         </CategoryContext.Provider>

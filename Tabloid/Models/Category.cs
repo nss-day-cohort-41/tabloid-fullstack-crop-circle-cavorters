@@ -10,7 +10,7 @@ namespace Tabloid.Models
     {
         public int Id { get; set; }
 
-        [StringLength(28, MinimumLength = 28)]
+        [StringLength(30, MinimumLength = 1)]
 
         [Required]
         [MaxLength(50)]

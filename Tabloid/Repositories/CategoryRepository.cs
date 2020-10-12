@@ -21,18 +21,17 @@ namespace Tabloid.Repositories
                 {
                     cmd.CommandText = 
 
-                    "SELECT Id, Name " +
-                    "FROM Category";
-
+                    "SELECT Id, Name FROM Category ORDER BY Name";
+                    
                     var reader = cmd.ExecuteReader();
                     var categories = new List<Category>();
                     while (reader.Read())
                     {
-                        var category = new Category()
+                        var category = (new Category()
                         {
                             Id = reader.GetInt32(reader.GetOrdinal("Id")),
                             Name = reader.GetString(reader.GetOrdinal("Name"))
-                        };
+                        });
 
                         categories.Add(category);
                     }

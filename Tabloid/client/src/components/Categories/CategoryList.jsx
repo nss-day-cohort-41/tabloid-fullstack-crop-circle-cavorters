@@ -11,12 +11,12 @@ export default function CategoryList() {
     useEffect(() => {
         GetAllCategories();
     }, []);
-    console.log(categories);
+    // console.log(categories);
     return (
         <section>
             <Link to={`/categories/add`}><Button>Add A New Category</Button></Link>
-            {categories.map(category =>
-                <Category key={category.id} category={category} />
+            {categories.map(c =>
+                <Category key={c.id} category={c} />
             )}
         </section>
     );

@@ -1,6 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Form, FormGroup, Card, CardBody, Label, Input, Button, } from "reactstrap";
-import Category from "./Category";
 import { CategoryContext } from "../../providers/CategoryProvider";
 import { useHistory } from "react-router-dom";
 
@@ -16,8 +15,8 @@ const CategoryAddForm = () => {
         };
 
 
-        addCategory(category).then((t) => {
-            history.push("/");
+        addCategory(category).then((c) => {
+            history.push("/categories");
         });
     };
 
@@ -27,7 +26,6 @@ const CategoryAddForm = () => {
                 <Card className="col-sm-12 col-lg-6">
                     <CardBody>
                         <Form>
-                            {}
                             <FormGroup>
                                 <Label for="name">Name</Label>
                                 <Input id="name" onChange={(e) => setName(e.target.value)} />
@@ -35,7 +33,7 @@ const CategoryAddForm = () => {
                         </Form>
                         <Button color="info" onClick={submit}>
                             SUBMIT
-            </Button>
+                        </Button>
                     </CardBody>
                 </Card>
             </div>
