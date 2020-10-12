@@ -1,6 +1,7 @@
 import React, { useState, createContext, useContext } from "react";
 import { UserProfileContext } from "./UserProfileProvider";
 
+
 export const CommentContext = createContext();
 
 export function CommentProvider(props) {
@@ -24,4 +25,4 @@ export function CommentProvider(props) {
             {props.children}
         </CommentContext.Provider>
     );
-}
+};
