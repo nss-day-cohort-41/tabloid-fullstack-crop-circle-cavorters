@@ -1,22 +1,14 @@
 import React, { useState, useContext } from "react";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import { UserProfileContext } from "./UserProfileProvider";
 
 export const CategoryContext = React.createContext();
 
 export const CategoryProvider = (props) => {
     const apiUrl = "/api/category";
-
     const { getToken } = useContext(UserProfileContext);
-
     const [categories, setCategories] = useState([]);
 
-    // useEffect(() => {
-    //     GetAllCategories()
-    //         .then(console.log(categories))
-    // }, []
-
-    // )
 
     const GetAllCategories = () =>
         getToken().then((token) =>
@@ -44,9 +36,22 @@ export const CategoryProvider = (props) => {
                 throw new Error("Unauthorized");
             }));
 
+
+    const editCategory = (category) =>
+        getToken().then((token) =>
+            fetch(`/api/category/${category.id}`, {
+                method: "PUT",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(category)
+            }));
+
+
     return (
         <CategoryContext.Provider value={{
-            categories, GetAllCategories, addCategory
+            categories, GetAllCategories, addCategory, editCategory
         }}>
             {props.children}
         </CategoryContext.Provider>

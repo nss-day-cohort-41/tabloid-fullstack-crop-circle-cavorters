@@ -51,19 +51,32 @@ namespace Tabloid.Controllers
         }
 
         // POST: CategoryController/Create
-/*        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        /*        [HttpPost]
+                [ValidateAntiForgeryToken]
+                public ActionResult Create(IFormCollection collection)
+                {
+                    try
+                    {
+                        return RedirectToAction(nameof(Index));
+                    }
+                    catch
+                    {
+                        return View();
+                    }
+                }*/
+
+        [HttpPut("{id}")]
+        public IActionResult Put(int id, Category category)
         {
-            try
+            if (id != category.Id)
             {
-                return RedirectToAction(nameof(Index));
+                return BadRequest();
             }
-            catch
-            {
-                return View();
-            }
-        }*/
+
+            _categoryRepository.EditCategory(category);
+            return NoContent();
+        }
+
 
         // GET: CategoryController/Edit/5
         /*public ActionResult Edit(int id)
@@ -87,29 +100,29 @@ namespace Tabloid.Controllers
         }*/
 
         // GET: CategoryController/Delete/5
-       /* public ActionResult Delete(int id)
-        {
-            return View();
-        }
+        /* public ActionResult Delete(int id)
+         {
+             return View();
+         }
 
-        private ActionResult View()
-        {
-            throw new NotImplementedException();
-        }*/
+         private ActionResult View()
+         {
+             throw new NotImplementedException();
+         }*/
 
         // POST: CategoryController/Delete/5
-       /* [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }*/
+        /* [HttpPost]
+         [ValidateAntiForgeryToken]
+         public ActionResult Delete(int id, IFormCollection collection)
+         {
+             try
+             {
+                 return RedirectToAction(nameof(Index));
+             }
+             catch
+             {
+                 return View();
+             }
+         }*/
     }
 }
