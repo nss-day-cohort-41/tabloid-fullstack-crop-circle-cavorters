@@ -7,7 +7,12 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink
+  NavLink,
+  DropdownItem,
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  
 } from 'reactstrap';
 import { UserProfileContext } from "../providers/UserProfileProvider";
 
@@ -31,9 +36,14 @@ export default function Header() {
               </NavItem>
             }
             {isLoggedIn &&
+            <>
             <NavItem>
               <NavLink tag={RRNavLink} to="/posts">Posts</NavLink>
-              </NavItem>
+            </NavItem>
+            <NavItem>
+              <NavLink tag={RRNavLink} to="/tags">Tag</NavLink>
+            </NavItem>
+            </>
             }
             {isLoggedIn && sessionUser.userTypeId === 1 &&
             <NavItem>
