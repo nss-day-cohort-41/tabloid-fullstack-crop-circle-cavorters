@@ -7,6 +7,7 @@ import Hello from "./Hello";
 import PostList from "./Posts/PostList";
 import UserList from "./Users/UserList";
 import CategoryList from "./Categories/CategoryList";
+// import CategoryForm from "./Categories/CategoryForm";
 import UserDetails from "./Users/UserDetails";
 import UserDeactivate from "./Users/UserDeactivate";
 import UserActivate from "./Users/UserActivate";

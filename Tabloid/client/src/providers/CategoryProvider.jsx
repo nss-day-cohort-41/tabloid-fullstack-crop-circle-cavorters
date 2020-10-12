@@ -20,7 +20,7 @@ export const CategoryProvider = (props) => {
             }).then(resp => resp.json())
                 .then(setCategories));
 
-    const AddCategory = (category) =>
+    const addCategory = (category) =>
         getToken().then((token) =>
             fetch(apiUrl, {
                 method: "POST",
