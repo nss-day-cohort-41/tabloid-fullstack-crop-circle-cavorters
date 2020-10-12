@@ -11,5 +11,10 @@ namespace Tabloid.Repositories
         List<Category> GetAllCategories();
         /*object GetbyId(int id);*/
 
+        void CreateCategory(Category category);
+        void EditCategory(Category category);
+
+        void DeleteCategory(int id);
+
     }
 }
