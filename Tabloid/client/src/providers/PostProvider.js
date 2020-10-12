@@ -21,7 +21,7 @@ export const PostProvider = (props) => {
         .then(setPosts));
   };
 
-  const getById = (id) => { 
+  const getById = (id) => {
     getToken().then((token) =>
       fetch(`/api/post/${id}`, {
         method: "GET",

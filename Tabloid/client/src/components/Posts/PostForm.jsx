@@ -16,7 +16,7 @@ export default function PostForm() {
         userProfileId: sessionUser.id
 
     });
-    console.log(sessionUser.id)
+    
     const [isLoading, setIsLoading] = useState(false);
 
     const handleFieldChange = e => {

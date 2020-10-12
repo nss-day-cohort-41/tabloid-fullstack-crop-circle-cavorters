@@ -5,9 +5,7 @@ import { useParams } from "react-router-dom";
 
 export default function PostDetail() {
     const { post, getById } = useContext(PostContext);
-    // const [postObj, setPostObj] = useState();
     const { id } = useParams();
-    console.log("post:", post, "id:", id);
 
     useEffect(() => {
         getById(id)
@@ -31,7 +29,7 @@ export default function PostDetail() {
                     <p>{post.categoryId}</p>
 
                     <p>{post.content}</p>
-                    <p>{post.publishDateTime}</p>
+                    <p>Post was Published: {new Intl.DateTimeFormat('en-US').format(new Date(post.publishDateTime))}</p>
                 </CardBody>
             </Card>
 
