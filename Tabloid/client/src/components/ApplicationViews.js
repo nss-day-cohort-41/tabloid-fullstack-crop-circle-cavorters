@@ -41,14 +41,14 @@ export default function ApplicationViews() {
         </Route>
 
         {/* Comment Routes */}
-          
-        <Route path="/post/comments/:id" exact>
+
+        <Route path="/posts/comments/:id" exact>
           {isLoggedIn ? <CommentProvider> <CommentList /> </CommentProvider> : <Redirect to="/login" />}
         </Route>
 
-        <Route path="comments/add/:id">
+        {/* <Route path="comments/add/:id">
           {isLoggedIn ? <CommentProvider> <CommentAddForm /></CommentProvider> : <Redirect to="/login" />}
-        </Route>
+        </Route> */}
 
         {/* <Route path="comment/:id/edit">
           {isLoggedIn ? <CommentProvider> <CommentEditForm /></CommentProvider> : <Redirect to="/login" />}

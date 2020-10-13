@@ -5,7 +5,7 @@ import { UserProfileContext } from "./UserProfileProvider";
 export const CommentContext = createContext();
 
 export function CommentProvider(props) {
-    const apiUrl = "/api/comment";
+    const apiUrl = "/api/post/comment";
     const { getToken } = useContext(UserProfileContext);
 
     const [comments, setComments] = useState([]);
@@ -14,6 +14,7 @@ export function CommentProvider(props) {
     const getAllCommentsByPostId = (id) =>
         getToken().then((token) =>
             fetch(apiUrl + "/" + id, {
+                //fetch(/api/post/${id}/comment, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`
