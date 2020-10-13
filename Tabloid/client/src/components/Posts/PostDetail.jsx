@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { PostContext } from "../../providers/PostProvider";
-import { Card, CardBody } from "reactstrap";
-import { useParams } from "react-router-dom";
+import { Card, CardBody, Button } from "reactstrap";
+import { useParams, Link } from "react-router-dom";
 
 export default function PostDetail() {
     const { post, getById } = useContext(PostContext);
