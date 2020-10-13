@@ -9,7 +9,7 @@ export default function PostList() {
 
   const newPost = () => {
     alert("routing to post form...");
-  }
+  } 
 
   useEffect(() => {
     getAllPosts();

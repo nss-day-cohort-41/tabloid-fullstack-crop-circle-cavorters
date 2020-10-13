@@ -12,7 +12,20 @@ export default function UserListDeactivated() {
 
   return (
     <section>
-    <Link to="/users">View Active Users</Link>
+      <div className="usersContainer">
+        <div className="users-header">
+          <div className="userTitle">
+            <h2>Deactivated Users</h2>
+          </div>
+          <div className="status-button">
+            <div className="viewBtn">
+              <Link style={{ textDecoration: 'none' }} to="/users">
+                  <button className="view">View All Active</button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
       {users.map(u =>
         <User key={u.id} user={u}/>
       )}

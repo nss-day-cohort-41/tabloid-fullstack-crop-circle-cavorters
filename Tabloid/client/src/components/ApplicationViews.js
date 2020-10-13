@@ -7,6 +7,8 @@ import Hello from "./Hello";
 import PostList from "./Posts/PostList";
 import PostDetail from "./Posts/PostDetail";
 import PostForm from "./Posts/PostForm";
+import PostEditForm from "./Posts/PostEditForm";
+import PostDelete from "./Posts/PostDelete";
 import TagList from "./Tags/TagList";
 import TagForm from "./Tags/TagForm";
 import TagEditForm from "./Tags/TagEditForm";
@@ -15,12 +17,11 @@ import UserList from "./Users/UserList";
 import CategoryList from "./Categories/CategoryList";
 import CategoryAddForm from "./Categories/CategoryAddForm";
 import CategoryEditForm from "./Categories/CategoryEditForm";
-// import CategoryProvider from "../providers/CategoryProvider";
 import UserDetails from "./Users/UserDetails";
 import UserDeactivate from "./Users/UserDeactivate";
 import UserActivate from "./Users/UserActivate";
 import UserListDeactivated from "./Users/UserListDeactivated";
-import { PostProvider } from "../providers/PostProvider"
+import UserEdit from "./Users/UserEdit";
 
 export default function ApplicationViews() {
   const { isLoggedIn } = useContext(UserProfileContext);
@@ -34,7 +35,6 @@ export default function ApplicationViews() {
           {isLoggedIn ? <Hello /> : <Redirect to="/login" />}
         </Route>
 
-
         <Route path="/login">
           <Login />
         </Route>
@@ -43,7 +43,7 @@ export default function ApplicationViews() {
           <Register />
         </Route>
 
-
+        {/* ---- POST ROUTES ---- */}
         <Route path="/posts" exact>
           {isLoggedIn ? <PostList /> : <Redirect to="/login" />}
         </Route>
@@ -60,24 +60,6 @@ export default function ApplicationViews() {
           {isLoggedIn ? <CategoryEditForm /> : <Redirect to="/login" />}
         </Route>
 
-        {/* TAGS ROUTES */}
-        <Route path="/tags" exact>
-          {isLoggedIn ? <TagList /> : <Redirect to="/login" />}
-        </Route>
-
-        <Route path="/tags/add">
-          {isLoggedIn ? <TagForm /> : <Redirect to="/login" />}
-        </Route>
-
-        <Route path="/tags/:id" exact>
-          {/* <Route path= "`/api/tags/edit/${id}`"> */}
-          {isLoggedIn ? <TagEditForm /> : <Redirect to="/login" />}
-        </Route>
-
-        <Route path="/tags/delete/:id" exact>
-          {isLoggedIn ? <DeleteTagPrompt /> : <Redirect to="/login" />}
-        </Route>
-
         <Route exact path="/posts/details/:id">
           {isLoggedIn ? <PostDetail /> : <Redirect to="/login" />}
         </Route>
@@ -85,6 +67,15 @@ export default function ApplicationViews() {
         <Route path="/posts/add">
           {isLoggedIn ? <PostForm /> : <Redirect to="/login" />}
         </Route>
+
+        <Route path="/posts/edit/:id">
+          {isLoggedIn ? <PostEditForm /> : <Redirect to="/login" />}
+        </Route>
+
+        <Route path="/posts/delete/:id">
+          {isLoggedIn ? <PostDelete /> : <Redirect to="/login" />}
+        </Route>
+        {/* END POST ROUTES */}
 
 
         <Route path="/users" exact>
@@ -107,6 +98,9 @@ export default function ApplicationViews() {
           {isLoggedIn && sessionUser.userTypeId === 1 ? <UserActivate /> : <Redirect to="/login" />}
         </Route>
 
+        <Route path="/users/edit/:id" exact>
+        {isLoggedIn && sessionUser.userTypeId === 1 ? <UserEdit /> : <Redirect to="/login" />}
+        </Route>
 
         {/* TAGS ROUTES */}
         <Route path="/tags" exact>
