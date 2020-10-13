@@ -7,7 +7,7 @@ export default function PostEditForm() {
 
     const { getById, updatePost, post, } = useContext(PostContext);
     const [editedPost, setEditedPost] = useState({});
-    
+
     //UseParams pulls in the id information from applications view 
     const { id } = useParams();
     const history = useHistory();
@@ -25,7 +25,7 @@ export default function PostEditForm() {
     console.log("editedPost.id 1: =", editedPost.id);
 
     const editPost = (e) => {
-        
+
         updatePost({
             title: editedPost.title,
             content: editedPost.content,
@@ -33,7 +33,7 @@ export default function PostEditForm() {
             headerImageUrl: editedPost.imageLocation,
             publicationDate: editedPost.publishDateTime,
             id: post.id
-        })  
+        })
 
         updatePost(editedPost.id, editedPost);
         history.push(`/posts`);
@@ -97,7 +97,7 @@ export default function PostEditForm() {
                                         onChange={handleFieldChange}
                                     />
                                 </FormGroup>
-                                {/* <FormGroup>
+                                <FormGroup>
                                     <Label for="content">Category</Label>
                                     <Input
                                         type="select"
@@ -107,7 +107,7 @@ export default function PostEditForm() {
                                         name="category"
                                         onChange={handleFieldChange}
                                     />
-                                </FormGroup> */}
+                                </FormGroup>
                                 <FormGroup>
                                     <Label for="content">Image Location</Label>
                                     <Input
@@ -131,7 +131,7 @@ export default function PostEditForm() {
                                     />
                                 </FormGroup>
                             </Form>
-                            <Button type="button" color="success" onClick={e => { editPost() }}>Submit</Button>
+                            <Button type="button" color="success" onClick={e => { editPost() }}>Save</Button>
                             <Link to={`/posts`}><Button type="button" color="warning">Cancel</Button></Link>
                         </CardBody>
                     </Card>

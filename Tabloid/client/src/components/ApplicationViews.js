@@ -18,7 +18,6 @@ import UserDetails from "./Users/UserDetails";
 import UserDeactivate from "./Users/UserDeactivate";
 import UserActivate from "./Users/UserActivate";
 import UserListDeactivated from "./Users/UserListDeactivated";
-import { PostProvider } from "../providers/PostProvider"
 
 export default function ApplicationViews() {
   const { isLoggedIn } = useContext(UserProfileContext);
@@ -32,7 +31,6 @@ export default function ApplicationViews() {
           {isLoggedIn ? <Hello /> : <Redirect to="/login" />}
         </Route>
 
-
         <Route path="/login">
           <Login />
         </Route>
@@ -41,7 +39,7 @@ export default function ApplicationViews() {
           <Register />
         </Route>
 
-
+        {/* ---- POST ROUTES ---- */}
         <Route path="/posts" exact>
           {isLoggedIn ? <PostList /> : <Redirect to="/login" />}
         </Route>
@@ -55,11 +53,13 @@ export default function ApplicationViews() {
         </Route>
 
         <Route path="/posts/edit/:id">
-          {isLoggedIn ? <PostEditForm /> : <Redirect to="/" />}
+          {isLoggedIn ? <PostEditForm /> : <Redirect to="/login" />}
         </Route>
+
         <Route path="/posts/delete/:id">
-          {isLoggedIn ? <PostDelete /> : <Redirect to="/" />}
+          {isLoggedIn ? <PostDelete /> : <Redirect to="/login" />}
         </Route>
+        {/* END POST ROUTES */}
 
 
         <Route path="/users" exact>

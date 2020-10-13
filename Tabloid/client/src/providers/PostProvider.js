@@ -63,19 +63,19 @@ export const PostProvider = (props) => {
   };
 
   const deletePost = (id) =>
-        getToken().then((token) =>
-        fetch(`/api/post/delete/${id}`, {
-            method: "DELETE",
-            headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json"
-            },
-           
-        }))
+    getToken().then((token) =>
+      fetch(`/api/post/delete/${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json"
+        },
+
+      }))
 
   return (
     <PostContext.Provider value={{
-      post, posts, getAllPosts, getById, addPost, updatePost, deletePost
+      post, posts, getAllPosts, getById, addPost, updatePost, deletePost, setPost
     }}>
       {props.children}
     </PostContext.Provider>
