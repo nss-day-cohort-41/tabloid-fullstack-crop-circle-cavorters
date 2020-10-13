@@ -8,7 +8,7 @@ export default function Category({ category }) {
             <CardBody>
                 <p>Category: {category.name}</p>
                 <div className="categoryManagementButtons">
-                    <Link to={`/categories/${category.id}`}><Button color="info">Edit</Button></Link>
+                    <Link to={`/categories/${category.id}`}><Button>Edit</Button></Link>
                 </div>
             </CardBody>
 
