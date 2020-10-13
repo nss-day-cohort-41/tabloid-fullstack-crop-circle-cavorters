@@ -50,8 +50,6 @@ export default function ApplicationViews() {
           {isLoggedIn ? <PostList /> : <Redirect to="/login" />}
         </Route>
 
-<<<<<<< HEAD
-=======
         {/* CATEGORIES ROUTES */}
         <Route path="/categories" exact>
           {isLoggedIn ? <CategoryList /> : <Redirect to="/login" />}
@@ -87,7 +85,6 @@ export default function ApplicationViews() {
           {isLoggedIn ? <DeleteTagPrompt /> : <Redirect to="/login" />}
         </Route>
 
->>>>>>> 5e497375a7a6f3c63ca284aa5f568aecad8e4795
         <Route exact path="/posts/details/:id">
           {isLoggedIn ? <PostDetail /> : <Redirect to="/login" />}
         </Route>
@@ -108,21 +105,6 @@ export default function ApplicationViews() {
           {isLoggedIn ? <MyPosts /> : <Redirect to="/login" />}
         </Route>
         {/* END POST ROUTES */}
-
-        <Route path="/categories" exact>
-          {isLoggedIn ? <CategoryList /> : <Redirect to="/login" />}
-        </Route>
-
-        <Route path="/categories/add">
-          {isLoggedIn ? <CategoryAddForm /> : <Redirect to="/login" />}
-        </Route>
-
-        <Route path="/categories/:id" exact>
-          {isLoggedIn ? <CategoryEditForm /> : <Redirect to="/login" />}
-        </Route>
-
-
-
 
         <Route path="/users" exact>
           {isLoggedIn && sessionUser.userTypeId === 1 ? <UserList /> : <Redirect to="/login" />}
@@ -147,22 +129,6 @@ export default function ApplicationViews() {
         <Route path="/users/edit/:id" exact>
           {isLoggedIn && sessionUser.userTypeId === 1 ? <UserEdit /> : <Redirect to="/login" />}
         </Route>
-
-        {/* TAGS ROUTES */}
-        <Route path="/tags" exact>
-          {isLoggedIn ? <TagList /> : <Redirect to="/login" />}
-        </Route>
-        <Route path="/tags/add">
-          {isLoggedIn ? <TagForm /> : <Redirect to="/login" />}
-        </Route>
-        <Route path="/tags/:id" exact>
-          {/* <Route path= "`/api/tags/edit/${id}`"> */}
-          {isLoggedIn ? <TagEditForm /> : <Redirect to="/login" />}
-        </Route>
-        <Route path="/tags/delete/:id" exact>
-          {isLoggedIn ? <DeleteTagPrompt /> : <Redirect to="/login" />}
-        </Route>
-        {/* END TAGS ROUTES */}
 
       </Switch>
     </main>

@@ -11,48 +11,48 @@ export default function UserSpecificPosts() {
         getAllPostsByUser(JSON.parse(sessionStorage.getItem("userProfile")).id);
     }, []);
 
-    // if (sessionUser.id === post.userProfileId) {
+    if (sessionUser.id === post.userProfileId) {
 
 
-    return (
-        <section>
-            <div class="postCard">
-                <div className="postHeader">
-                    <h1>Posts</h1>
-                    <p>
-                        <Link class="btn btn-primary" to="/posts/add">New Post</Link>
-                    </p>
-                    <p>
-                        <Link class="btn btn-primary" to="/posts/myposts">My Posts</Link>
-                    </p>
+        return (
+            <section>
+                <div class="postCard">
+                    <div className="postHeader">
+                        <h1>Posts</h1>
+                        <p>
+                            <Link class="btn btn-primary" to="/posts/add">New Post</Link>
+                        </p>
+                        <p>
+                            <Link class="btn btn-primary" to="/posts/myposts">My Posts</Link>
+                        </p>
+                    </div>
+                    <div className="post-container">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Title
+                </th>
+                                    <th>
+                                        Posted by
+                </th>
+                                    <th>
+                                        Category
+                </th>
+                                    <th>
+                                        Publish Date
+                </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            {posts.map(p =>
+                                <Post key={p.id} post={p} />
+                            )}
+                        </table>
+                    </div>
                 </div>
-                <div className="post-container">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>
-                                    Title
-                </th>
-                                <th>
-                                    Posted by
-                </th>
-                                <th>
-                                    Category
-                </th>
-                                <th>
-                                    Publish Date
-                </th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        {posts.map(p =>
-                            <Post key={p.id} post={p} />
-                        )}
-                    </table>
-                </div>
-            </div>
-        </section>
+            </section>
 
-    );
-    // } 
+        );
+    }
 }
