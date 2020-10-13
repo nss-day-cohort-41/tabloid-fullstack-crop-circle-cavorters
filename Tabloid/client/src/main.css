@@ -132,3 +132,12 @@ html, #root {
 .status-button {
     text-align: center;
 }
+
+.login-form, .registration-form {
+    display: flex;
+    justify-content: center;
+}
+
+fieldset {
+    width: 30%;
+}
