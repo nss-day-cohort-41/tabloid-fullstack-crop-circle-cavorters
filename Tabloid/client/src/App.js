@@ -12,10 +12,10 @@ function App() {
     <Router>
       <UserProfileProvider>
         <PostProvider>
-        <TagProvider>
-          <Header />
-        <ApplicationViews />
-        </TagProvider>
+          <TagProvider>
+            <Header />
+            <ApplicationViews />
+          </TagProvider>
         </PostProvider>
       </UserProfileProvider>
     </Router>

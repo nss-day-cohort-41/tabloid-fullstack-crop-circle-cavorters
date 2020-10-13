@@ -267,6 +267,8 @@ namespace Tabloid.Repositories
                 }
             }
         }
-
     }
 }
+
+
+

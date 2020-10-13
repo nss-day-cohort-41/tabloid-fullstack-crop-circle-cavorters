@@ -20,9 +20,10 @@ namespace Tabloid.Models
 
         [Required]
         [MaxLength(255)]
+        [DisplayName("Header Image URL")]
         public string ImageLocation { get; set; }
 
-        [Required]
+
         public DateTime CreateDateTime { get; set; }
 
         [DisplayName("Published")]
@@ -37,7 +38,6 @@ namespace Tabloid.Models
         /* public Category Category { get; set; } */
 
         [Required]
-        [DisplayName("Author")]
         public int UserProfileId { get; set; }
         public UserProfile UserProfile { get; set; }
     }
