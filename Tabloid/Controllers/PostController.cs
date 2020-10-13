@@ -69,5 +69,15 @@ namespace Tabloid.Controllers
             return NoContent();
         }
 
+        [HttpGet("myposts")]
+        public IActionResult GetUserPosts()
+
+        {
+            var posts = _postRepository.GetAllApprovedPostsForUser();
+            return Ok(posts);
+        }
+
+        
+
     }
 }

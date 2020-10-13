@@ -9,6 +9,7 @@ import PostDetail from "./Posts/PostDetail";
 import PostForm from "./Posts/PostForm";
 import PostEditForm from "./Posts/PostEditForm";
 import PostDelete from "./Posts/PostDelete";
+import MyPosts from "./Posts/MyPosts";
 import TagList from "./Tags/TagList";
 import TagForm from "./Tags/TagForm";
 import TagEditForm from "./Tags/TagEditForm";
@@ -48,36 +49,6 @@ export default function ApplicationViews() {
           {isLoggedIn ? <PostList /> : <Redirect to="/login" />}
         </Route>
 
-        <Route path="/categories" exact>
-          {isLoggedIn ? <CategoryList /> : <Redirect to="/login" />}
-        </Route>
-
-        <Route path="/categories/add">
-          {isLoggedIn ? <CategoryAddForm /> : <Redirect to="/login" />}
-        </Route>
-
-        <Route path="/categories/:id" exact>
-          {isLoggedIn ? <CategoryEditForm /> : <Redirect to="/login" />}
-        </Route>
-
-        {/* TAGS ROUTES */}
-        <Route path="/tags" exact>
-          {isLoggedIn ? <TagList /> : <Redirect to="/login" />}
-        </Route>
-
-        <Route path="/tags/add">
-          {isLoggedIn ? <TagForm /> : <Redirect to="/login" />}
-        </Route>
-
-        <Route path="/tags/:id" exact>
-          {/* <Route path= "`/api/tags/edit/${id}`"> */}
-          {isLoggedIn ? <TagEditForm /> : <Redirect to="/login" />}
-        </Route>
-
-        <Route path="/tags/delete/:id" exact>
-          {isLoggedIn ? <DeleteTagPrompt /> : <Redirect to="/login" />}
-        </Route>
-
         <Route exact path="/posts/details/:id">
           {isLoggedIn ? <PostDetail /> : <Redirect to="/login" />}
         </Route>
@@ -93,7 +64,25 @@ export default function ApplicationViews() {
         <Route path="/posts/delete/:id">
           {isLoggedIn ? <PostDelete /> : <Redirect to="/login" />}
         </Route>
+
+        <Route path="/post/myposts" exact>
+          {isLoggedIn ? <MyPosts /> : <Redirect to="/login" />}
+        </Route>
         {/* END POST ROUTES */}
+
+        <Route path="/categories" exact>
+          {isLoggedIn ? <CategoryList /> : <Redirect to="/login" />}
+        </Route>
+
+        <Route path="/categories/add">
+          {isLoggedIn ? <CategoryAddForm /> : <Redirect to="/login" />}
+        </Route>
+
+        <Route path="/categories/:id" exact>
+          {isLoggedIn ? <CategoryEditForm /> : <Redirect to="/login" />}
+        </Route>
+
+
 
 
         <Route path="/users" exact>

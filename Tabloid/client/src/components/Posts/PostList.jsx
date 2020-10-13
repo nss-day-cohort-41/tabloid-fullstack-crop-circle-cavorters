@@ -4,12 +4,11 @@ import Post from "./Post";
 import { PostContext } from "../../providers/PostProvider";
 import { Link } from "react-router-dom";
 
+
 export default function PostList() {
   const { posts, getAllPosts } = useContext(PostContext);
 
-  const newPost = () => {
-    alert("routing to post form...");
-  }
+  
 
   useEffect(() => {
     getAllPosts();
@@ -22,6 +21,9 @@ export default function PostList() {
           <h1>Posts</h1>
           <p>
             <Link class="btn btn-primary" to="/posts/add">New Post</Link>
+          </p>
+          <p>
+            <Link class="btn btn-primary" to="/posts/myPosts">My Posts</Link>
           </p>
         </div>
         <div className="post-container">
