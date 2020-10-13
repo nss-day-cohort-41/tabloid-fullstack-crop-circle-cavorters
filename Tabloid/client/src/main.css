@@ -1,13 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap');
 
 html, #root {
-    background-color: cornsilk;
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/4/42/Looseleaf_Legal_Pad_Background.svg');
+    background-size: 100%;
     font-family: 'comic-sans', cursive
 }
 
 .card-container {
     display: flex;
     justify-content: space-between;
+}
+
+.navLogo {
+    width: 150px;
+}
+
+.navLogo > img {
+    width: 100%;
+    height: auto;
 }
 
 .status {
@@ -117,6 +127,26 @@ html, #root {
     background-color: goldenrod;
 }
 
+.post-btn {
+    display: block;
+    color: black;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    background-color: lightgoldenrodyellow;
+    width: 80px;
+    height: 30px;
+    border-radius: 30px;
+    font-size: .8rem;
+    font-weight: 500;
+    box-shadow: 1px 1px 2px 1px #747272;
+    margin: 5px 0;
+}
+
+.post-btn:hover {
+    background-color: goldenrod;
+}
+
 .displayName {
     color:goldenrod;
     text-decoration: none;
@@ -191,7 +221,9 @@ fieldset {
 .editUsersContainer, 
 .usersContainer, 
 .tagsListContainer, 
-.tagzDeleteContainer {
+.tagzDeleteContainer,
+.backBtn,
+.postContainer {
     display: flex;
     justify-content: center;
 }
@@ -212,7 +244,18 @@ fieldset {
     justify-content: space-between;
 }
 
-.users-table, .tagCard {
+.post {
+    width: 70%;
+}
+
+.postBtns {
+    padding: 20px 0;
+}
+
+.users-table, 
+.tagCard, 
+.userDetailCard, 
+.post {
     background-color: white;
     border: 2px solid black;
     border-radius: 15px;
@@ -239,4 +282,25 @@ fieldset {
 
 #name {
     resize: none;
+}
+
+.userDetailImg > img {
+    height: 150px;
+    width: auto;
+    border-radius: 50%;
+    border: 1px solid black;
+    box-shadow: 3px 3px 5px ;
+}
+
+.userDetailHeader {
+    display: flex;
+}
+
+.userDetailInfo {
+    margin-left: 100px;
+}
+
+.actualBackBtn {
+    width: 34%;
+    margin-top: 20px;
 }

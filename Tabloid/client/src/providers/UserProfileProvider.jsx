@@ -131,6 +131,7 @@ export function UserProfileProvider(props) {
         .then(setUserTypes));
 
   
+
   return (
     <UserProfileContext.Provider value={{ users, isLoggedIn, login, logout, register, getToken, setUsers, getAllUsers, getUserProfile, updateUser, getUserId, getAllInactiveUsers, userTypes, getAllUserTypes }}>
       {isFirebaseReady

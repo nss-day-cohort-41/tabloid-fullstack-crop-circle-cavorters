@@ -11,26 +11,26 @@ import {
 import Tag from "./Tag";
 import { TagContext } from "../../providers/TagProvider";
 import { useHistory, useParams, Link } from "react-router-dom";
-//import { useParamas } from "react-router-dom";
+//import { useParams } from "react-router-dom";
 
 
 const TagEditForm = () => {
-//Bringing in my fetch methods via UseContext
+  //Bringing in my fetch methods via UseContext
   const { getTagById, updateTag } = useContext(TagContext);
-//Creating a new object with state to update the exisiting DB's value with
+  //Creating a new object with state to update the exisiting DB's value with
   const [editedTag, setEditedTag] = useState("");
   const [tag, setTag] = useState("");
- //UseParams pulls in the id information from applications view 
+  //UseParams pulls in the id information from applications view 
   const { id } = useParams();
-// Use this hook to allow us to programatically redirect users
+  // Use this hook to allow us to programatically redirect users
   const history = useHistory();
 
 
-//Setup found in Grace&Wisdom (new object and target values)...PreventDefault seems to break everything...might be needed later
-//https://stackoverflow.com/questions/30727837/react-change-input-defaultvalue-by-passing-props
+  //Setup found in Grace&Wisdom (new object and target values)...PreventDefault seems to break everything...might be needed later
+  //https://stackoverflow.com/questions/30727837/react-change-input-defaultvalue-by-passing-props
   const editTag = (e) => {
     //e.preventDefault();
-    updateTag({ name: editedTag.name, id: tag.id})
+    updateTag({ name: editedTag.name, id: tag.id })
       .then(() => history.push("/tags"))
       .catch((err) => alert(`An error ocurred: ${err.message}`));
   }
@@ -40,18 +40,18 @@ const TagEditForm = () => {
     const stateToChange = { ...editedTag };
     stateToChange[evt.target.name] = evt.target.value;
     setEditedTag(stateToChange);
-};
+  };
 
-//TESTING to see that useParams is pullin what I need...
-console.log(id);
-//console.log(idTag);
+  //TESTING to see that useParams is pullin what I need...
+  console.log(id);
+  //console.log(idTag);
 
 
-//Getting the ID information and then setting my Tag
+  //Getting the ID information and then setting my Tag
   useEffect(() => {
     getTagById(id)
-    .then(setTag);   
-}, []);
+      .then(setTag);
+  }, []);
 
 
   return (
@@ -59,27 +59,27 @@ console.log(id);
       <div className="row justify-content-center">
         <Card className="col-sm-12 col-lg-6">
           <CardBody>
-  
+
             <Form>
               <FormGroup>
                 {/* USED FOR TESTING: <div>{tag.id}</div> */}
                 <Input
-                  id= {tag.id}
+                  id={tag.id}
                   onChange={handleFieldChange}
-                  type= "hidden"
+                  type="hidden"
                   value={tag.id}
                 />
               </FormGroup>
               <FormGroup>
                 <Label for="name">Name</Label>
-                <Input 
-                type="textarea" 
-                id="name"  
-                required
-                defaultValue={tag.name}
-                name="name"
-                //onChange={(e) => setTag(e.target.value)}
-               onChange={handleFieldChange}
+                <Input
+                  type="textarea"
+                  id="name"
+                  required
+                  defaultValue={tag.name}
+                  name="name"
+                  //onChange={(e) => setTag(e.target.value)}
+                  onChange={handleFieldChange}
                 />
               </FormGroup>
             </Form>
@@ -92,5 +92,5 @@ console.log(id);
     </div>
 
   );
- };
- export default TagEditForm;
+};
+export default TagEditForm;
