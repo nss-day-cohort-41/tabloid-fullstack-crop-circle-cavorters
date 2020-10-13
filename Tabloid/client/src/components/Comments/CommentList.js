@@ -11,6 +11,7 @@ export default function CommentList() {
     const { comments, getAllCommentsByPostId } = useContext(CommentContext);
     const { post, getPost } = useContext(PostContext)
     const { id } = useParams();
+    const { history } = useHistory();
 
     useEffect(() => {
         getAllCommentsByPostId(id);
@@ -29,21 +30,19 @@ export default function CommentList() {
 
                 <h4>Subject</h4>
                 <p>{comments && comments.subject}</p>
+
                 <h6>Comment</h6>
                 <p>{comments && comments.content}</p>
-                <Button onClick={() => history.push(`/comments/${comments.postId}`)}>
+                <Button onClick={() => history.push(`post/comments/${comments.postId}`)}>
                     Back To Posts
             </Button>
+                {comments.map(c => {
+
+                    return <Comment key={c.id} comment={c} />
+                })}
             </section>
 
 
-            {/* { comments.map((comment) => {
-                    return (
-                        <Comment key={comment.id} comment={comment} />
-                    )
-                }
-
-                )} */}
 
 
         </>

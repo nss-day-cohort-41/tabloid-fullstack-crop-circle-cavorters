@@ -26,8 +26,8 @@ export default function Post({ post }) {
             <button className="std-btn">View Post</button>
           </Link>
 
-          <Link to={`/posts/comment/${post.id}`}><Button color="info">Comments</Button></Link>
-          
+          <Link to={`/post/${post.id}/comments`}><Button color="info">Comments</Button></Link>
+
           <Link style={{ textDecoration: 'none' }} to={`/posts/edit/${post.id}`}>
             <button className="std-btn">Edit</button>
           </Link>

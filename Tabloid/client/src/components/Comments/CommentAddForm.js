@@ -24,7 +24,7 @@ const CommentAddForm = () => {
     const submitForm = (e) => {
         e.preventDefault();
         addComment({ text: commentText })
-            .then(() => history.push("/"))
+            .then(() => history.push("/comments"))
             .catch((err) => alert(`Error has ocurred: ${err.message}`));
     };
 

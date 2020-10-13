@@ -49,12 +49,12 @@ export default function ApplicationViews() {
           <Register />
         </Route>
 
-       
+
 
         {/* Comment Routes */}
 
-        <Route path="/posts/comments/:id" exact>
-          {isLoggedIn ? <CommentProvider> <CommentList /> </CommentProvider> : <Redirect to="/login" />}
+        <Route path="/post/:id/comments" exact>
+          {isLoggedIn ? <CommentList /> : <Redirect to="/login" />}
         </Route>
 
         {/* <Route path="comments/add/:id">

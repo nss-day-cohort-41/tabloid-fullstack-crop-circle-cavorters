@@ -5,7 +5,7 @@ import { UserProfileContext } from "./UserProfileProvider";
 export const CommentContext = createContext();
 
 export function CommentProvider(props) {
-    const apiUrl = "/api/post/comment";
+    const apiUrl = "/api/comment";
     const { getToken } = useContext(UserProfileContext);
 
     const [comments, setComments] = useState([]);
