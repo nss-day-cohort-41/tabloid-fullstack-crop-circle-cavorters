@@ -143,8 +143,10 @@ namespace Tabloid.Repositories
                     cmd.CommandText =
                         @"SELECT Tag.Id, Tag.name FROM Tag
                             SELECT Post.Id FROM POST
-                            JOIN PostTags on Tag.Id= PostTags.TagId
-                        WHERE PostTags.PostId =@postId";
+                            JOIN PostTag on Tag.Id= PostTag.TagId
+                        WHERE PostTag.PostId = @postId";
+
+                    cmd.Parameters.AddWithValue("@id", postId);
 
                     var reader = cmd.ExecuteReader();
 
