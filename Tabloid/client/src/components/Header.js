@@ -12,7 +12,7 @@ import {
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
-  
+
 } from 'reactstrap';
 import { UserProfileContext } from "../providers/UserProfileProvider";
 
@@ -36,18 +36,18 @@ export default function Header() {
               </NavItem>
             }
             {isLoggedIn &&
-            <>
-            <NavItem>
-              <NavLink tag={RRNavLink} to="/posts">Posts</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink tag={RRNavLink} to="/tags">Tag</NavLink>
-            </NavItem>
-            </>
+              <>
+                <NavItem>
+                  <NavLink tag={RRNavLink} to="/posts">Posts</NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink tag={RRNavLink} to="/tags">Tag</NavLink>
+                </NavItem>
+              </>
             }
             {isLoggedIn && sessionUser.userTypeId === 1 &&
-            <NavItem>
-              <NavLink tag={RRNavLink} to="/users">Users</NavLink>
+              <NavItem>
+                <NavLink tag={RRNavLink} to="/users">Users</NavLink>
               </NavItem>
             }
 

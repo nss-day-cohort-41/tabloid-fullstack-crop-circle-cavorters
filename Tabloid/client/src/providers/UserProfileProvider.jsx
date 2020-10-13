@@ -118,7 +118,7 @@ export function UserProfileProvider(props) {
       }));
   };
 
-  
+
   return (
     <UserProfileContext.Provider value={{ users, isLoggedIn, login, logout, register, getToken, setUsers, getAllUsers, getUserProfile, updateUser, getUserId, getAllInactiveUsers }}>
       {isFirebaseReady
