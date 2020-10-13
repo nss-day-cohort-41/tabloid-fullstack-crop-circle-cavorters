@@ -1,8 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap');
 
 html, #root {
-    background-image: url('https://upload.wikimedia.org/wikipedia/commons/4/42/Looseleaf_Legal_Pad_Background.svg');
-    background-size: 100%;
+    background-color: cornsilk;
     font-family: 'comic-sans', cursive
 }
 
@@ -301,6 +300,6 @@ fieldset {
 }
 
 .actualBackBtn {
-    width: 34%;
+    width: 50%;
     margin-top: 20px;
 }

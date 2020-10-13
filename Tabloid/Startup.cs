@@ -25,13 +25,8 @@ namespace Tabloid
             services.AddTransient<IPostRepository, PostRepository>();
             services.AddTransient<IUserTypeRepository, UserTypeRepository>();
             services.AddTransient<ITagRepository, TagRepository>();
-
-<<<<<<< HEAD
-=======
-
             services.AddTransient<ICategoryRepository, CategoryRepository>();
 
->>>>>>> master
             var firebaseProjectId = Configuration.GetValue<string>("FirebaseProjectId");
             var googleTokenUrl = $"https://securetoken.google.com/{firebaseProjectId}";
             services

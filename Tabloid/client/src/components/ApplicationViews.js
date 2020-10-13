@@ -61,24 +61,6 @@ export default function ApplicationViews() {
           {isLoggedIn ? <CategoryEditForm /> : <Redirect to="/login" />}
         </Route>
 
-        {/* TAGS ROUTES */}
-        <Route path="/tags" exact>
-          {isLoggedIn ? <TagList /> : <Redirect to="/login" />}
-        </Route>
-
-        <Route path="/tags/add">
-          {isLoggedIn ? <TagForm /> : <Redirect to="/login" />}
-        </Route>
-
-        <Route path="/tags/:id" exact>
-          {/* <Route path= "`/api/tags/edit/${id}`"> */}
-          {isLoggedIn ? <TagEditForm /> : <Redirect to="/login" />}
-        </Route>
-
-        <Route path="/tags/delete/:id" exact>
-          {isLoggedIn ? <DeleteTagPrompt /> : <Redirect to="/login" />}
-        </Route>
-
         <Route exact path="/posts/details/:id">
           {isLoggedIn ? <PostDetail /> : <Redirect to="/login" />}
         </Route>
