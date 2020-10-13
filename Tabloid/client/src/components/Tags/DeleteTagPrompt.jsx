@@ -31,12 +31,12 @@ const DeleteTagPrompt = () => {
 
   return (
     <>
-        <main className="users-container">
+        <main className="tagzDeleteContainer">
             <section className="users-table">
                 <h4>....So you wanna delete your tag : "{tag.name}"?</h4>
                 <hr />
                 <div className="row">
-                    <div className="col-md-4">
+                    <div className="actionBtns">
                         <div className="form-group">
                             <input type="submit" onClick={deleteSpecificTag} value="Confirm" className="btn btn-primary" />&nbsp;&nbsp;|&nbsp;&nbsp;
                             <Link to="/tags">
