@@ -7,6 +7,8 @@ import Hello from "./Hello";
 import PostList from "./Posts/PostList";
 import PostDetail from "./Posts/PostDetail";
 import PostForm from "./Posts/PostForm";
+import PostEditForm from "./Posts/PostEditForm";
+import PostDelete from "./Posts/PostDelete";
 import TagList from "./Tags/TagList";
 import TagForm from "./Tags/TagForm";
 import TagEditForm from "./Tags/TagEditForm";
@@ -50,6 +52,13 @@ export default function ApplicationViews() {
 
         <Route path="/posts/add">
           {isLoggedIn ? <PostForm /> : <Redirect to="/login" />}
+        </Route>
+
+        <Route path="/posts/edit/:id">
+          {isLoggedIn ? <PostEditForm /> : <Redirect to="/" />}
+        </Route>
+        <Route path="/posts/delete/:id">
+          {isLoggedIn ? <PostDelete /> : <Redirect to="/" />}
         </Route>
 
 
