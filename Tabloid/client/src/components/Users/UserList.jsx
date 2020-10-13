@@ -12,14 +12,23 @@ export default function UserList() {
 
   return (
     <section>
-        <div className="status-button">
-            <Link style={{ textDecoration: 'none' }} to="/inactive">
-                <button className="view">View Deactivated</button>
-            </Link>
+      <div className="usersContainer">
+        <div className="users-header">
+          <div className="userTitle">
+            <h2>Active Users</h2>
+          </div>
+          <div className="status-button">
+            <div className="viewBtn">
+              <Link style={{ textDecoration: 'none' }} to="/inactive">
+                  <button className="view">View Deactivated</button>
+              </Link>
+            </div>
+          </div>
         </div>
-        {users.map(u =>
-            <User key={u.id} user={u}/>
-        )}
+      </div>
+      {users.map(u =>
+          <User key={u.id} user={u}/>
+      )}
     </section>
   );
 }

@@ -28,23 +28,23 @@ const UserDeactivate = () => {
 
   return (
     <>
-        <main className="users-container">
-            <section className="users-table">
-                <h1>Deactivate</h1>
+        <main className="usersContainer">
+          <section className="users-table">
+            <h1>Deactivate</h1>
 
-                <h4>Are you sure you want to activate {user.fullName}?</h4>
-                <hr />
-                <div className="row">
-                    <div className="col-md-4">
-                        <div className="form-group">
-                            <input type="submit" onClick={activateUser} value="Confirm" className="btn btn-primary" />&nbsp;&nbsp;|&nbsp;&nbsp;
-                            <Link to="/inactive">
-                                Cancel
-                            </Link>
-                        </div>
-                    </div>
+            <h4>Are you sure you want to activate {user.fullName}?</h4>
+            <hr />
+            <div className="row">
+              <div className="actionBtns">
+                <div className="form-group">
+                  <input type="submit" onClick={activateUser} value="Confirm" className="btn btn-primary" />&nbsp;&nbsp;|&nbsp;&nbsp;
+                  <Link to="/inactive">
+                    Cancel
+                  </Link>
                 </div>
-            </section>
+              </div>
+            </div>
+          </section>
         </main>
     </>
   );

@@ -35,14 +35,14 @@ const UserEdit = () => {
 
   return (
     <>
-        <main className="users-container">
+        <main className="editUsersContainer">
             <section className="users-table">
                 <h1>Change User Type</h1>
 
-                <h4>Select a user type for {user.fullName}?</h4>
+                <h4>Select a user type for {user.fullName}</h4>
                 <hr />
 
-                <select onChange={handleChange}> 
+                <select className="userEditDropdown" onChange={handleChange}> 
                 {userTypes.map(userType =>
                     user.userTypeId === userType.id ?
                     <option selected value={userType.id}>
@@ -54,7 +54,7 @@ const UserEdit = () => {
                 )}
                 </select>
                 <div className="row">
-                    <div className="col-md-4">
+                    <div className="actionBtns">
                         <div className="form-group">
                             <input type="submit" onClick={editUser} value="Confirm" className="btn btn-primary" />&nbsp;&nbsp;|&nbsp;&nbsp;
                             <Link to="/users">

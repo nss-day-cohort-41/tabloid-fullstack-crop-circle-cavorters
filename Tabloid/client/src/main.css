@@ -14,6 +14,7 @@ html, #root {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding: 8px 0;
 }
 
 .userCard {
@@ -69,8 +70,11 @@ html, #root {
     background: white;
 }
 
-.buttons > a {
-    text-decoration-style: none;
+.buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
 }
 
 .std-btn {
@@ -86,7 +90,7 @@ html, #root {
     font-size: .8rem;
     font-weight: 500;
     box-shadow: 1px 1px 2px 1px #747272;
-    margin-bottom: 15px;
+
 }
 
 .std-btn:hover {
@@ -112,10 +116,8 @@ html, #root {
 	display:inline-block;
 	cursor:pointer;
 	color:#ffffff;
-	font-family:Arial;
-	font-size:15px;
-	font-weight:bold;
-	padding:8px 33px;
+	font-size:12px;
+	padding:5px 23px;
 	text-decoration:none;
 	text-shadow:0px 1px 0px #373737;
 }
@@ -129,8 +131,22 @@ html, #root {
 	top:1px;
 }
 
+.usersContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.users-header {
+    display: flex;
+    width: 40%;
+    justify-content: space-between;
+}
+
 .status-button {
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-right: 10px;
 }
 
 .login-form, .registration-form {
@@ -140,4 +156,31 @@ html, #root {
 
 fieldset {
     width: 30%;
+}
+
+.userEditDropdown {
+    width: 42%;
+    margin-bottom: 20px;
+}
+
+.editUsersContainer, .usersContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.users-table {
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 15px;
+    padding: 20px 40px;
+    box-shadow: 3px 3px 5px;
+}
+
+.users-container {
+    width: 40%;
+}
+
+.actionBtns {
+    width: 100%;
+    padding: 0 15px;
 }
