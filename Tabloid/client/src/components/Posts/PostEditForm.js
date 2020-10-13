@@ -19,10 +19,6 @@ export default function PostEditForm() {
     useEffect(() => {
         setEditedPost(post)
     }, [post]);
-    console.log("post.id 1:", post.id)
-    console.log("id 1:", id)
-    console.log("editedPost 1:", editedPost)
-    console.log("editedPost.id 1: =", editedPost.id);
 
     const editPost = (e) => {
 
@@ -36,24 +32,14 @@ export default function PostEditForm() {
         })
 
         updatePost(editedPost.id, editedPost);
-        history.push(`/posts`);
+        history.push(`/posts/details/${id}`);
     }
-
-    console.log("post.id 2:", post.id)
-    console.log("id 2:", id);
-    console.log("editedPost 2:", editedPost);
-    console.log("editedPost.id 2:", editedPost.id);
 
     const handleFieldChange = e => {
         const stateToChange = { ...editedPost };
         stateToChange[e.target.id] = e.target.value;
         setEditedPost(stateToChange);
     };
-    console.log("post.id 3:", post.id)
-    console.log("id 3:", id);
-    console.log("editedPost 3:", editedPost);
-    console.log("editedPost.id 3:", editedPost.id);
-
 
     if (!editedPost) {
         return null
