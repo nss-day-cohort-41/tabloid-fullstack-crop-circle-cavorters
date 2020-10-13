@@ -15,7 +15,7 @@ import UserList from "./Users/UserList";
 import CategoryList from "./Categories/CategoryList";
 import CategoryAddForm from "./Categories/CategoryAddForm";
 import CategoryEditForm from "./Categories/CategoryEditForm";
-import DeleteCategory from "./Categories/DeleteCategory";
+import DeleteCategoryAlert from "./Categories/CategoryDelete";
 import UserDetails from "./Users/UserDetails";
 import UserDeactivate from "./Users/UserDeactivate";
 import UserActivate from "./Users/UserActivate";
@@ -62,7 +62,7 @@ export default function ApplicationViews() {
         </Route>
 
         <Route path="/categories/delete/:id" exact>
-          {isLoggedIn ? <DeleteCategory /> : <Redirect to="/login" />}
+          {isLoggedIn ? <DeleteCategoryAlert /> : <Redirect to="/login" />}
         </Route>
 
         {/* TAGS ROUTES */}

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { CategoryContext } from "../../providers/CategoryProvider";
 import { useHistory, useParams, Link } from "react-router-dom";
 
-const DeleteCategory = () => {
+const DeleteCategoryAlert = () => {
     const [category, setCategory] = useState();
     const { deleteCategory, getCategoryById } = useContext(CategoryContext);
     const { id } = useParams();
@@ -48,4 +48,4 @@ const DeleteCategory = () => {
     );
 }
 
-export default DeleteCategory;
+export default DeleteCategoryAlert;
