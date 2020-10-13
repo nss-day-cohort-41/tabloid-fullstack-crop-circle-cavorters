@@ -4,18 +4,39 @@ import { Link } from "react-router-dom";
 
 
 export default function Post({ post }) {
+
+
   return (
-    <Card className="m-4">
-      <CardBody>
-        <h2>{post.title}</h2>
-        <p>{post.userProfile.fullName}</p>
-        <p>{post.categoryId}</p>
-        <p>{post.isApproved}</p>
-        <p>{post.publishDateTime}</p>
-        <Link to={`/posts/comment/${post.id}`}><Button color="info">Comments</Button></Link>
+    <tbody>
+      <tr>
+        <td>
+          {post.title}
+        </td>
+        <td>
+          {post.userProfile.fullName}
+        </td>
+        <td>
+          {post.categoryId}
+        </td>
+        <td>
+          {new Intl.DateTimeFormat('en-US').format(new Date(post.publishDateTime))}
+        </td>
+        <td>
+          <Link style={{ textDecoration: 'none' }} to={`/posts/details/${post.id}`}>
+            <button className="std-btn">View Post</button>
+          </Link>
 
+          <Link to={`/posts/comment/${post.id}`}><Button color="info">Comments</Button></Link>
+          
+          <Link style={{ textDecoration: 'none' }} to={`/posts/edit/${post.id}`}>
+            <button className="std-btn">Edit</button>
+          </Link>
+          <Link style={{ textDecoration: 'none' }} to={`/posts/delete/${post.id}`}>
+            <button className="std-btn">Delete</button>
+          </Link>
+        </td>
+      </tr>
+    </tbody>
 
-      </CardBody>
-    </Card>
   );
 }
