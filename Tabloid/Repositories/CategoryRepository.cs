@@ -150,22 +150,5 @@ namespace Tabloid.Repositories
             }
         }
 
-
-/*
-            {
-                conn.Open();
-                using(var cmd = conn.CreateCommand())
-                {
-                    cmd.CommandText = @"
-                            UPDATE Post
-                            SET CategoryId = @categoryId
-                            WHERE CategoryId = @id";
-
-                    cmd.Parameters.AddWithValue("@categoryId", 1);
-                    cmd.Parameters.AddWithValue("@id", id);
-                    cmd.ExecuteNonQuery();
-                }
-            }
-        }*/
     }
 }
