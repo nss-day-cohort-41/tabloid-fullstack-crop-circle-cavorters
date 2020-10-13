@@ -17,6 +17,7 @@ import UserList from "./Users/UserList";
 import CategoryList from "./Categories/CategoryList";
 import CategoryAddForm from "./Categories/CategoryAddForm";
 import CategoryEditForm from "./Categories/CategoryEditForm";
+import DeleteCategoryAlert from "./Categories/CategoryDelete";
 import UserDetails from "./Users/UserDetails";
 import UserDeactivate from "./Users/UserDeactivate";
 import UserActivate from "./Users/UserActivate";
@@ -48,6 +49,7 @@ export default function ApplicationViews() {
           {isLoggedIn ? <PostList /> : <Redirect to="/login" />}
         </Route>
 
+        {/* CATEGORIES ROUTES */}
         <Route path="/categories" exact>
           {isLoggedIn ? <CategoryList /> : <Redirect to="/login" />}
         </Route>
@@ -58,6 +60,28 @@ export default function ApplicationViews() {
 
         <Route path="/categories/:id" exact>
           {isLoggedIn ? <CategoryEditForm /> : <Redirect to="/login" />}
+        </Route>
+
+        <Route path="/categories/delete/:id" exact>
+          {isLoggedIn ? <DeleteCategoryAlert /> : <Redirect to="/login" />}
+        </Route>
+
+        {/* TAGS ROUTES */}
+        <Route path="/tags" exact>
+          {isLoggedIn ? <TagList /> : <Redirect to="/login" />}
+        </Route>
+
+        <Route path="/tags/add">
+          {isLoggedIn ? <TagForm /> : <Redirect to="/login" />}
+        </Route>
+
+        <Route path="/tags/:id" exact>
+          {/* <Route path= "`/api/tags/edit/${id}`"> */}
+          {isLoggedIn ? <TagEditForm /> : <Redirect to="/login" />}
+        </Route>
+
+        <Route path="/tags/delete/:id" exact>
+          {isLoggedIn ? <DeleteTagPrompt /> : <Redirect to="/login" />}
         </Route>
 
         <Route exact path="/posts/details/:id">
@@ -99,7 +123,7 @@ export default function ApplicationViews() {
         </Route>
 
         <Route path="/users/edit/:id" exact>
-        {isLoggedIn && sessionUser.userTypeId === 1 ? <UserEdit /> : <Redirect to="/login" />}
+          {isLoggedIn && sessionUser.userTypeId === 1 ? <UserEdit /> : <Redirect to="/login" />}
         </Route>
 
         {/* TAGS ROUTES */}
