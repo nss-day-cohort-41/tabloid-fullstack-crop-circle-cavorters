@@ -83,7 +83,8 @@ const TagEditForm = () => {
                 />
               </FormGroup>
             </Form>
-            <Button type="button" color="success" onClick={e => { editTag() }}>Submit</Button>
+            <Button  type="button" color="success" onClick={e => {editTag()}}>Submit</Button>
+            &nbsp;&nbsp;&nbsp;
             <Link to={`/tags`}><Button type="button" color="warning">Cancel</Button></Link>
           </CardBody>
         </Card>

@@ -1,7 +1,7 @@
 import React, { useEffect, useContext, useState } from "react";
 import { UserProfileContext } from "../../providers/UserProfileProvider";
-import { useParams } from "react-router-dom";
-
+import { useParams, Link } from "react-router-dom";
+ 
 const UserDetails = () => {
   const [ user, setUser ] = useState();
   const { getUserProfile } = useContext(UserProfileContext);
@@ -16,22 +16,33 @@ const UserDetails = () => {
   }
 
   return (
-    <div className="container">
-      <div className="row justify-content-center">
-        <div className="col-sm-12 col-lg-6">
-          <h2>{user.fullName}</h2>
-          {
-          user.imageLocation !== null ?
-          <img src={user.imageLocation} alt={user.fullName}/> :
-          <img src="https://robohash.org/numquamutut.png?size=150x150&set=set1" alt="DefaultImage"/>
-          }
-          <p><strong>Display Name:</strong> {user.displayName}</p>
-          <p><strong>Email:</strong> {user.userType.name}</p>
-          <p><strong>Creation Date:</strong> {user.userType.name}</p>
-          <p><strong>User Type:</strong> {user.userType.name}</p>
+    <>
+      <div className="usersContainer">
+        <div className="userDetailCard">
+          <div className="userDetailHeader">
+            <div className="userDetailImg">
+              <h2>{user.fullName}</h2>
+              {
+              user.imageLocation !== null ?
+              <img src={user.imageLocation} alt={user.fullName}/> :
+              <img src="https://robohash.org/numquamutut.png?size=150x150&set=set1" alt="DefaultImage"/>
+              }
+            </div>
+            <div className="userDetailInfo">
+              <p><strong>Display Name:</strong> {user.displayName}</p>
+              <p><strong>Email:</strong> {user.email}</p>
+              <p><strong>User Since:</strong> {new Intl.DateTimeFormat('en-US').format(new Date(user.createDateTime))}</p>
+              <p><strong>User Type:</strong> {user.userType.name}</p>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+      <div className="backBtn">
+        <div className="actualBackBtn">
+          <Link to="/users">Back to List</Link>
+        </div>
+      </div>
+    </>
   );
 };
 

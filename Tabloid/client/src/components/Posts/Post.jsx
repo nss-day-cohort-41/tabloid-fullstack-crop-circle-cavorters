@@ -15,20 +15,20 @@ export default function Post({ post }) {
           {post.userProfile.fullName}
         </td>
         <td>
-          {post.categoryId}
+          {post.category.name}
         </td>
         <td>
           {new Intl.DateTimeFormat('en-US').format(new Date(post.publishDateTime))}
         </td>
         <td>
           <Link style={{ textDecoration: 'none' }} to={`/posts/details/${post.id}`}>
-            <button className="std-btn">View Post</button>
+            <button className="post-btn">View Post</button>
           </Link>
           <Link style={{ textDecoration: 'none' }} to={`/posts/edit/${post.id}`}>
-            <button className="std-btn">Edit</button>
+            <button className="post-btn">Edit</button>
           </Link>
           <Link style={{ textDecoration: 'none' }} to={`/posts/delete/${post.id}`}>
-            <button className="std-btn">Delete</button>
+            <button className="post-btn">Delete</button>
           </Link>
         </td>
       </tr>
