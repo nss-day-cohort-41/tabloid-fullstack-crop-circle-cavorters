@@ -13,11 +13,24 @@ export default function CategoryList() {
     }, []);
     // console.log(categories);
     return (
-        <section>
-            <Link to={`/categories/add`}><Button>Add A New Category</Button></Link>
-            {categories.map(c =>
-                <Category key={c.id} category={c} />
-            )}
+        <>
+        <section className="tagz">
+            <div className="tagzHeader">
+                <h2>Categories</h2>
+                <div>
+                <Link to={`/categories/add`}>
+                    <Button>Add A New Category</Button>
+                </Link>
+                </div>
+            </div>
+            </section>
+            <section className="tagsListContainer">
+            <div className="tagsList">
+                {categories.map(c =>
+                    <Category key={c.id} category={c} />
+                )}
+            </div>
         </section>
+        </>
     );
 }

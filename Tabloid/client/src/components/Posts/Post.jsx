@@ -15,7 +15,7 @@ export default function Post({ post }) {
           {post.userProfile.fullName}
         </td>
         <td>
-          {post.categoryId}
+          {post.category.name}
         </td>
         <td>
           {new Intl.DateTimeFormat('en-US').format(new Date(post.publishDateTime))}

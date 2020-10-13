@@ -26,7 +26,7 @@ export default function PostDetail() {
                     <section className="px-3">
                         <div className="row justify-content-between">
                             <h1 className="text-secondary">{post.title}</h1>
-                            <h1 className="text-black-50">{post.categoryId}</h1>
+                            <h1 className="text-black-50">{post.category.name}</h1>
                         </div>
                         <div className="row justify-content-between">
                             <p className="text-secondary">Written by {post.userProfile.displayName}</p>

@@ -63,7 +63,7 @@ const CategoryEditForm = () => {
                                 />
                             </FormGroup>
                         </Form>
-                        <Button type="button" onClick={e => { editCategory() }}>Submit</Button>
+                        <Button type="button" onClick={e => { editCategory() }}>Submit</Button>&nbsp;&nbsp;
                         <Link to={`/categories`}><Button type="button">Cancel</Button></Link>
                     </CardBody>
                 </Card>

@@ -42,9 +42,10 @@ export default function PostForm() {
 
     return (
         <>
-            <Form>
-                <FormGroup>
+            <Form className="newPostForm">
+                <FormGroup className="newPost">
                     <div >
+                        <Label for="title">Title</Label>
                         <Input
                             type="text"
                             required
@@ -53,6 +54,7 @@ export default function PostForm() {
                             placeholder="Title"
                             value={post.title}
                         />
+                        <Label for="imageLocation">Image URL</Label>
                         <Input
                             type="text"
                             required
@@ -61,6 +63,7 @@ export default function PostForm() {
                             placeholder="Url"
                             value={post.imageLocation}
                         />
+                        <Label for="content">Content</Label>
                         <Input
                             type="text"
                             required
@@ -69,6 +72,7 @@ export default function PostForm() {
                             placeholder="Content"
                             value={post.content}
                         />
+                        <Label for="publishDateTime">Publish Date</Label>
                         <Input
                             type="datetime-local"
                             required
@@ -77,6 +81,7 @@ export default function PostForm() {
                             placeholder="Publication Date"
                             value={post.publishDateTime}
                         />
+                        <br />
                         <div>
                             <Button
                                 className="newPostSubmitButton"
