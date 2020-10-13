@@ -1,9 +1,8 @@
-﻿using Microsoft.Data.SqlClient;
-using Microsoft.Extensions.Configuration;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
 using Tabloid.Models;
-
 
 namespace Tabloid.Repositories
 {
@@ -14,15 +13,15 @@ namespace Tabloid.Repositories
 
         public List<Category> GetAllCategories()
         {
-            using (var conn = Connection)
+            using(var conn = Connection)
             {
                 conn.Open();
-                using (var cmd = conn.CreateCommand())
+                using(var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = 
+                    cmd.CommandText =
 
-                    "SELECT Id, Name FROM Category ORDER BY Name";
-                    
+                        "SELECT Id, Name FROM Category ORDER BY Name";
+
                     var reader = cmd.ExecuteReader();
                     var categories = new List<Category>();
                     while (reader.Read())
@@ -30,7 +29,7 @@ namespace Tabloid.Repositories
                         var category = (new Category()
                         {
                             Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                            Name = reader.GetString(reader.GetOrdinal("Name"))
+                                Name = reader.GetString(reader.GetOrdinal("Name"))
                         });
 
                         categories.Add(category);
@@ -45,10 +44,10 @@ namespace Tabloid.Repositories
 
         public void AddCategory(Category category)
         {
-            using (var conn = Connection)
+            using(var conn = Connection)
             {
                 conn.Open();
-                using (var cmd = conn.CreateCommand())
+                using(var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
                         INSERT INTO Category (Name)
@@ -57,7 +56,7 @@ namespace Tabloid.Repositories
 
                     cmd.Parameters.AddWithValue("@name", category.Name);
 
-                    int id = (int)cmd.ExecuteScalar();
+                    int id = (int) cmd.ExecuteScalar();
                     category.Id = id;
                 }
             }
@@ -65,10 +64,10 @@ namespace Tabloid.Repositories
 
         public Category GetCategoryById(int id)
         {
-            using (var conn = Connection)
+            using(var conn = Connection)
             {
                 conn.Open();
-                using (var cmd = conn.CreateCommand())
+                using(var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
                         SELECT Id, name
@@ -98,10 +97,10 @@ namespace Tabloid.Repositories
 
         public void EditCategory(Category category)
         {
-            using (var conn = Connection)
+            using(var conn = Connection)
             {
                 conn.Open();
-                using (var cmd = conn.CreateCommand())
+                using(var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
                             UPDATE Category
@@ -116,12 +115,40 @@ namespace Tabloid.Repositories
             }
         }
 
+
+
+
         public void DeleteCategory(int id)
         {
-            throw new NotImplementedException();
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                            UPDATE Post
+                            SET CategoryId = @categoryId
+                            WHERE CategoryId = @id
+                        ";
+                    cmd.Parameters.AddWithValue("@categoryId", 1);
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                            DELETE FROM Category
+                            WHERE Id = @id
+                        ";
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
 
-
     }
- }
-
+}

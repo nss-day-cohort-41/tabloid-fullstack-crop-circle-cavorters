@@ -3,44 +3,24 @@ import { Link } from "react-router-dom";
 import { Card, CardBody, Button } from "reactstrap";
 
 export default function Category({ category }) {
-    return (
-      <main className="tagCard">
-        <section className="tagCardContainer"> 
-          <div className="tagName">
-            <div className="theTag">
-              <strong>Category: </strong>{category.name}
-            </div>
+  return (
+    <main className="tagCard">
+      <section className="tagCardContainer">
+        <div className="tagName">
+          <div className="theTag">
+            <strong>Category: </strong>{category.name}
           </div>
-          <div className="tagManagementButtons">   
-            <Link to={`/categories/${category.id}`}>
-              <button className="tag-btn">Edit</button>
-            </Link>
+        </div>
+        <div className="tagManagementButtons">
+          <Link to={`/categories/${category.id}`}>
+            <button className="tag-btn">Edit</button>
+          </Link>
             &nbsp;&nbsp;&nbsp;
             <Link to={`/categories/delete/${category.id}`}>
-              <button className="tag-btn">Delete</button>
-            </Link>
-          </div>
-        </section>
-      </main>
-    );
+            <button className="tag-btn">Delete</button>
+          </Link>
+        </div>
+      </section>
+    </main>
+  );
 }
-
-
-// export default function Category({ category }) {
-//     return (
-//         <Card className="m-4">
-//             <CardBody>
-//                 <h2>{category.name}</h2>
-//                 <p>{category.id}</p>
-//             </CardBody>
-//         </Card>
-//     );
-// }
-
-
-
-
-// <h2>{category.name}</h2>
-// <p>{category.id}</p>
-// <div className="categoryManagementButtons">
-//     <Link to={`/categories/${category.id}`}><Button color="info">Edit</Button></Link>

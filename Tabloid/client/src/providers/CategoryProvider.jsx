@@ -1,5 +1,4 @@
 import React, { useState, useContext } from "react";
-// import { useEffect } from "react";
 import { UserProfileContext } from "./UserProfileProvider";
 
 export const CategoryContext = React.createContext();
@@ -67,10 +66,20 @@ export const CategoryProvider = (props) => {
                 body: JSON.stringify(category)
             }));
 
+    const deleteCategory = (id) =>
+        getToken().then((token) =>
+            fetch(`/api/category/${id}`, {
+                method: "DELETE",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                },
+            }));
+
 
     return (
         <CategoryContext.Provider value={{
-            categories, getAllCategories, addCategory, editCategory, getCategoryById, updateCategory
+            categories, getAllCategories, addCategory, editCategory, getCategoryById, updateCategory, deleteCategory
         }}>
             {props.children}
         </CategoryContext.Provider>

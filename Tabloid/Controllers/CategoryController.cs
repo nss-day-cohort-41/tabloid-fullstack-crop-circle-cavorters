@@ -52,21 +52,6 @@ namespace Tabloid.Controllers
             return CreatedAtAction("Get", new { id = category.Id }, category);
         }
 
-        // POST: CategoryController/Create
-        /*        [HttpPost]
-                [ValidateAntiForgeryToken]
-                public ActionResult Create(IFormCollection collection)
-                {
-                    try
-                    {
-                        return RedirectToAction(nameof(Index));
-                    }
-                    catch
-                    {
-                        return View();
-                    }
-                }*/
-
         [HttpPut("{id}")]
         public IActionResult Put(int id, Category category)
         {
@@ -79,51 +64,12 @@ namespace Tabloid.Controllers
             return NoContent();
         }
 
-        // GET: CategoryController/Edit/5
-        /*public ActionResult Edit(int id)
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
         {
-            return View();
-        }*/
+            _categoryRepository.DeleteCategory(id);
+            return NoContent();
+        }
 
-        // POST: CategoryController/Edit/5
-        /*[HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }*/
-
-        // GET: CategoryController/Delete/5
-        /* public ActionResult Delete(int id)
-         {
-             return View();
-         }
-
-         private ActionResult View()
-         {
-             throw new NotImplementedException();
-         }*/
-
-        // POST: CategoryController/Delete/5
-        /* [HttpPost]
-         [ValidateAntiForgeryToken]
-         public ActionResult Delete(int id, IFormCollection collection)
-         {
-             try
-             {
-                 return RedirectToAction(nameof(Index));
-             }
-             catch
-             {
-                 return View();
-             }
-         }*/
     }
 }
