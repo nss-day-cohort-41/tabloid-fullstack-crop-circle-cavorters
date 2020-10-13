@@ -25,14 +25,14 @@ export default function DeletePostPage() {
 
     return (
         <>
-            <main className="users-container">
-                <section className="users-table">
+            <main className="postContainer">
+                <section className="post">
                     <h4> Delete this Post: "{post.title}"?</h4>
                     <hr />
                     <div className="row">
-                        <div className="col-md-4">
+                        <div className="actionBtns">
                             <div className="form-group">
-                                <Input type="submit" onClick={deleteThisPost} value="Confirm" className="btn btn-primary" />&nbsp;&nbsp;|&nbsp;&nbsp;
+                                <input type="submit" onClick={deleteThisPost} value="Confirm" className="btn btn-primary" />&nbsp;&nbsp;|&nbsp;&nbsp;
                                 <Link to={`/posts/details/${id}`}>
                                     Cancel
                                 </Link>

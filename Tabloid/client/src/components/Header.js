@@ -25,7 +25,9 @@ export default function Header() {
   return (
     <div>
       <Navbar color="light" light expand="md">
-        <NavbarBrand tag={RRNavLink} to="/">Tabloid</NavbarBrand>
+        <NavbarBrand className="navLogo"tag={RRNavLink} to="/">
+          <img src="https://res.cloudinary.com/dhduglm4j/image/upload/v1602603540/tabloid_euehri.png" alt="Tabloid Logo" />
+        </NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>

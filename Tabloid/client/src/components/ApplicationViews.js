@@ -22,6 +22,7 @@ import UserDetails from "./Users/UserDetails";
 import UserDeactivate from "./Users/UserDeactivate";
 import UserActivate from "./Users/UserActivate";
 import UserListDeactivated from "./Users/UserListDeactivated";
+import UserEdit from "./Users/UserEdit";
 
 export default function ApplicationViews() {
   const { isLoggedIn } = useContext(UserProfileContext);
@@ -121,6 +122,9 @@ export default function ApplicationViews() {
           {isLoggedIn && sessionUser.userTypeId === 1 ? <UserActivate /> : <Redirect to="/login" />}
         </Route>
 
+        <Route path="/users/edit/:id" exact>
+          {isLoggedIn && sessionUser.userTypeId === 1 ? <UserEdit /> : <Redirect to="/login" />}
+        </Route>
 
         {/* TAGS ROUTES */}
         <Route path="/tags" exact>

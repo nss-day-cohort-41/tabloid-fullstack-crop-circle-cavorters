@@ -21,22 +21,44 @@ export default function PostDetail() {
     return (
 
         <>
-            <Link to={`/posts`}><Button type="button" color="warning">Back to Posts</Button></Link>
-            
-            <Card className="m-4">
-                <CardBody>
-                    <h2>{post.title}</h2>
-                    <p>{post.userProfile.displayName}</p>
-                    <p>{post.imageLocation}</p>
-                    <p>{post.categoryId}</p>
+            <div className="postContainer">
+                <div className="post">
+                    <section className="px-3">
+                        <div className="row justify-content-between">
+                            <h1 className="text-secondary">{post.title}</h1>
+                            <h1 className="text-black-50">{post.category.name}</h1>
+                        </div>
+                        <div className="row justify-content-between">
+                            <p className="text-secondary">Written by {post.userProfile.displayName}</p>
 
-                    <p>{post.content}</p>
-                    <p>Post was Published: {new Intl.DateTimeFormat('en-US').format(new Date(post.publishDateTime))}</p>
-                </CardBody>
-            </Card>
-            
+                            <p className="text-black-50">Published on {new Intl.DateTimeFormat('en-US').format(new Date(post.publishDateTime))}</p>
+                        </div>
+                        <div className="row postBtns justify-content-between">
+                            <div>
+                                <a href={`/posts/edit/${post.id}`} className="btn btn-outline-primary mx-1" title="Edit">
+                                    <i className="fas fa-pencil-alt">Edit</i>
+                                </a>
+                                <a href={`/posts/delete/${post.id}`} className="btn btn-outline-primary mx-1" title="Delete">
+                                    <i className="fas fa-trash">Delete</i>
+                                </a>
+                            </div>
+                        </div>
+                        <section className="row justify-content-center">
+                            <div>
+                                <img src={post.imageLocation} />
+                            </div>
+                        </section>                        
+                    </section>
+                    <hr />
+                    
+                    <section className="row post__content">
+                        <p className="col-sm-12 mt-5">{post.content}</p>
+                    </section>
 
-
+                    <a href={`post/${post.id}/comments`}className="btn btn-outline-primary mx-1">View Comments</a>
+                    
+                </div>
+            </div>
         </>
     )
 }

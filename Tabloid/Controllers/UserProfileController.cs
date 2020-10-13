@@ -6,15 +6,17 @@ using Tabloid.Repositories;
 
 namespace Tabloid.Controllers
 {
-    /*[Authorize]*/
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UserProfileController : ControllerBase
     {
         private readonly IUserProfileRepository _userProfileRepository;
-        public UserProfileController(IUserProfileRepository userProfileRepository)
+        private readonly IUserTypeRepository _userTypeRepository;
+        public UserProfileController(IUserProfileRepository userProfileRepository, IUserTypeRepository userTypeRepository)
         {
             _userProfileRepository = userProfileRepository;
+            _userTypeRepository = userTypeRepository;
         }
 
         [HttpGet]
