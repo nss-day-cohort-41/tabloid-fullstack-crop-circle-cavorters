@@ -41,7 +41,7 @@ const CommentAddForm = () => {
             setIsLoading(true);
             addComment(newComment);
             setIsLoading(false);
-            history.push(`/commentsbypost/${id}`)
+            history.push(`comments/${id}`)
         }
     }
 

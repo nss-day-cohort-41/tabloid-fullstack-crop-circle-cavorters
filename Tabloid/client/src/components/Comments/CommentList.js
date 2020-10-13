@@ -26,7 +26,7 @@ export default function CommentList() {
                     <h1>Comments</h1>
                     <Link to={`comments/add`}><Button color="primary">Add New Comment</Button></Link>
                 </div>
-                {/* {comments && comments.map((comment) => {
+                {/* { comments.map((comment) => {
                     return (
                         <Comment key={comment.id} comment={comment} />
                     )
