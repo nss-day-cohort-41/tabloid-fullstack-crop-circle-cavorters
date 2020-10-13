@@ -19,10 +19,10 @@ namespace Tabloid.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = 
+                    cmd.CommandText =
 
                     "SELECT Id, Name FROM Category ORDER BY Name";
-                    
+
                     var reader = cmd.ExecuteReader();
                     var categories = new List<Category>();
                     while (reader.Read())
@@ -118,7 +118,20 @@ namespace Tabloid.Repositories
 
         public void DeleteCategory(int id)
         {
-            throw new NotImplementedException();
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        DELETE FROM Category 
+                        WHERE Id = @id";
+
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+
         }
 
 

@@ -15,7 +15,7 @@ import UserList from "./Users/UserList";
 import CategoryList from "./Categories/CategoryList";
 import CategoryAddForm from "./Categories/CategoryAddForm";
 import CategoryEditForm from "./Categories/CategoryEditForm";
-// import CategoryProvider from "../providers/CategoryProvider";
+import DeleteCategory from "./Categories/DeleteCategory";
 import UserDetails from "./Users/UserDetails";
 import UserDeactivate from "./Users/UserDeactivate";
 import UserActivate from "./Users/UserActivate";
@@ -48,6 +48,7 @@ export default function ApplicationViews() {
           {isLoggedIn ? <PostList /> : <Redirect to="/login" />}
         </Route>
 
+        {/* CATEGORIES ROUTES */}
         <Route path="/categories" exact>
           {isLoggedIn ? <CategoryList /> : <Redirect to="/login" />}
         </Route>
@@ -58,6 +59,10 @@ export default function ApplicationViews() {
 
         <Route path="/categories/:id" exact>
           {isLoggedIn ? <CategoryEditForm /> : <Redirect to="/login" />}
+        </Route>
+
+        <Route path="/categories/delete/:id" exact>
+          {isLoggedIn ? <DeleteCategory /> : <Redirect to="/login" />}
         </Route>
 
         {/* TAGS ROUTES */}
