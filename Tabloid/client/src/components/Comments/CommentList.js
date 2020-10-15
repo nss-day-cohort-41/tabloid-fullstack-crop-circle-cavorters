@@ -17,6 +17,7 @@ export default function CommentList() {
         getAllCommentsByPostId(id);
         //getPost(id);
     }, []);
+    console.log("id", id);
 
 
 
@@ -33,7 +34,7 @@ export default function CommentList() {
 
                 <h6>Comment</h6>
                 <p>{comments && comments.content}</p>
-                <Button onClick={() => history.push(`post/comments/${comments.postId}`)}>
+                <Button onClick={() => history.push(`/posts/`)}>
                     Back To Posts
             </Button>
                 {comments.map(c => {

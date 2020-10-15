@@ -14,27 +14,47 @@ export function CommentProvider(props) {
     const getAllCommentsByPostId = (id) =>
         getToken().then((token) =>
             fetch(apiUrl + "/" + id, {
-                //fetch(/api/post/${id}/comment, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             }).then(resp => resp.json())
-                .then(setComments)); 
-                
-              //Add a new comment  
-                const addComment = (newComment) => {
-                    return getToken().then((token) => {
-                        fetch("/api/comment/", {
-                            method: "POST",
-                            headers: {
-                                "Content-Type": "application/json",
-                                Authorization: `Bearer ${token}`
-                            },
-                            body: JSON.stringify(newComment)
-                        })
-                    })
-                };
+                .then(setComments));
+
+
+
+    //Add A New Comment
+
+    // const addComment = (comment) =>
+    //     getToken().then((token) =>
+    //         fetch(apiUrl, {
+    //             method: "POST",
+    //             headers: {
+    //                 Authorization: `Bearer ${token}`,
+    //                 "Content-Type": "application/json"
+    //             },
+    //             body: JSON.stringify(comment)
+    //         }).then(resp => {
+    //             if (resp.ok) {
+    //                 return resp.json();
+    //             }
+    //             throw new Error("Unauthorized");
+    //         }));
+
+
+    //Add a new comment  
+    const addComment = (newComment) => {
+        return getToken().then((token) => {
+            fetch("/api/comment/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                },
+                body: JSON.stringify(newComment)
+            })
+        })
+    };
 
     const editComment = (comment) => {
         return getToken().then((token) => {

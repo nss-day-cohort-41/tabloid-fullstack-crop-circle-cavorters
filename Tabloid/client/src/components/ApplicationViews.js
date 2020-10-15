@@ -6,9 +6,9 @@ import Register from "./Register";
 import Hello from "./Hello";
 import PostList from "./Posts/PostList";
 import CommentList from "./Comments/CommentList";
-//import CommentAddForm from "./Comments/CommentAddForm";
-//import CommentEditForm from "./Comments/CommentEditForm.js";
-//import CommentDelete from "./Comments/CommentDelete";
+import CommentAddForm from "./Comments/CommentAddForm";
+import CommentEditForm from "./Comments/CommentEditForm.js";
+import CommentDelete from "./Comments/CommentDelete";
 import PostDetail from "./Posts/PostDetail";
 import PostForm from "./Posts/PostForm";
 import TagList from "./Tags/TagList";
@@ -19,7 +19,7 @@ import UserList from "./Users/UserList";
 import CategoryList from "./Categories/CategoryList";
 import CategoryAddForm from "./Categories/CategoryAddForm";
 import CategoryEditForm from "./Categories/CategoryEditForm";
-// import CategoryProvider from "../providers/CategoryProvider";
+ import CategoryProvider from "../providers/CategoryProvider";
 import UserDetails from "./Users/UserDetails";
 import UserDeactivate from "./Users/UserDeactivate";
 import UserActivate from "./Users/UserActivate";
@@ -57,9 +57,9 @@ export default function ApplicationViews() {
           {isLoggedIn ? <CommentList /> : <Redirect to="/login" />}
         </Route>
 
-        {/* <Route path="comments/add/:id">
+        <Route path="/post/:postId/comments/add">
           {isLoggedIn ? <CommentProvider> <CommentAddForm /></CommentProvider> : <Redirect to="/login" />}
-        </Route> */}
+        </Route>
 
         {/* <Route path="comment/:id/edit">
           {isLoggedIn ? <CommentProvider> <CommentEditForm /></CommentProvider> : <Redirect to="/login" />}

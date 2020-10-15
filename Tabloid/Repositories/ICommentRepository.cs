@@ -9,7 +9,10 @@ namespace Tabloid.Repositories
         void Delete(int postId);
         
         List<Comment> GetAllPostComments(int postId);
-        
+        List<Comment> GetAllComments();
+
+        Comment GetCommentById(int commentId);
+
         void Update(Comment comment);
     }
 }
