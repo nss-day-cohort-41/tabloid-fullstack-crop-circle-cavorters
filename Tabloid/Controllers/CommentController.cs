@@ -27,7 +27,14 @@ namespace Tabloid.Controllers
             _userRepo = userRepository;
         }
 
-      
+        [HttpPost]
+        public IActionResult Post(Comment comment)
+        {
+            comment.CreateDateTime = DateTime.Now;
+            _commentRepository.Add(comment);
+            return CreatedAtAction("Get", new { id = comment.Id }, comment);
+        }
+
 
 
 
@@ -78,7 +85,7 @@ namespace Tabloid.Controllers
 
 
         // PUT api/<CommentController>/5
-        [HttpPut("{id}")]
+        [HttpPut("edit/{id}")]
         public IActionResult Put(int id, Comment comment)
         {
 
@@ -90,8 +97,10 @@ namespace Tabloid.Controllers
             return Ok();
         }
 
+
+
         // DELETE api/<CommentController>/5
-        [HttpDelete("{id}")]
+        [HttpDelete("delete/{id}")]
         public IActionResult Delete(int id)
         {
             _commentRepository.Delete(id);

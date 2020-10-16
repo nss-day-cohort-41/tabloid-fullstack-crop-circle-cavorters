@@ -25,6 +25,7 @@ export default function Comment({ comment }) {
                 <p>{comment.creatDateTime}</p>
                 {/* <p className="text-left px-2">
                 {currentDateTime(comment.createDateTime)}</p> */}
+                <p>{new Intl.DateTimeFormat('en-US').format(new Date(comment.createDateTime))}</p>
 
 
                 <>

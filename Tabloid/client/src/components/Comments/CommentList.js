@@ -40,9 +40,11 @@ export default function CommentList() {
 
                 <h6>Date</h6>
                 <p>{comments && comments.createDateTime}</p>
-                <Button onClick={() => history.push(`/posts/`)}>
+
+
+                <Link to={`/posts/details/${id}`}><Button>
                     Back To Posts
-            </Button>
+            </Button></Link>
                 {comments.map(c => {
 
                     return <Comment key={c.id} comment={c} />
