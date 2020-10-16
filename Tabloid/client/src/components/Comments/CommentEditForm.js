@@ -15,10 +15,13 @@ const CommentEditForm = () => {
 
     const { editComment, comment, getCommentById } = useContext(CommentContext);
     console.log(comment);
+    //useState is invoked when a user makes an event happen.( the UserInterface changes state).
+    //UseState is watching the Post, or all the Posts based on what developer tells it to watch.
     const [isLoading, setIsLoading] = useState(false);
     const [editedComment, setEditedComment] = useState();
     console.log(editedComment);
 
+    //useEffect has to happen after a page is rendered.
     useEffect(() => {
         getCommentById(id);
     }, []);

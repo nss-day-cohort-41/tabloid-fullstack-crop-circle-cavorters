@@ -22,6 +22,7 @@ export default function Header() {
   const toggle = () => setIsOpen(!isOpen);
   const sessionUser = JSON.parse(sessionStorage.getItem("userProfile"));
 
+  //Tabs for the navBar on landing page go here
   return (
     <div>
       <Navbar color="light" light expand="md">

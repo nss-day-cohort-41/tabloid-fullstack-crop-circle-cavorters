@@ -1,6 +1,7 @@
+//Providers are like the front-end Repositories. This is where you will find your ingredients to pull from.
+
 import React, { useState, createContext, useContext } from "react";
 import { UserProfileContext } from "./UserProfileProvider";
-
 
 export const CommentContext = createContext();
 
@@ -10,7 +11,8 @@ export function CommentProvider(props) {
 
     const [comments, setComments] = useState([]);
 
-    //Get all Comments by id,must match API
+    //List all the Action Methods in Code Blocks Below
+    //Get all Comments by id,must match API. Makes fetch calls to the API.
     const getAllCommentsByPostId = (id) =>
         getToken().then((token) =>
             fetch(apiUrl + "/" + id, {
@@ -80,6 +82,7 @@ export function CommentProvider(props) {
         })
     }
 
+    ///Must return your catalog of actions
     return (
 
         <CommentContext.Provider value={{ comments, getAllCommentsByPostId, addComment, editComment, deleteComment }}>
