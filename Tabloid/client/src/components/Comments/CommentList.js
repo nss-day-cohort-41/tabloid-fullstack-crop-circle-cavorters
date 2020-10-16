@@ -34,6 +34,12 @@ export default function CommentList() {
 
                 <h6>Comment</h6>
                 <p>{comments && comments.content}</p>
+
+                <h6>Author</h6>
+                <p>{comments && comments.userProfile}</p>
+
+                <h6>Date</h6>
+                <p>{comments && comments.createDateTime}</p>
                 <Button onClick={() => history.push(`/posts/`)}>
                     Back To Posts
             </Button>
