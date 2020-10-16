@@ -45,10 +45,6 @@ export default function ApplicationViews() {
           <Register />
         </Route>
 
-        {/* ---- POST ROUTES ---- */}
-        <Route path="/posts" exact>
-          {isLoggedIn ? <PostList /> : <Redirect to="/login" />}
-        </Route>
 
         {/* CATEGORIES ROUTES */}
         <Route path="/categories" exact>
@@ -85,6 +81,11 @@ export default function ApplicationViews() {
           {isLoggedIn ? <DeleteTagPrompt /> : <Redirect to="/login" />}
         </Route>
 
+        {/* ---- POST ROUTES ---- */}
+        <Route path="/posts" exact>
+          {isLoggedIn ? <PostList /> : <Redirect to="/login" />}
+        </Route>
+
         <Route exact path="/posts/details/:id">
           {isLoggedIn ? <PostDetail /> : <Redirect to="/login" />}
         </Route>
@@ -101,7 +102,7 @@ export default function ApplicationViews() {
           {isLoggedIn ? <PostDelete /> : <Redirect to="/login" />}
         </Route>
 
-        <Route path="/post/myposts" exact>
+        <Route path="/posts/myposts/:id" exact>
           {isLoggedIn ? <MyPosts /> : <Redirect to="/login" />}
         </Route>
         {/* END POST ROUTES */}

@@ -1,10 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { PostContext } from "../../providers/PostProvider";
 import { useHistory, Link } from "react-router-dom";
-import {
-    Button, Form, FormGroup, Label, Input, Dropdown,
-    DropdownToggle, DropdownMenu, DropdownItem
-} from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import { CategoryContext } from "../../providers/CategoryProvider";
 
 export default function PostForm() {
@@ -20,7 +17,7 @@ export default function PostForm() {
     const [post, setPost] = useState({
         title: "",
         content: "",
-        categoryId: 2,
+        categoryId: "",
         imageLocation: "",
         publishDateTime: "",
         userProfileId: sessionUser.id
@@ -36,9 +33,14 @@ export default function PostForm() {
     };
 
     const createNewPost = e => {
+        debugger
         e.preventDefault();
         if (post.title === "") {
             alert("Give your post a title!")
+
+        } else if (post.categoryId === "" || post.categoryId === "default") {
+            alert("Pick a Category!")
+
         } else {
             setIsLoading(true);
         }
@@ -85,21 +87,16 @@ export default function PostForm() {
                             type="select"
                             onChange={handleFieldChange}
                             id="categoryId"
-                            placeholder="Category"
-                            defaultValue={2}
+                            value={post.categoryId}
                         >
                             <DropdownToggle caret>
                                 Select Category
                             </DropdownToggle>
-
+                            <option selected value="default" >Select a Category</option>
                             {categories.map(category => {
+
                                 return <option key={category.id} value={category.id}>{category.name}</option>
                             })}
-                            {/* <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option> */}
 
                         </Input>
                         <Label for="content">Content</Label>

@@ -69,7 +69,7 @@ namespace Tabloid.Controllers
             return NoContent();
         }
 
-        [HttpGet("myposts")]
+        [HttpGet("myposts/{userProfileId}")]
         public IActionResult GetUserPosts(int id)
 
         {

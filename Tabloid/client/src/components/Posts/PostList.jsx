@@ -8,6 +8,8 @@ import { Link } from "react-router-dom";
 export default function PostList() {
   const { posts, getAllPosts } = useContext(PostContext);
 
+  const userProfile = JSON.parse(sessionStorage.getItem("userProfile"))
+
   useEffect(() => {
     getAllPosts();
   }, []);
@@ -21,7 +23,7 @@ export default function PostList() {
             <Link class="btn btn-primary" to="/posts/add">New Post</Link>
           </p>
           <p>
-            <Link class="btn btn-primary" to="/posts/myPosts">My Posts</Link>
+            <Link class="btn btn-primary" to={`/posts/myposts/${userProfile.id}`}>My Posts</Link>
           </p>
         </div>
         <div className="post-container">

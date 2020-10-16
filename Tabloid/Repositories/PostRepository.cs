@@ -91,7 +91,7 @@ namespace Tabloid.Repositories
         }
         //created for "myposts"
         //Ordered by CreateDateTime DESC
-        public List<Post> GetAllApprovedPostsForUser(int id)
+        public List<Post> GetAllApprovedPostsForUser(int userProfileId)
         {
             using (var conn = Connection)
             {
@@ -110,13 +110,16 @@ namespace Tabloid.Repositories
                               u.Email, u.CreateDateTime, u.ImageLocation AS AvatarImage,
                               u.UserTypeId, 
 
-                              ut.[Name] AS UserTypeName
+                              ut.[Name] AS UserTypeName,
+                              c.[Name] AS CategoryName
                          FROM Post p
-
+                              LEFT JOIN Category c ON p.CategoryId = c.id  
                               LEFT JOIN UserProfile u ON p.UserProfileId = u.id
                               LEFT JOIN UserType ut ON u.UserTypeId = ut.id
-                        WHERE p.UserProfileId = u.id
+                        WHERE p.UserProfileId = @userProfileId
                         ORDER BY u.CreateDateTime DESC";
+
+                    DbUtils.AddParameter(cmd, "@userProfileId", userProfileId);
                     var reader = cmd.ExecuteReader();
 
                     var posts = new List<Post>();
