@@ -15,7 +15,7 @@ export function CommentProvider(props) {
     //Get all Comments by id,must match API. Makes fetch calls to the API.
     const getAllCommentsByPostId = (id) =>
         getToken().then((token) =>
-            fetch(apiUrl + "/" + id, {
+            fetch(apiUrl + "/post/" + id, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`

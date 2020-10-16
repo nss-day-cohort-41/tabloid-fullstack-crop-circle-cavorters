@@ -19,7 +19,7 @@ export default function Comment({ comment }) {
                 <h2>Comment</h2>
                 <p>{comment.content}</p>
 
-                comment.userProfileId !== parseInt(userId) ? null :
+                
                  <>
                     <Button onClick={() => history.push(`/comments/edit/${comment.id}`)}>Edit </Button>
                     <Button onClick={() => history.push(`/comments/delete/${comment.id}`)}>Delete</Button>
