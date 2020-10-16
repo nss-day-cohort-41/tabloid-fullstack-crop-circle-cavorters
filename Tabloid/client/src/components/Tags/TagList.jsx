@@ -22,16 +22,23 @@ export default function TagList() {
 
     return (
         <>
-
-            <section>
-                <div>
-                    <Link to={`/tags/add`}><Button color="primary">Add New Tag</Button></Link>
+            <section className="tagz">
+                <div className="tagzHeader">
+                    <h2>Tagz</h2>
+                    <div>
+                        <Link to={`/tags/add`}>
+                            <Button color="primary">Add New Tag</Button>
+                        </Link>
+                    </div>
                 </div>
-                {tags.map(t =>
-                    <Tag key={t.id} tag={t} />
-                )}
             </section>
-
+            <section className="tagsListContainer">
+                <div className="tagsList">
+                    {tags.map(t =>
+                        <Tag key={t.id} tag={t} />
+                    )}
+                </div>
+            </section>
         </>
     );
 }

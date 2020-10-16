@@ -23,11 +23,11 @@ namespace Tabloid.Repositories
                 CreateDateTime = reader.GetDateTime(reader.GetOrdinal("CreateDateTime")),
                 PublishDateTime = DbUtils.GetNullableDateTime(reader, "PublishDateTime"),
                 CategoryId = reader.GetInt32(reader.GetOrdinal("CategoryId")),
-                /* Category = new Category()
+                Category = new Category()
                 {
                     Id = reader.GetInt32(reader.GetOrdinal("CategoryId")),
                     Name = reader.GetString(reader.GetOrdinal("CategoryName"))
-                }, */
+                },
                 UserProfileId = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
                 UserProfile = new UserProfile()
                 {
@@ -60,7 +60,7 @@ namespace Tabloid.Repositories
                               p.CreateDateTime, p.PublishDateTime, p.IsApproved,
                               p.CategoryId, p.UserProfileId,
                               
-
+                              c.[Name] AS CategoryName,
 
                               u.FirstName, u.LastName, u.DisplayName, 
                               u.Email, u.CreateDateTime, u.ImageLocation AS AvatarImage,
@@ -68,7 +68,7 @@ namespace Tabloid.Repositories
 
                               ut.[Name] AS UserTypeName
                          FROM Post p
-
+                              LEFT JOIN Category c ON p.CategoryId = c.id
                               LEFT JOIN UserProfile u ON p.UserProfileId = u.id
                               LEFT JOIN UserType ut ON u.UserTypeId = ut.id
                         WHERE IsApproved = 1 AND PublishDateTime < SYSDATETIME()
@@ -155,6 +155,53 @@ namespace Tabloid.Repositories
                     DbUtils.AddParameter(cmd, "@UserProfileId", post.UserProfileId);
 
                     post.Id = (int)cmd.ExecuteScalar();
+                }
+            }
+        }
+
+        public void UpdatePost(Post post)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                            UPDATE Post
+                            SET 
+                                Title = @title, 
+                                Content = @content, 
+                                ImageLocation = @imageLocation, 
+                                PublishDateTime = @publishDateTime,
+                               	CategoryId = @categoryId,
+		                        UserProfileId = @userProfileId
+                            WHERE Id = @id";
+                    DbUtils.AddParameter(cmd, "@id", post.Id);
+                    DbUtils.AddParameter(cmd, "@Title", post.Title);
+                    DbUtils.AddParameter(cmd, "@Content", post.Content);
+                    DbUtils.AddParameter(cmd, "@ImageLocation", DbUtils.ValueOrDBNull(post.ImageLocation));
+                    DbUtils.AddParameter(cmd, "@PublishDateTime", DbUtils.ValueOrDBNull(post.PublishDateTime));
+                    DbUtils.AddParameter(cmd, "@CategoryId", post.CategoryId);
+                    DbUtils.AddParameter(cmd, "@UserProfileId", post.UserProfileId);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void DeletePost(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                            DELETE FROM Post
+                            WHERE Id = @id
+                        ";
+                    DbUtils.AddParameter(cmd, "@id", id);
+                    cmd.ExecuteNonQuery();
+
                 }
             }
         }
