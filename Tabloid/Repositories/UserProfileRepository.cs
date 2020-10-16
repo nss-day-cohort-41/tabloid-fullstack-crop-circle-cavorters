@@ -182,6 +182,7 @@ namespace Tabloid.Repositories
             }
         }
 
+
         public UserProfile GetUserProfileById(int id)
         {
             using (var conn = Connection)
@@ -267,6 +268,7 @@ namespace Tabloid.Repositories
                 }
             }
         }
+
     }
 }
 

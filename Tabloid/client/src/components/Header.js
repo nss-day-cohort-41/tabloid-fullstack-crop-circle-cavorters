@@ -22,6 +22,7 @@ export default function Header() {
   const toggle = () => setIsOpen(!isOpen);
   const sessionUser = JSON.parse(sessionStorage.getItem("userProfile"));
 
+  //Tabs for the navBar on landing page go here
   return (
     <div>
       <Navbar color="light" light expand="md">
@@ -37,7 +38,12 @@ export default function Header() {
                 <NavLink tag={RRNavLink} to="/">Home</NavLink>
               </NavItem>
             }
+
             {isLoggedIn &&
+              // <NavItem>
+              //   <NavLink tag={RRNavLink} to="/comments">Comments</NavLink>
+              // </NavItem>
+
               <>
                 <NavItem>
                   <NavLink tag={RRNavLink} to="/posts">Posts</NavLink>
@@ -58,6 +64,7 @@ export default function Header() {
                 <NavLink tag={RRNavLink} to="/users">Users</NavLink>
               </NavItem>
             }
+
 
           </Nav>
           <Nav navbar>

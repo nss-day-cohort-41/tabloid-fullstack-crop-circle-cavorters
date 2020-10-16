@@ -2,6 +2,7 @@ import React from "react";
 import { Card, CardBody, Button } from "reactstrap";
 import { Link } from "react-router-dom";
 
+
 export default function Post({ post }) {
 
 
@@ -24,6 +25,9 @@ export default function Post({ post }) {
           <Link style={{ textDecoration: 'none' }} to={`/posts/details/${post.id}`}>
             <button className="post-btn">View Post</button>
           </Link>
+
+          <Link to={`/post/${post.id}/comments`}><Button color="info">Comments</Button></Link>
+
           <Link style={{ textDecoration: 'none' }} to={`/posts/edit/${post.id}`}>
             <button className="post-btn">Edit</button>
           </Link>

@@ -5,6 +5,10 @@ import Login from "./Login";
 import Register from "./Register";
 import Hello from "./Hello";
 import PostList from "./Posts/PostList";
+import CommentList from "./Comments/CommentList";
+import CommentAddForm from "./Comments/CommentAddForm";
+import CommentEditForm from "./Comments/CommentEditForm.js";
+import CommentDelete from "./Comments/CommentDelete";
 import PostDetail from "./Posts/PostDetail";
 import PostForm from "./Posts/PostForm";
 import PostEditForm from "./Posts/PostEditForm";
@@ -17,11 +21,15 @@ import UserList from "./Users/UserList";
 import CategoryList from "./Categories/CategoryList";
 import CategoryAddForm from "./Categories/CategoryAddForm";
 import CategoryEditForm from "./Categories/CategoryEditForm";
+ import CategoryProvider from "../providers/CategoryProvider";
 import DeleteCategoryAlert from "./Categories/CategoryDelete";
 import UserDetails from "./Users/UserDetails";
 import UserDeactivate from "./Users/UserDeactivate";
 import UserActivate from "./Users/UserActivate";
 import UserListDeactivated from "./Users/UserListDeactivated";
+import { CommentProvider } from "../providers/CommentProvider";
+
+//import { PostProvider } from "../providers/PostProvider"
 import UserEdit from "./Users/UserEdit";
 
 export default function ApplicationViews() {
@@ -43,6 +51,26 @@ export default function ApplicationViews() {
         <Route path="/register">
           <Register />
         </Route>
+
+
+
+        {/* Comment Routes */}
+
+        <Route path="/post/:id/comments" exact>
+          {isLoggedIn ? <CommentList /> : <Redirect to="/login" />}
+        </Route>
+
+        <Route path="/post/:postId/comments/add">
+          {isLoggedIn ? <CommentProvider> <CommentAddForm /></CommentProvider> : <Redirect to="/login" />}
+        </Route>
+
+        {/* <Route path="comment/:id/edit">
+          {isLoggedIn ? <CommentProvider> <CommentEditForm /></CommentProvider> : <Redirect to="/login" />}
+        </Route> */}
+
+        {/* <Route path="comment/:id/delete">
+          {isLoggedIn ? <CommentProvider> <CommentDelete /></CommentProvider> : <Redirect to="/login" />}
+        </Route> */}
 
         {/* ---- POST ROUTES ---- */}
         <Route path="/posts" exact>
