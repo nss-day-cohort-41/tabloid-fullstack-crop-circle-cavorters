@@ -56,6 +56,7 @@ export default function PostDetail() {
                     </section>
 
                     <a href={`post/${post.id}/comments`}className="btn btn-outline-primary mx-1">View Comments</a>
+                    <a href={`/posts/details/${post.id}/posttags`}className="btn btn-outline-primary mx-1">View Tags</a>
                     
                 </div>
             </div>

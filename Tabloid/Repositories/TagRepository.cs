@@ -7,7 +7,7 @@ using Tabloid.Models;
 
 namespace Tabloid.Repositories
 {
-    public class TagRepository : BaseRepository, ITagRepository
+    public class  TagRepository : BaseRepository, ITagRepository
     {
         public TagRepository(IConfiguration config) : base(config) { }
         public List<Tag> GetAllTags()
@@ -133,7 +133,7 @@ namespace Tabloid.Repositories
             }
         }
 
-        public List<Tag> GetAllTagsOnAPost(int postId)
+        public List<PostTag> GetAllTagsOnAPost(int id)
         {
             using (var conn = Connection)
             {
@@ -141,29 +141,39 @@ namespace Tabloid.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText =
-                        @"SELECT Tag.Id, Tag.name FROM Tag
-                            SELECT Post.Id FROM POST
-                            JOIN PostTag on Tag.Id= PostTag.TagId
-                        WHERE PostTag.PostId = @postId";
+                        @"SELECT pt.Id, pt.TagId, pt.PostId, Tag.Name 
+                            FROM PostTag pt
+                            JOIN Post ON pt.PostId = Post.Id
+                            JOIN Tag ON pt.TagId = Tag.Id
+                            WHERE PostId = @postId
+                            ORDER BY Name";
 
-                    cmd.Parameters.AddWithValue("@id", postId);
+                    cmd.Parameters.AddWithValue("@postId", id);
 
                     var reader = cmd.ExecuteReader();
 
-                    var tags = new List<Tag>();
+                    var postTags = new List<PostTag>();
 
                     while (reader.Read())
                     {
-                        tags.Add(new Tag()
+                        PostTag postTag = new PostTag()
                         {
                             Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                            Name = reader.GetString(reader.GetOrdinal("name")),
-                        });
+                            TagId = reader.GetInt32(reader.GetOrdinal("TagId")),
+                            PostId = reader.GetInt32(reader.GetOrdinal("PostId")),
+
+                            Tag = new Tag()
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("TagId")),
+                                Name = reader.GetString(reader.GetOrdinal("Name"))
+                            }
+                        };
+                        postTags.Add(postTag);
                     }
 
                     reader.Close();
 
-                    return tags;
+                    return postTags;
                 }
             }
         }

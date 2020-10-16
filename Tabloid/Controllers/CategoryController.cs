@@ -16,7 +16,7 @@ namespace Tabloid.Controllers
     [ApiController]
     public class CategoryController : ControllerBase
     {
-
+       
         private readonly ICategoryRepository _categoryRepository;
 
         public CategoryController(
