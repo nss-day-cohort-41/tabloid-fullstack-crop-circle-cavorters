@@ -34,6 +34,7 @@ export default function PostDetail() {
                             <p className="text-black-50">Published on {new Intl.DateTimeFormat('en-US').format(new Date(post.publishDateTime))}</p>
                         </div>
                         <div className="row postBtns justify-content-between">
+                            <Link to={`/posts`}><Button type="button" color="warning">Back to Posts</Button></Link>
                             <div>
                                 <a href={`/posts/edit/${post.id}`} className="btn btn-outline-primary mx-1" title="Edit">
                                     <i className="fas fa-pencil-alt">Edit</i>
@@ -47,16 +48,16 @@ export default function PostDetail() {
                             <div>
                                 <img src={post.imageLocation} />
                             </div>
-                        </section>                        
+                        </section>
                     </section>
                     <hr />
-                    
+
                     <section className="row post__content">
                         <p className="col-sm-12 mt-5">{post.content}</p>
                     </section>
 
-                    <a href={`post/${post.id}/comments`}className="btn btn-outline-primary mx-1">View Comments</a>
-                    
+                    <a href={`post/${post.id}/comments`} className="btn btn-outline-primary mx-1">View Comments</a>
+
                 </div>
             </div>
         </>

@@ -1,12 +1,22 @@
 import React, { useContext, useState, useEffect } from "react";
 import { PostContext } from "../../providers/PostProvider";
-import { useHistory } from "react-router-dom";
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { useHistory, Link } from "react-router-dom";
+import {
+    Button, Form, FormGroup, Label, Input, Dropdown,
+    DropdownToggle, DropdownMenu, DropdownItem
+} from 'reactstrap';
+import { CategoryContext } from "../../providers/CategoryProvider";
 
 export default function PostForm() {
     const history = useHistory();
     const { addPost } = useContext(PostContext);
+    const { categories, getAllCategories } = useContext(CategoryContext)
     const sessionUser = JSON.parse(sessionStorage.getItem("userProfile"));
+
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+
+    const toggle = () => setDropdownOpen(prevState => !prevState);
+
     const [post, setPost] = useState({
         title: "",
         content: "",
@@ -33,12 +43,17 @@ export default function PostForm() {
             setIsLoading(true);
         }
 
+        post.categoryId = parseInt(post.categoryId);
         addPost(post)
             .then((p) => {
                 history.push(`/posts/details/${p.id}`)
             })
 
     };
+
+    useEffect(() => {
+        getAllCategories();
+    }, []);
 
     return (
         <>
@@ -63,6 +78,30 @@ export default function PostForm() {
                             placeholder="Url"
                             value={post.imageLocation}
                         />
+                        <Label for="category">Category</Label>
+                        <Input isOpen={dropdownOpen} toggle={toggle}
+
+                            required
+                            type="select"
+                            onChange={handleFieldChange}
+                            id="categoryId"
+                            placeholder="Category"
+                            defaultValue={2}
+                        >
+                            <DropdownToggle caret>
+                                Select Category
+                            </DropdownToggle>
+
+                            {categories.map(category => {
+                                return <option key={category.id} value={category.id}>{category.name}</option>
+                            })}
+                            {/* <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option> */}
+
+                        </Input>
                         <Label for="content">Content</Label>
                         <Input
                             type="text"
@@ -89,6 +128,7 @@ export default function PostForm() {
                                 disabled={isLoading}
                                 onClick={createNewPost}
                             >Submit</Button>
+                            <Link to={`/posts`}><Button type="button" color="warning">Cancel</Button></Link>
                         </div>
                     </div>
                 </FormGroup>

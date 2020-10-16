@@ -11,6 +11,6 @@ namespace Tabloid.Repositories
         void UpdatePost(Post post);
         void DeletePost(int id);
         Post GetUserPostsById(int id, int userProfileId);
-        List<Post> GetAllApprovedPostsForUser();
+        List<Post> GetAllApprovedPostsForUser(int id);
     }
 }

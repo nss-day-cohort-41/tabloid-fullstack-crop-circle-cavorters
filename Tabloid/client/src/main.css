@@ -39,6 +39,7 @@ html, #root {
     align-items: center;
     justify-content: center;
     margin: 10px;
+    
 }
 
 .details-container {
@@ -245,6 +246,7 @@ fieldset {
 
 .post {
     width: 70%;
+    
 }
 
 .postBtns {

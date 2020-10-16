@@ -21,9 +21,9 @@ export const PostProvider = (props) => {
         .then(setPosts));
   };
 
-  const getAllPostsByUser = () => {
+  const getAllPostsByUser = (id) => {
     getToken().then((token) =>
-      fetch(`/api/post/myposts`, {
+      fetch(`/api/post/myposts/${id}`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`

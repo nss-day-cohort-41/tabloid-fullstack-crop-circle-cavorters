@@ -91,7 +91,7 @@ namespace Tabloid.Repositories
         }
         //created for "myposts"
         //Ordered by CreateDateTime DESC
-        public List<Post> GetAllApprovedPostsForUser()
+        public List<Post> GetAllApprovedPostsForUser(int id)
         {
             using (var conn = Connection)
             {
@@ -115,7 +115,7 @@ namespace Tabloid.Repositories
 
                               LEFT JOIN UserProfile u ON p.UserProfileId = u.id
                               LEFT JOIN UserType ut ON u.UserTypeId = ut.id
-                        WHERE IsApproved = 1 AND PublishDateTime < SYSDATETIME()
+                        WHERE p.UserProfileId = u.id
                         ORDER BY u.CreateDateTime DESC";
                     var reader = cmd.ExecuteReader();
 

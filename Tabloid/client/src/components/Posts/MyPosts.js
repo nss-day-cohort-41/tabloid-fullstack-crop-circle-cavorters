@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import Post from "./Post";
 import { PostContext } from "../../providers/PostProvider";
 import { Link, useHistory } from "react-router-dom";
+import { Button } from 'reactstrap';
 
 export default function UserSpecificPosts() {
     const history = useHistory();
@@ -14,6 +15,10 @@ export default function UserSpecificPosts() {
         const currentUser = JSON.parse(sessionStorage.getItem("userProfile"))
         setUser(currentUser.id)
     }, []);
+
+    // console.log("currentUser:", currentUser);
+    // console.log("currentUser.id:", currentUser.id);
+    console.log("userProfile:", JSON.parse(sessionStorage.getItem("userProfile")));
 
 
 
@@ -52,8 +57,10 @@ export default function UserSpecificPosts() {
                         {posts.map(p =>
                             <Post key={p.id} post={p} user={user} />
                         )}
+
                     </table>
                 </div>
+
             </div>
         </section>
 

@@ -70,10 +70,10 @@ namespace Tabloid.Controllers
         }
 
         [HttpGet("myposts")]
-        public IActionResult GetUserPosts()
+        public IActionResult GetUserPosts(int id)
 
         {
-            var posts = _postRepository.GetAllApprovedPostsForUser();
+            var posts = _postRepository.GetAllApprovedPostsForUser(id);
             return Ok(posts);
         }
 
