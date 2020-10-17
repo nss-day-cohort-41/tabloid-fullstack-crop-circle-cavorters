@@ -12,24 +12,21 @@ export default function PostTag({ PostTag }) {
 
   return (
 
-    <main className="tagCard">
-      <section className="tagCardContainer"> 
-        <div className="tagName">
-          <div className="theTag">
-            <strong>Tag: # </strong>
-             
-            "{PostTag.tag.name}"
-          </div>
+    <main className="postTagCard">
+      <section className="postTagCardContainer"> 
+        <div className="postTagName">
+         <h5 className="theHashTagtoSetOtherstoShame"> # </h5>
+             "{PostTag.tag.name}"
         </div>
-        <div className="tagManagementButtons">   
-          {/* <Link to={`/tags/${postTag.id}`}>
+       {/* <div className="postTagManagementButtons">   
+            <Link to={`/tags/${PostTag.id}`}>
             <button className="tag-btn">Edit</button>
-          </Link>
-          &nbsp;&nbsp;&nbsp;
-          <Link to={`/tags/delete/${postTag.id}`}>
-            <button className="tag-btn">Delete</button>
           </Link> */}
-        </div>
+          &nbsp;&nbsp;&nbsp;
+          {/* <Link to={`/tags/delete/${PostTag.id}`}>
+            <button className="tag-btn">Delete</button>
+          </Link> 
+        </div> */}
       </section>
     </main>
   );

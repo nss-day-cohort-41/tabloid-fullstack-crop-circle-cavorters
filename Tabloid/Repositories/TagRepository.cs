@@ -178,5 +178,37 @@ namespace Tabloid.Repositories
             }
         }
 
+        public void AddPostTag(PostTag postTag)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        INSERT INTO PostTag (TagId, PostId)                  
+                        OUTPUT INSERTED.ID
+                        VALUES ( @tagId, @postId)";
+
+
+                    cmd.Parameters.AddWithValue("@tagId", postTag.TagId);
+                    cmd.Parameters.AddWithValue("@postId", postTag.PostId);
+
+                    //Tag = new Tag()
+                    //{
+                    //    cmd.Parameters.AddWithValue("@name", tag.Name);
+                    //}
+                    //int newlyCreatedId = (int)cmd.ExecuteScalar();
+                    //category.Id = newlyCreatedId;
+
+
+                    int id = (int)cmd.ExecuteScalar();
+                    postTag.Id = id;
+                }
+            }
+        }
+
+
+
     }
 }

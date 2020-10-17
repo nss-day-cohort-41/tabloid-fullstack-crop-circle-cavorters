@@ -14,6 +14,7 @@ function App() {
   return (
     <Router>
       <UserProfileProvider>
+      <PostTagProvider>
         <PostProvider>         
           <TagProvider>
             <CommentProvider>
@@ -24,6 +25,7 @@ function App() {
             </CommentProvider>
           </TagProvider>
         </PostProvider>
+        </PostTagProvider>
       </UserProfileProvider>
     </Router >
   );

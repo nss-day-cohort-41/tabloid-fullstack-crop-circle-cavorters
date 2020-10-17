@@ -7,7 +7,7 @@ export const PostTagProvider = (props) => {
     const apiUrl = "/api/posttag";
     const { getToken } = useContext(UserProfileContext);
     const [postTags, setPostTags] = useState([]);
-    //const [postTag, setPostTag] = useState([]);
+    const [postTag, setPostTag] = useState([]);
     
 
 
@@ -41,7 +41,7 @@ export const PostTagProvider = (props) => {
         
     return (
         <PostTagContext.Provider value={{
-            postTags, getAllTagsForAPost, addPostTag
+            postTag, postTags, getAllTagsForAPost, addPostTag
         }}>
             {props.children}
         </PostTagContext.Provider>

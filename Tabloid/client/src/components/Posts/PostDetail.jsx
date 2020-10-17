@@ -1,17 +1,33 @@
 import React, { useContext, useEffect, useState } from "react";
 import { PostContext } from "../../providers/PostProvider";
-import { Card, CardBody, Button } from "reactstrap";
+import { PostTagContext } from "../../providers/PostTagProvider";
+import { TagContext } from "../../providers/TagProvider";
+import { Card, CardBody, Button, ListGroup } from "reactstrap";
 import { useParams, Link } from "react-router-dom";
+import PostTag from "../Tags/PostTag";
 
 export default function PostDetail() {
     const { post, getById } = useContext(PostContext);
+    const { postTags, getAllTagsForAPost } = useContext(PostTagContext);
     const { id } = useParams();
+    //const { tag, getTagById } = useContext(TagContext);
 
     useEffect(() => {
         getById(id)
 
     }, []);
 
+
+    const parsedId = parseInt(id)
+
+    useEffect(() => {
+        getAllTagsForAPost(id);
+    }, []);
+
+
+    // if (!postTags) {
+    //     return null;
+    // }
     // we need the if statement to return true on the first render.
     // so we must include !post.userProfile because react will not let us
     // ask for the property of an undefined object
@@ -27,6 +43,9 @@ export default function PostDetail() {
                         <div className="row justify-content-between">
                             <h1 className="text-secondary">{post.title}</h1>
                             <h1 className="text-black-50">{post.category.name}</h1>
+                            <div className="postTagLineUp">
+                                {postTags.map(pt => <PostTag key={pt.id} PostTag={pt} />)}
+                            </div>
                         </div>
                         <div className="row justify-content-between">
                             <p className="text-secondary">Written by {post.userProfile.displayName}</p>
@@ -47,18 +66,23 @@ export default function PostDetail() {
                             <div>
                                 <img src={post.imageLocation} />
                             </div>
-                        </section>                        
+                        </section>
+
+
+
+
+
                     </section>
                     <hr />
-                    
+
                     <section className="row post__content">
                         <p className="col-sm-12 mt-5">{post.content}</p>
                     </section>
 
-                    
-                    <a href={`/posts/details/${post.id}/posttags`}className="btn btn-outline-primary mx-1">View Tags</a>
-                    <a href={`/post/${post.id}/comments`}className="btn btn-outline-primary mx-1">View Comments</a>
-                    
+
+                    <a href={`/posts/details/${post.id}/posttags`} className="btn btn-outline-primary mx-1">View Tags</a>
+                    <a href={`/post/${post.id}/comments`} className="btn btn-outline-primary mx-1">View Comments</a>
+
                 </div>
             </div>
         </>

@@ -39,28 +39,21 @@ namespace Tabloid.Controllers
        // public IActionResult Get(int postId, int id)
           public IActionResult GetPT(int id)
         {
-            //_postRepository.GetPublishedPostById(id);
-            // _tagRepository.GetAllTags();
-            // return Ok(_tagRepository.GetAllTagsOnAPost(id));
-            //var postTags = _tagRepository.GetAllTagsOnAPost(id);
-            //return Ok(postTags);
-
             List<PostTag> postTags = _tagRepository.GetAllTagsOnAPost(id);
             if (postTags == null)
             {
                 return NotFound();
             }
             return Ok(postTags);
-            //return Ok(_tagRepository.GetAllTagsOnAPost(postId));
         }
 
 
-        //[HttpPost]
-        //public IActionResult Post(Tag tag)
-        //{
-        //    _tagRepository.AddTag(tag);
-        //    return CreatedAtAction("Get", new { id = tag.Id }, tag);
-        //}
+        [HttpPost]
+        public IActionResult Post(PostTag postTag)
+        {
+            _tagRepository.AddPostTag(postTag);
+            return CreatedAtAction("Get", new { id = postTag.Id }, postTag);
+        }
 
 
     }

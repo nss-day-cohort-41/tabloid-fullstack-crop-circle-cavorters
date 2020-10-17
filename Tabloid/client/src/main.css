@@ -317,3 +317,80 @@ fieldset {
 .newPost {
     width: 35%;
 }
+
+/* PostTag CSS start */
+.postTagLineUp{
+    display: inline-flex;
+    
+}
+
+.postTag-btn {
+    display: block;
+    color: black;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    background-color: lightgoldenrodyellow;
+    width: 10px;
+    height: 5px;
+    border-radius: 30px;
+    font-size: .8rem;
+    font-weight: 500;
+    box-shadow: 1px 1px 2px 1px #747272;
+    
+
+}
+.postTag-btn:hover {
+    background-color: goldenrod;
+}
+
+.postTagName {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+   
+}
+
+.postTagCardContainer {
+    display: flex;
+    justify-content: space-between;   
+}
+
+.postTagCard {
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 15px;
+    width: 125px;
+    padding: .5px .5px;
+    margin: 0px 4px;
+    box-shadow: 1px 1px 2.5px;
+    
+}
+
+.postTagManagementButtons{
+  float:right;
+}
+
+.theHashTagtoSetOtherstoShame{
+    color: goldenrod;
+    text-shadow: 0 0 1px  whitesmoke;
+      /* Control the  timing of frames */
+    animation: glow 7.0s ease infinite;
+    -moz-animation: glow 5.0s ease infinite;
+    -webkit-animation: glow 5.0s ease infinite;
+  }
+  @keyframes glow {
+    0%,
+    100% {
+    /* text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px  #e62300, 0 0 40px  #e62300, 0 0 50px  #e62300, 0 0 60px #e62300, 0 0 70px #e62300; */
+       text-shadow: 0 0 1vw goldenrod, 0 0 3vw gold, 0 0 10vw goldenrod, 0 0 10vw gold, 0 0 .4vw goldenrod, .5 vw .5 vw .1vw gold;
+      color: #FED128; 
+    }
+    50% {
+    /* text-shadow: 0 0 20px #fff, 0 0 30px #37dbc0, 0 0 40px  #37dbc0, 0 0 50px  #37dbc0, 0 0 60px  #37dbc0, 0 0 70px  #37dbc0, 0 0 80px #37dbc0; */
+         text-shadow: 0 0 .5vw goldenrod, 0 0 1.5vw gold, 0 0 5vw goldenrod, 0 0 5vw gold, 0 0 .2vw goldenrod, .5 vw .5 vw .1vw goldenrod;
+      color: #806914; 
+    }
+  }
+/* PostTag CSS end */
