@@ -29,9 +29,9 @@ import UserDeactivate from "./Users/UserDeactivate";
 import UserActivate from "./Users/UserActivate";
 import UserListDeactivated from "./Users/UserListDeactivated";
 import { CommentProvider } from "../providers/CommentProvider";
-
 //import { PostProvider } from "../providers/PostProvider"
 import UserEdit from "./Users/UserEdit";
+import AddPostTagForm from "./Tags/AddPostTagForm";
 
 export default function ApplicationViews() {
   const { isLoggedIn } = useContext(UserProfileContext);
@@ -155,6 +155,9 @@ export default function ApplicationViews() {
         </Route>
         <Route path="/tags/delete/:id" exact>
           {isLoggedIn ? <DeleteTagPrompt /> : <Redirect to="/login" />}
+        </Route>
+        <Route path="/posttags/add/:id" exact>
+          {isLoggedIn ? <AddPostTagForm /> : <Redirect to="/login" />}
         </Route>
         {/* END TAGS ROUTES */}
 

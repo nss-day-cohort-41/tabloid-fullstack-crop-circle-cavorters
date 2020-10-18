@@ -319,11 +319,15 @@ fieldset {
 }
 
 /* PostTag CSS start */
-.postTagLineUp{
-    display: inline-flex;
-    
-}
 
+
+.titleANDPostTag{
+    display: inline-flex;
+}
+.postTagLineUp{
+    display: inline-flex;    
+    padding: 10px 10px ;   
+}
 .postTag-btn {
     display: block;
     color: black;
@@ -337,26 +341,20 @@ fieldset {
     font-size: .8rem;
     font-weight: 500;
     box-shadow: 1px 1px 2px 1px #747272;
-    
-
 }
 .postTag-btn:hover {
     background-color: goldenrod;
 }
-
 .postTagName {
     width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: center;
-   
+    justify-content: center;  
 }
-
 .postTagCardContainer {
     display: flex;
-    justify-content: space-between;   
+    justify-content: space-between;  
 }
-
 .postTagCard {
     background-color: white;
     border: 2px solid black;
@@ -364,14 +362,11 @@ fieldset {
     width: 125px;
     padding: .5px .5px;
     margin: 0px 4px;
-    box-shadow: 1px 1px 2.5px;
-    
+    box-shadow: 1px 1px 2.5px;    
 }
-
-.postTagManagementButtons{
+/* .postTagManagementButtons{
   float:right;
-}
-
+} */
 .theHashTagtoSetOtherstoShame{
     color: goldenrod;
     text-shadow: 0 0 1px  whitesmoke;
@@ -393,4 +388,6 @@ fieldset {
       color: #806914; 
     }
   }
+
+  
 /* PostTag CSS end */

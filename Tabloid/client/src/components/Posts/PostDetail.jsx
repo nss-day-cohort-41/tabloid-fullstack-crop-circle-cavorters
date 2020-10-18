@@ -39,13 +39,17 @@ export default function PostDetail() {
         <>
             <div className="postContainer">
                 <div className="post">
+
                     <section className="px-3">
                         <div className="row justify-content-between">
-                            <h1 className="text-secondary">{post.title}</h1>
-                            <h1 className="text-black-50">{post.category.name}</h1>
-                            <div className="postTagLineUp">
-                                {postTags.map(pt => <PostTag key={pt.id} PostTag={pt} />)}
+                            <div className="titleANDPostTag">
+                                <h1 className="text-secondary">{post.title}</h1>
+                                <div className="postTagLineUp">
+                                    {postTags.map(pt => <PostTag key={pt.id} PostTag={pt} />)}
+                                </div>
                             </div>
+                            <h1 className="text-black-50">{post.category.name}</h1>
+
                         </div>
                         <div className="row justify-content-between">
                             <p className="text-secondary">Written by {post.userProfile.displayName}</p>
@@ -82,7 +86,8 @@ export default function PostDetail() {
 
                     <a href={`/posts/details/${post.id}/posttags`} className="btn btn-outline-primary mx-1">View Tags</a>
                     <a href={`/post/${post.id}/comments`} className="btn btn-outline-primary mx-1">View Comments</a>
-
+                    <a href={`/posttags/add/${post.id}`} className="btn btn-outline-primary mx-1">Add a Tag</a>
+                    {/* <Link to={`/posttags/add/${tag.id}`}><button className="tag-btn">Add A Tag</button></Link> */}
                 </div>
             </div>
         </>
