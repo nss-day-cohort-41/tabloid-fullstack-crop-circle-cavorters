@@ -42,7 +42,7 @@ export const PostProvider = (props) => {
           Authorization: `Bearer ${token}`
         }
       })).then((resp) => resp.json())
-      .then(setPosts);
+      .then(setPost);
   };
 
   const addPost = (post) => {

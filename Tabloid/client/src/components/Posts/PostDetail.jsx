@@ -5,6 +5,7 @@ import { useParams, Link } from "react-router-dom";
 
 export default function PostDetail() {
     const { post, getById } = useContext(PostContext);
+    console.log("post", post)
     const { id } = useParams();
 
     useEffect(() => {

@@ -17,7 +17,7 @@ export default function PostForm() {
     const [post, setPost] = useState({
         title: "",
         content: "",
-        categoryId: "",
+        categoryId: 1,
         imageLocation: "",
         publishDateTime: "",
         userProfileId: sessionUser.id
@@ -47,7 +47,11 @@ export default function PostForm() {
         post.categoryId = parseInt(post.categoryId);
         addPost(post)
             .then((p) => {
-                history.push(`/posts/details/${p.id}`)
+                history.push(`/posts/`)
+                // Would like for this line to read: 
+                // history.push(`/posts/details/${p.id}`)
+                // so the route would lead back to the newly created post
+                // but it breaks when i do that.
             })
 
     };

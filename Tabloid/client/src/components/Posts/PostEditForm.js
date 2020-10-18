@@ -9,7 +9,7 @@ export default function PostEditForm() {
     const { getById, updatePost, post } = useContext(PostContext);
     const { categories, getAllCategories } = useContext(CategoryContext);
     const [editedPost, setEditedPost] = useState({});
-    const [ categoryId, setCategoryId ] = useState();
+    const [categoryId, setCategoryId] = useState();
 
     //UseParams pulls in the id information from applications view 
     const { id } = useParams();
@@ -17,7 +17,7 @@ export default function PostEditForm() {
 
     const handleChange = (e) => {
         setCategoryId(e.target.value);
-      }
+    }
 
     useEffect(() => {
         getById(parseInt(id));
@@ -33,7 +33,7 @@ export default function PostEditForm() {
     }, [post]);
 
     const editPost = (e) => {
-       
+
         updatePost({
             title: editedPost.title,
             content: editedPost.content,
@@ -99,16 +99,16 @@ export default function PostEditForm() {
                                 <FormGroup>
                                     <Label for="content">Category</Label>
                                     <br />
-                                    <select className="userEditDropdown" onChange={handleChange}> 
-                                    {categories.map(category =>
-                                        category.id === post.categoryId ?
-                                        <option selected value={category.id}>
-                                            {category.name}
-                                        </option> :    
-                                        <option value={category.id}>
-                                            {category.name}
-                                        </option>            
-                                    )}
+                                    <select className="userEditDropdown" onChange={handleChange}>
+                                        {categories.map(category =>
+                                            category.id === post.categoryId ?
+                                                <option selected value={category.id}>
+                                                    {category.name}
+                                                </option> :
+                                                <option value={category.id}>
+                                                    {category.name}
+                                                </option>
+                                        )}
                                     </select>
                                 </FormGroup>
                                 <FormGroup>

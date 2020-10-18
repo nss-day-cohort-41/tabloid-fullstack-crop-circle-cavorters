@@ -25,7 +25,10 @@ export default function UserSpecificPosts() {
                 <div className="postHeader">
                     <h1>Posts</h1>
                     <p>
-                        <Link class="btn btn-primary" to="/posts/add">New Post</Link>
+                        <Link class="btn btn-secondary" to="/posts/add">New Post</Link>
+                    </p>
+                    <p>
+                        <Link class="btn btn-primary" to={`/posts/`}>All Posts</Link>
                     </p>
                 </div>
                 <div className="post-container">
