@@ -25,7 +25,7 @@ export default function Header() {
   return (
     <div>
       <Navbar color="light" light expand="md">
-        <NavbarBrand className="navLogo"tag={RRNavLink} to="/">
+        <NavbarBrand className="navLogo" tag={RRNavLink} to="/">
           <img src="https://res.cloudinary.com/dhduglm4j/image/upload/v1602603540/tabloid_euehri.png" alt="Tabloid Logo" />
         </NavbarBrand>
         <NavbarToggler onClick={toggle} />
@@ -49,6 +49,10 @@ export default function Header() {
 
                 <NavItem>
                   <NavLink tag={RRNavLink} to="/tags">Tag</NavLink>
+                </NavItem>
+
+                <NavItem>
+                  <NavLink tag={RRNavLink} to={`/posts/myposts/${sessionUser.id}`}>My Posts</NavLink>
                 </NavItem>
               </>
             }

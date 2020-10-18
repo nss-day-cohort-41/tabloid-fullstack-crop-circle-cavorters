@@ -2,32 +2,21 @@ import React, { useContext, useEffect, useState } from "react";
 import Post from "./Post";
 import { PostContext } from "../../providers/PostProvider";
 import { UserProfileContext } from "../../providers/UserProfileProvider";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
+
 
 
 export default function UserSpecificPosts() {
-    const history = useHistory();
     const { posts, getAllPostsByUser } = useContext(PostContext);
     const { userProfile } = useContext(UserProfileContext);
-    const [user, setUser] = useState();
+    const [user, setUser] = useState([]);
+
 
     useEffect(() => {
-        getAllPostsByUser(userProfile.id);
-        const currentUser = JSON.parse(userProfile)
-        console.log("sessionStorage.userProfile:", sessionStorage.userProfile);
-
-        console.log("userProfile:", JSON.parse(sessionStorage.getItem("userProfile")));
-
-        // const currentUser = JSON.parse(sessionStorage.getItem("userProfile"))
-        setUser(currentUser.id)
-
-        console.log("currentUser:", currentUser);
-        console.log("currentUser.id:", currentUser.id);
+        getAllPostsByUser(JSON.parse(userProfile).id);
     }, []);
 
-    console.log("sessionStorage.userProfile:", sessionStorage.userProfile);
-    console.log("userProfile:", JSON.parse(sessionStorage.getItem("userProfile")));
-
+    console.log("userProfile:", JSON.parse(userProfile));
 
 
     return (

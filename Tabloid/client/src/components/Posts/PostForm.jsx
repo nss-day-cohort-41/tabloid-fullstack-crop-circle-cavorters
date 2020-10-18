@@ -33,7 +33,6 @@ export default function PostForm() {
     };
 
     const createNewPost = e => {
-        debugger
         e.preventDefault();
         if (post.title === "") {
             alert("Give your post a title!")
@@ -81,13 +80,15 @@ export default function PostForm() {
                             value={post.imageLocation}
                         />
                         <Label for="category">Category</Label>
-                        <Input isOpen={dropdownOpen} toggle={toggle}
+                        <Input
+                            isOpen={dropdownOpen}
+                            toggle={toggle}
 
                             required
                             type="select"
                             onChange={handleFieldChange}
                             id="categoryId"
-                            value={post.categoryId}
+                            value={post.category}
                         >
                             <DropdownToggle caret>
                                 Select Category

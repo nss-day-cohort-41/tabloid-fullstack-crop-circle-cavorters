@@ -69,9 +69,10 @@ namespace Tabloid.Controllers
             return NoContent();
         }
 
-        [HttpGet("myposts/{userProfileId}")]
+        // **Add the id with no slash before it in the route and do the same in the provider with the fetch call. 
+        // Because React doesn't like it when it has to go down more than one level for the id.
+        [HttpGet("myposts{id}")]
         public IActionResult GetUserPosts(int id)
-
         {
             var posts = _postRepository.GetAllApprovedPostsForUser(id);
             return Ok(posts);

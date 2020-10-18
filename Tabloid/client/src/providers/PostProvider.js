@@ -21,14 +21,16 @@ export const PostProvider = (props) => {
         .then(setPosts));
   };
 
+  // React js seems to hate multiple slashes in the fetch routes.
+  // So just add the id with no slash but inside string interpolation
   const getAllPostsByUser = (id) => {
-    getToken().then((token) =>
-      fetch(`/api/post/myposts/${id}`, {
+    return getToken().then((token) =>
+      fetch(`/api/post/myposts${id}`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`
         }
-      }).then(resp => resp.json())
+      }).then((resp) => resp.json())
         .then(setPosts));
   };
 
@@ -40,7 +42,7 @@ export const PostProvider = (props) => {
           Authorization: `Bearer ${token}`
         }
       })).then((resp) => resp.json())
-      .then(setPost);
+      .then(setPosts);
   };
 
   const addPost = (post) => {
