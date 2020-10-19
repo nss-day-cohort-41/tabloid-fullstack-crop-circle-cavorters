@@ -228,12 +228,15 @@ namespace Tabloid.Repositories
                 {
                     cmd.CommandText = @"
                         INSERT INTO Post (
-                            Title, Content, ImageLocation, CreateDateTime, PublishDateTime,
-                            IsApproved, CategoryId, UserProfileId )
+                                Title, Content, ImageLocation,
+                                CreateDateTime, PublishDateTime,
+                                IsApproved, CategoryId, UserProfileId )
                         OUTPUT INSERTED.ID
                         VALUES (
-                            @Title, @Content, @ImageLocation, @CreateDateTime, @PublishDateTime,
-                            @IsApproved, @CategoryId, @UserProfileId )";
+                                @Title, @Content, @ImageLocation, 
+                                @CreateDateTime, @PublishDateTime,
+                                @IsApproved, @CategoryId, @UserProfileId )";
+
                     DbUtils.AddParameter(cmd, "@Title", post.Title);
                     DbUtils.AddParameter(cmd, "@Content", post.Content);
                     DbUtils.AddParameter(cmd, "@ImageLocation", DbUtils.ValueOrDBNull(post.ImageLocation));
