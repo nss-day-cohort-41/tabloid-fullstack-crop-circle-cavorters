@@ -27,7 +27,8 @@ export const PostTagProvider = (props) => {
           
      const addPostTag = (createPostTag) =>
     getToken().then((token) =>
-              fetch(apiUrl, {
+             // fetch(`${apiUrl}/add`, {
+                fetch(apiUrl, {
                   method: "POST",
                   headers: {
                       Authorization: `Bearer ${token}`,

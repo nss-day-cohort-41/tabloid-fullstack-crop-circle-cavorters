@@ -84,7 +84,7 @@ export default function PostDetail() {
                     </section>
 
 
-                    <a href={`/posts/details/${post.id}/posttags`} className="btn btn-outline-primary mx-1">View Tags</a>
+                    {/* <a href={`/posts/details/${post.id}/posttags`} className="btn btn-outline-primary mx-1">View Tags</a> */}
                     <a href={`/post/${post.id}/comments`} className="btn btn-outline-primary mx-1">View Comments</a>
                     <a href={`/posttags/add/${post.id}`} className="btn btn-outline-primary mx-1">Add a Tag</a>
                     {/* <Link to={`/posttags/add/${tag.id}`}><button className="tag-btn">Add A Tag</button></Link> */}

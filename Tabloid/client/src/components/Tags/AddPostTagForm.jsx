@@ -39,23 +39,23 @@ const AddPostTagForm = () => {
     const toggle = () => setDropdownOpen(prevState => !prevState);
 
 
-
-
-
-
+    // const handleFieldChange = e => {
+    //     const stateToChange = { ...createPostTag};
+    //     stateToChange[e.target.tagId] = e.target.value;
+    //     setCreatePostTag(stateToChange);
+    // };
+    const handleFieldChange = (e) => {
+        setCreatePostTag(e.target.value);
+      }
 
     const submit = (e) => {
-        const createPostTag = { PostId: parseInt(id), TagId: ""};   
+        const createPostTag = { postId: parseInt(id), tagId: ""};   
         addPostTag(createPostTag).then((post) => {
             history.push(`/posts/details/${parsedId}`);
         });
     };
-    
-    const handleFieldChange = e => {
-        const stateToChange = { ...createPostTag };
-        stateToChange[e.target.id] = e.target.value;
-        setCreatePostTag(stateToChange);
-    };
+
+
 
     useEffect(() => {
         getAllTags()
@@ -73,8 +73,8 @@ const AddPostTagForm = () => {
                                 required
                                 type="select"
                                 onChange={handleFieldChange}
-                                id="createPostTag.TagId"
-                                value={createPostTag.TagId}
+                                // id="createPostTag.tagId"
+                                // value={createPostTag.tagId}
                             >
                                 <DropdownToggle caret>
                                     Select A Tag ta Add
