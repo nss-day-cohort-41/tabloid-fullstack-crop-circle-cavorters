@@ -54,7 +54,6 @@ export default function ApplicationViews() {
         </Route>
 
 
-
         {/* Comment Routes */}
 
         <Route path="/post/:id/comments" exact>
