@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 
 export default function PostList() {
   const { posts, getAllPosts } = useContext(PostContext);
-  // const [post, setPost] = useState({});
   const userProfile = JSON.parse(sessionStorage.getItem("userProfile"))
 
   useEffect(() => {
@@ -18,11 +17,11 @@ export default function PostList() {
     <section>
       <div class="postCard">
         <div className="postHeader">
-          <h1>Posts</h1>
+          <h1>All Posts</h1>
           <p>
             <Link class="btn btn-secondary" to="/posts/add">New Post</Link>
-          </p>
-          <p>
+            {/* </p>
+          <p> */}
             <Link class="btn btn-success" to={`/posts/myposts/${userProfile.id}`}>My Posts</Link>
           </p>
         </div>
