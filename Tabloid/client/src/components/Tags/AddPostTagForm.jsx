@@ -8,16 +8,13 @@ import {
     Input,
     Button,
     DropdownToggle,
-    DropdownMenu,
-
-    DropdownItem
 
 } from "reactstrap";
 import { TagContext } from "../../providers/TagProvider";
 import { PostTagContext } from "../../providers/PostTagProvider";
 import { PostContext } from "../../providers/PostProvider";
 import { useHistory, useParams, Link } from "react-router-dom";
-import PostTag from "./PostTag";
+//import PostTag from "./PostTag";
 
 
 
@@ -27,40 +24,43 @@ const AddPostTagForm = () => {
     const { tags, getAllTags, addTag } = useContext(TagContext);
     const { postTags, setPostTags, addPostTag } = useContext(PostTagContext);
     const { post } = useContext(PostContext);
-    const [createPostTag, setCreatePostTag] = useState("");
     const { id } = useParams();
     const parsedId = parseInt(id)
+    const [createPostTag, setCreatePostTag] = useState();
     // Use this hook to allow us to programatically redirect users
     const history = useHistory();
-
+ const [postTag, setPostTag] = useState({postId: parseInt(id), tagId: createPostTag});
 
 
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const toggle = () => setDropdownOpen(prevState => !prevState);
 
 
-    // const handleFieldChange = e => {
-    //     const stateToChange = { ...createPostTag};
-    //     stateToChange[e.target.tagId] = e.target.value;
-    //     setCreatePostTag(stateToChange);
-    // };
-    const handleFieldChange = (e) => {
-        setCreatePostTag(e.target.value);
-      }
-
     const submit = (e) => {
-        const createPostTag = { postId: parseInt(id), tagId: ""};   
-        addPostTag(createPostTag).then((post) => {
+        e.preventDefault(); 
+        const parsedTagId = parseInt(createPostTag)
+        postTag.tagId = parsedTagId; 
+       // console.log("posttag=", postTag)   
+        addPostTag(postTag).then(() => {
             history.push(`/posts/details/${parsedId}`);
         });
     };
 
+//Mistake Made 101: make sure your forms target "value" is not "key"...othewise the value will not be recorded
+    const handleFieldChange = (e) => {
+        setCreatePostTag(e.target.value);
+      }
 
+  //    console.log("createdposttag=", createPostTag)
 
     useEffect(() => {
         getAllTags()
     }, []);
 
+
+    // if (!postTag) {
+    //     return null;
+    //   } 
     
     return (
         <div className="container pt-4">
@@ -73,7 +73,7 @@ const AddPostTagForm = () => {
                                 required
                                 type="select"
                                 onChange={handleFieldChange}
-                                // id="createPostTag.tagId"
+                               // value= {postTag.tagId}
                                 // value={createPostTag.tagId}
                             >
                                 <DropdownToggle caret>
@@ -81,8 +81,7 @@ const AddPostTagForm = () => {
                             </DropdownToggle>
                                 <option>Select a Tag</option>
                                 {tags.map(tag => {
-
-                                    return <option key={tag.id} >{tag.name}</option>
+                                    return <option value={tag.id} >{tag.name}</option>
                                 })}
 
                             </Input>
