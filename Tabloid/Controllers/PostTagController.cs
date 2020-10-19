@@ -9,7 +9,7 @@ using Tabloid.Models;
 
 namespace Tabloid.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class PostTagController : ControllerBase
@@ -52,7 +52,9 @@ namespace Tabloid.Controllers
         public IActionResult Post(PostTag postTag)
         {
             _tagRepository.AddPostTag(postTag);
-            return CreatedAtAction("Get", new { id = postTag.Id }, postTag);
+            //return NoContent();
+            return Ok();
+            //return CreatedAtAction("Get", new { id = postTag.Id }, postTag);
         }
 
 

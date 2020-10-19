@@ -12,6 +12,7 @@ namespace Tabloid.Models
 {
     public class Tag
     {
+        //public PostTag postTag { get; set; }
         public int Id { get; set; }
 
         [Required]

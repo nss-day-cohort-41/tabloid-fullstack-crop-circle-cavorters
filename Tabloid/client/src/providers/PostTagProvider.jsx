@@ -22,7 +22,9 @@ export const PostTagProvider = (props) => {
                 }
             }).then(resp => resp.json()))
           .then(setPostTags);
-        
+       
+          
+          
      const addPostTag = (createPostTag) =>
     getToken().then((token) =>
               fetch(apiUrl, {
@@ -32,12 +34,14 @@ export const PostTagProvider = (props) => {
                       "Content-Type": "application/json"
                   },
                   body: JSON.stringify(createPostTag)
-              }).then(resp => {
-                  if (resp.ok) {
-                      return resp.json();
-                  }
-                  throw new Error("Unauthorized");
-              })); 
+}))
+
+            //   .then(resp => {
+            //       if (resp.ok) {
+            //           return resp.json();
+            //       }
+            //       throw new Error("Unauthorized");
+            //   })); 
         
     return (
         <PostTagContext.Provider value={{

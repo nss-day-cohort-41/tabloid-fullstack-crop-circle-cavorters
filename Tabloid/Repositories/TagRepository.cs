@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Tabloid.Utils;
 using Tabloid.Models;
 
 namespace Tabloid.Repositories
@@ -187,28 +188,31 @@ namespace Tabloid.Repositories
                 {
                     cmd.CommandText = @"
                         INSERT INTO PostTag (TagId, PostId)                  
-                        OUTPUT INSERTED.ID
-                        VALUES ( @tagId, @postId)";
+                        OUTPUT INSERTED.Id
+                        VALUES (@TagId, @PostId)";
 
 
                     cmd.Parameters.AddWithValue("@tagId", postTag.TagId);
                     cmd.Parameters.AddWithValue("@postId", postTag.PostId);
 
-                    //Tag = new Tag()
-                    //{
-                    //    cmd.Parameters.AddWithValue("@name", tag.Name);
-                    //}
-                    //int newlyCreatedId = (int)cmd.ExecuteScalar();
-                    //category.Id = newlyCreatedId;
+                    ////Tag = new Tag()
+                    ////{
+                    ////    cmd.Parameters.AddWithValue("@name", tag.Name);
+                    ////}
+                    ////int newlyCreatedId = (int)cmd.ExecuteScalar();
+                    ////category.Id = newlyCreatedId;
 
 
                     int id = (int)cmd.ExecuteScalar();
                     postTag.Id = id;
+                    //DbUtils.AddParameter(cmd, "@PostId", postTag.PostId);
+                    //DbUtils.AddParameter(cmd, "@TagId", postTag.TagId);
+
+                    //postTag.Id = (int)cmd.ExecuteScalar();
                 }
             }
         }
-
-
+      
 
     }
 }

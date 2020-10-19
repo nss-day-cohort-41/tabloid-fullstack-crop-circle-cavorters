@@ -25,9 +25,9 @@ import PostTag from "./PostTag";
 
 const AddPostTagForm = () => {
     const { tags, getAllTags, addTag } = useContext(TagContext);
-    const { postTag, setPostTag, addPostTag } = useContext(PostTagContext);
+    const { postTags, setPostTags, addPostTag } = useContext(PostTagContext);
     const { post } = useContext(PostContext);
-    //const [name, setName] = useState("");
+    const [createPostTag, setCreatePostTag] = useState("");
     const { id } = useParams();
     const parsedId = parseInt(id)
     // Use this hook to allow us to programatically redirect users
@@ -38,58 +38,51 @@ const AddPostTagForm = () => {
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const toggle = () => setDropdownOpen(prevState => !prevState);
 
-    const handleFieldChange = e => {
-        const stateToChange = { ...postTag };
-        stateToChange[e.target.id] = e.target.value;
-        setPostTag(stateToChange);
-    };
+
+
+
 
 
 
     const submit = (e) => {
-        const PostTag = {
-            PostId: parseInt(id),
-            TagId: (id)
-
-        };
-
-        addPostTag(PostTag).then((t) => {
-
-            history.push(`/posts/details/${post.id}`);
+        const createPostTag = { PostId: parseInt(id), TagId: ""};   
+        addPostTag(createPostTag).then((post) => {
+            history.push(`/posts/details/${parsedId}`);
         });
+    };
+    
+    const handleFieldChange = e => {
+        const stateToChange = { ...createPostTag };
+        stateToChange[e.target.id] = e.target.value;
+        setCreatePostTag(stateToChange);
     };
 
     useEffect(() => {
         getAllTags()
     }, []);
 
+    
     return (
         <div className="container pt-4">
             <div className="row justify-content-center">
                 <Card className="col-sm-12 col-lg-6">
                     <CardBody>
                         <Form>
-                            {/* <FormGroup>
-                                <Label for="name">Name</Label>
-                                <Input id="name" onChange={(e) => setName(e.target.value)} />
-                            </FormGroup> */}
-
                             <Label for="tags">Tags</Label>
                             <Input isOpen={dropdownOpen} toggle={toggle}
-
                                 required
                                 type="select"
                                 onChange={handleFieldChange}
-                                id="tagId"
-                                value={PostTag.TagId}
+                                id="createPostTag.TagId"
+                                value={createPostTag.TagId}
                             >
                                 <DropdownToggle caret>
                                     Select A Tag ta Add
                             </DropdownToggle>
-                                <option selected value="default" >Select a Tag</option>
+                                <option>Select a Tag</option>
                                 {tags.map(tag => {
 
-                                    return <option key={tag.id} value={tag.id}>{tag.name}</option>
+                                    return <option key={tag.id} >{tag.name}</option>
                                 })}
 
                             </Input>
