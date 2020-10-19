@@ -57,8 +57,8 @@ export default function PostDetail() {
                         <p className="col-sm-12 mt-5">{post.content}</p>
                     </section>
 
-                    <a href={`post/${post.id}/comments`} className="btn btn-outline-primary mx-1">View Comments</a>
-
+                    <a href={`/post/${post.id}/comments`}className="btn btn-outline-primary mx-1">View Comments</a>
+                    
                 </div>
             </div>
         </>
