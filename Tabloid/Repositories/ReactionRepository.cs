@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Tabloid.Models;
 
@@ -17,7 +15,7 @@ namespace Tabloid.Repositories
                 conn.Open();
                 using(var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = "SELECT Id, name FROM PostReaction ORDER BY name";
+                    cmd.CommandText = "SELECT Id, PostId, ReactionId, UserProfileId FROM PostReaction ORDER BY Id";
 
                     var reader = cmd.ExecuteReader();
 
@@ -28,7 +26,10 @@ namespace Tabloid.Repositories
                         reactions.Add(new Reaction()
                         {
                             Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                                Name = reader.GetString(reader.GetOrdinal("name")),
+                                PostId = reader.GetInt32(reader.GetOrdinal("PostId")),
+                                ReactionId = reader.GetInt32(reader.GetOrdinal("ReactionId")),
+                                UserProfileId = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
+
                         });
                     }
 
@@ -46,7 +47,7 @@ namespace Tabloid.Repositories
                 using(var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        SELECT Id, name
+                        SELECT Id, PostId, ReactionId, UserProfileId
                         FROM PostReaction 
                         WHERE Id = @id";
 
@@ -58,7 +59,10 @@ namespace Tabloid.Repositories
                         Reaction reaction = new Reaction()
                         {
                             Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                            Name = reader.GetString(reader.GetOrdinal("Name"))
+                            PostId = reader.GetInt32(reader.GetOrdinal("PostId")),
+                            ReactionId = reader.GetInt32(reader.GetOrdinal("ReactionId")),
+                            UserProfileId = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
+
                         };
 
                         reader.Close();

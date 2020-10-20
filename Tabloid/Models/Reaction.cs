@@ -13,8 +13,11 @@ namespace Tabloid.Models
     {
         public int Id { get; set; }
 
-        [Required]
-        [MaxLength(50)]
-        public string Name { get; set; }
+        public int PostId { get; set; }
+
+        public int ReactionId { get; set; }
+
+        public int UserProfileId { get; set; }
+
     }
 }
