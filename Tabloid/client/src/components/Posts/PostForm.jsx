@@ -1,20 +1,24 @@
 import React, { useContext, useState, useEffect } from "react";
+import { CategoryContext } from "../../providers/CategoryProvider";
 import { PostContext } from "../../providers/PostProvider";
 import { useHistory } from "react-router-dom";
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
 export default function PostForm() {
     const history = useHistory();
+    const { categories, getAllCategories } = useContext(CategoryContext);
     const { addPost } = useContext(PostContext);
+    const [ categoryId, setCategoryId ] = useState();
+    
     const sessionUser = JSON.parse(sessionStorage.getItem("userProfile"));
     const [post, setPost] = useState({
         title: "",
         content: "",
-        categoryId: 2,
+        categoryId: "",
         imageLocation: "",
         publishDateTime: "",
+        isApproved: true,
         userProfileId: sessionUser.id
-
     });
 
     const [isLoading, setIsLoading] = useState(false);
@@ -33,12 +37,22 @@ export default function PostForm() {
             setIsLoading(true);
         }
 
+        const parsedCat = parseInt(categoryId);
+        post.categoryId = parsedCat;
         addPost(post)
             .then((p) => {
                 history.push(`/posts/details/${p.id}`)
             })
 
     };
+
+    const handleChange = (e) => {
+        setCategoryId(e.target.value);
+      }
+
+    useEffect(() => {
+        getAllCategories();
+    }, [])
 
     return (
         <>
@@ -54,6 +68,19 @@ export default function PostForm() {
                             placeholder="Title"
                             value={post.title}
                         />
+                        <Label for="category">Category</Label>
+                            <br />
+                            <select className="userEditDropdown" onChange={handleChange}> 
+                            {categories.map(category =>
+                                category.id === post.categoryId ?
+                                <option selected value={category.id}>
+                                    {category.name}
+                                </option> :    
+                                <option value={category.id}>
+                                    {category.name}
+                                </option>            
+                            )}
+                            </select>
                         <Label for="imageLocation">Image URL</Label>
                         <Input
                             type="text"

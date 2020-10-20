@@ -79,37 +79,37 @@ export default function ApplicationViews() {
 
         {/* CATEGORIES ROUTES */}
         <Route path="/categories" exact>
-          {isLoggedIn ? <CategoryList /> : <Redirect to="/login" />}
+          {isLoggedIn && sessionUser.userTypeId === 1 ? <CategoryList /> : <Redirect to="/login" />}
         </Route>
 
         <Route path="/categories/add">
-          {isLoggedIn ? <CategoryAddForm /> : <Redirect to="/login" />}
+          {isLoggedIn && sessionUser.userTypeId === 1 ? <CategoryAddForm /> : <Redirect to="/login" />}
         </Route>
 
         <Route path="/categories/:id" exact>
-          {isLoggedIn ? <CategoryEditForm /> : <Redirect to="/login" />}
+          {isLoggedIn && sessionUser.userTypeId === 1 ? <CategoryEditForm /> : <Redirect to="/login" />}
         </Route>
 
         <Route path="/categories/delete/:id" exact>
-          {isLoggedIn ? <DeleteCategoryAlert /> : <Redirect to="/login" />}
+          {isLoggedIn && sessionUser.userTypeId === 1 ? <DeleteCategoryAlert /> : <Redirect to="/login" />}
         </Route>
 
         {/* TAGS ROUTES */}
         <Route path="/tags" exact>
-          {isLoggedIn ? <TagList /> : <Redirect to="/login" />}
+          {isLoggedIn && sessionUser.userTypeId === 1 ? <TagList /> : <Redirect to="/login" />}
         </Route>
 
         <Route path="/tags/add">
-          {isLoggedIn ? <TagForm /> : <Redirect to="/login" />}
+          {isLoggedIn && sessionUser.userTypeId === 1 ? <TagForm /> : <Redirect to="/login" />}
         </Route>
 
         <Route path="/tags/:id" exact>
           {/* <Route path= "`/api/tags/edit/${id}`"> */}
-          {isLoggedIn ? <TagEditForm /> : <Redirect to="/login" />}
+          {isLoggedIn && sessionUser.userTypeId === 1 ? <TagEditForm /> : <Redirect to="/login" />}
         </Route>
 
         <Route path="/tags/delete/:id" exact>
-          {isLoggedIn ? <DeleteTagPrompt /> : <Redirect to="/login" />}
+          {isLoggedIn && sessionUser.userTypeId === 1 ? <DeleteTagPrompt /> : <Redirect to="/login" />}
         </Route>
 
         <Route exact path="/posts/details/:id">

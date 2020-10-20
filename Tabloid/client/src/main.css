@@ -1,9 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap');
 
-html, #root {
+@import url('https://fonts.googleapis.com/css2?family=Krona+One&display=swap');
+
+/* html, #root {
     background-color: cornsilk;
     font-family: 'comic-sans', cursive
-}
+} */
 
 .card-container {
     display: flex;
@@ -71,10 +73,10 @@ html, #root {
 .post-container {
     display: flex;
     justify-content: space-between;
-    width: 60%;
+    width: 80%;
     border: 1px solid #373737;
     border-radius: 12px;
-    padding: 20px;
+    padding: 0px;
     box-shadow: 1px 1px 2px 1px #747272;
     background: white;
 }
@@ -102,7 +104,46 @@ html, #root {
 
 }
 
-.std-btn:hover {
+.postAdminBtn {
+    display: block;
+    color: black;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    background-color: lightgoldenrodyellow;
+    width: auto;
+    height: 30px;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: .8rem;
+    font-weight: 500;
+    box-shadow: 1px 1px 2px 1px #747272;
+
+}
+
+.postAdminBtn:hover {
+    background-color: goldenrod;
+}
+
+.postAuthorBtn {
+    display: block;
+    color: black;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    background-color:#dfe8fc;
+    width: auto;
+    height: 30px;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: .8rem;
+    font-weight: 500;
+    box-shadow: 1px 1px 2px 1px #747272;
+
+}
+
+.postAuthorBtn:hover {
     background-color: goldenrod;
 }
 
@@ -316,4 +357,247 @@ fieldset {
 
 .newPost {
     width: 35%;
+}
+
+.postTable {
+    width: 100%;
+}
+
+.postTitle {
+    width: 40%;
+    padding: 20px 0;
+    padding-right: 10px;
+    padding-left: 20px
+}
+
+.postUserName, 
+.postCategory, 
+.postDate {
+    width: 20%;
+    padding: 20px 0;
+    padding-right: 10px;
+}
+
+.postTitle-header {
+    width: 45%;
+    padding: 10px 0;
+    padding-right: 10px;
+    padding-left: 20px
+}
+
+.postUserName-header, 
+.postCategory-header,
+.postDate-header {
+    width: 20%;
+    padding: 10px 0;
+    padding-right: 10px;
+}
+
+.postCard-admin {
+    width: 100%;
+}
+
+.postContent {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.adminButtons {
+    display: flex;
+    width: 100%;
+    padding: 20px 0;
+    padding-right: 20px;
+    justify-content: flex-end;
+}
+
+.adminBtn {
+    padding: 0 5px;
+}
+
+.postCard-details {
+    border-bottom: 1px solid #373737;
+}
+
+.postTableHeader {
+    border-bottom: 2px solid black;
+    box-shadow: 0px 3px 5px 0px #373737;
+}
+
+.post-container {
+    position: sticky;
+    top: 0;
+    border-radius: 15px;
+}
+
+.authorPostCards {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    padding: 10px;
+}
+
+.authorPostItem {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    border-radius: 15px;
+    margin: 10px;
+    padding: 0px;
+    font-size: 14px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.authorPostDetails {
+    display: flex;
+    justify-content: space-between;
+}
+
+.authorPostItems {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.authorButtons, .authorViewOnlyButton {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 5px 0;
+
+}
+
+.authorBtn {
+    padding: 5px;
+}
+
+.apht {
+    font-family: 'Krona One', sans-serif;
+}
+
+.authorPostCardContainer {
+    background: gray;
+}
+
+.authorPostHeaderRight {
+    padding: 0 10px;
+    text-align: right;
+    font-family: sans-serif;
+    color: #373737
+}
+.authorPostHeaderRight > h5 {
+    font-family: 'Oswald', sans-serif;
+    color: #1e0997
+}
+
+.postsAuthor {
+    font-family: sans-serif;
+    color: #373737
+}
+
+.imageBackground {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.defaultPostImagePreview{
+    width: 100%;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.imageButtonHeader {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.authorButtonsOverlay{
+    position: relative;
+    width: 100%;
+    padding: 20px;
+}
+
+.authorButtons {
+    position: absolute;
+    /* bottom: 0; */
+    left: -5;
+    right: 0;
+    overflow: hidden;
+    width: 0;
+    height: 50px;
+    transition: .5s ease;
+}
+
+.authorButtonsOverlay:hover .authorButtons {
+    width: 120px;
+    right: 0;
+    top: 0;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 0 15px 0 5px;
+    box-shadow: -2px 2px 3px 0px #373737;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+  
+  /* Hide default HTML checkbox */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+  
+  /* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+  
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+  
+input:checked + .slider {
+    background-color: #2196F3;
+}
+  
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+  
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
 }

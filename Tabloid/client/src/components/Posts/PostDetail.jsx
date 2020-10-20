@@ -21,6 +21,9 @@ export default function PostDetail() {
     return (
 
         <>
+            <Link style={{ textDecoration: 'none' }} to={`/posts`}>
+              <button className="std-btn">&#x2190; Back to Posts</button>
+            </Link>
             <div className="postContainer">
                 <div className="post">
                     <section className="px-3">
