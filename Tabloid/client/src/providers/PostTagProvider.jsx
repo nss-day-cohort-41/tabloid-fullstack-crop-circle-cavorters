@@ -7,7 +7,7 @@ export const PostTagProvider = (props) => {
     const apiUrl = "/api/posttag";
     const { getToken } = useContext(UserProfileContext);
     const [postTags, setPostTags] = useState([]);
-    const [postTag, setPostTag] = useState([]);
+    const [postTag, setPostTag] = useState({});
     const [postTagz, setPostTagz] = useState([]);
 
 
@@ -26,13 +26,12 @@ export const PostTagProvider = (props) => {
     const getPostTagById = (id) =>
         getToken().then((token) =>
             fetch(`/api/posttag/GetSinglePT/${id}`, {
-                // fetch(`${apiUrl}/tag/${id}`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             }).then(resp => resp.json()))
-            .then(setPostTags);
+            .then(setPostTag);
    
 
     const addPostTag = (createPostTag) =>
@@ -58,6 +57,7 @@ export const PostTagProvider = (props) => {
                 },
 
             }))
+            //.then(setPostTags);
 
     return (
         <PostTagContext.Provider value={{
