@@ -75,6 +75,7 @@ export function CommentProvider(props) {
             fetch(`${apiUrl}/delete/${comment.id}`, {
                 method: "DELETE",
                 headers: {
+                    "Content-Type": "application/json",
                     Authorization: `Bearer ${token}`
                 }
             })

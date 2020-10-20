@@ -18,15 +18,7 @@ const CommentAddForm = () => {
     const [subject, setSubject] = useState("");
     const [createDateTime, setCreateDateTime] = useState("");
 
-    // const [newComment, setNewComment] = useState({
-    //     postId: parseInt(id),
-    //     userProfileId: parseInt(userId),
-    //     subject: "",
-    //     content: ""
-    // })
-    // console.log(newComment);
 
-    ///Action addComment
     const submitForm = (e) => {
         e.preventDefault();
         addComment({ text: commentText })
