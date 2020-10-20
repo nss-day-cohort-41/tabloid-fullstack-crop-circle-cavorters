@@ -35,16 +35,34 @@ export default function Post({ post }) {
             <button className="post-btn">Delete</button>
           </Link>
 
-          <div class="emojibox">
 
-
-
-          </div>
-
-
+          {/* <td>
+            {reaction.postid}
+          </td> */}
         </td>
       </tr>
     </tbody>
 
   );
 }
+
+
+// export function Reaction({ reaction }) {
+//   <tbody>
+//     <td>
+//       {reaction.Id}
+//     </td>
+
+//     <td>
+//       {reaction.PostId}
+//     </td>
+
+//     <td>
+//       {reaction.ReactionId}
+//     </td>
+
+//     <td>
+//       {reaction.UserProfileId}
+//     </td>
+//   </tbody>
+// }
