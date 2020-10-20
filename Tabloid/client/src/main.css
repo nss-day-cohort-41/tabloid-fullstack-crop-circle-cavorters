@@ -626,6 +626,14 @@ input:checked + .slider:before {
     padding: 0;
 }
 
+.userPostHeaderDetails {
+    display: flex;
+    justify-content: space-between;
+    width: 95%;
+    margin: 0;
+    padding: 0;
+}
+
 .postHeaderDetails > div > h1 {
     margin: 0;
 }
@@ -646,4 +654,22 @@ input:checked + .slider:before {
 
 .toggle > div > p {
     font-size: 14px;
+}
+
+.toggle {
+    margin-bottom: 10px;
+}
+
+.approvedPosts, .unapprovedPosts {
+    padding: 5px 15px;
+    border: 2px black solid;
+    border-radius: 35px;
+    color: black;
+}
+
+.approvedPosts:hover,
+.unapprovedPosts:hover {
+    text-decoration: none;
+    color: red;
+    border-color: red;
 }

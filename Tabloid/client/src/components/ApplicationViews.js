@@ -10,6 +10,8 @@ import CommentAddForm from "./Comments/CommentAddForm";
 import CommentEditForm from "./Comments/CommentEditForm.js";
 import CommentDelete from "./Comments/CommentDelete";
 import PostDetail from "./Posts/PostDetail";
+import UnapprovedPostList from "./Posts/UnapprovedPostList";
+import AuthorViewList from "./Posts/AuthorViewList";
 import PostForm from "./Posts/PostForm";
 import PostEditForm from "./Posts/PostEditForm";
 import PostDelete from "./Posts/PostDelete";
@@ -21,7 +23,7 @@ import UserList from "./Users/UserList";
 import CategoryList from "./Categories/CategoryList";
 import CategoryAddForm from "./Categories/CategoryAddForm";
 import CategoryEditForm from "./Categories/CategoryEditForm";
- import CategoryProvider from "../providers/CategoryProvider";
+import CategoryProvider from "../providers/CategoryProvider";
 import DeleteCategoryAlert from "./Categories/CategoryDelete";
 import UserDetails from "./Users/UserDetails";
 import UserDeactivate from "./Users/UserDeactivate";
@@ -118,6 +120,14 @@ export default function ApplicationViews() {
 
         <Route path="/posts/add">
           {isLoggedIn ? <PostForm /> : <Redirect to="/login" />}
+        </Route>
+
+        <Route path="/posts/unapproved" exact>
+          {isLoggedIn && sessionUser.userTypeId === 1 ? <UnapprovedPostList /> : <Redirect to="/login" />}
+        </Route>
+
+        <Route path="/posts/userview" exact>
+          {isLoggedIn && sessionUser.userTypeId === 1 ? <AuthorViewList /> : <Redirect to="/login" />}
         </Route>
 
         <Route path="/posts/edit/:id">

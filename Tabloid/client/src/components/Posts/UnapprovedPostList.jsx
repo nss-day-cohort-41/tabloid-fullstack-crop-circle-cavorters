@@ -5,12 +5,12 @@ import { PostContext } from "../../providers/PostProvider";
 import { Link } from "react-router-dom";
 
 export default function PostList() {
-  const { unapprovedPosts, posts, getAllPosts, getAllUnapprovedPosts} = useContext(PostContext);
+  const { unapprovedPosts, getAllUnapprovedPosts} = useContext(PostContext);
   const sessionUser = JSON.parse(sessionStorage.getItem("userProfile"));
 
 
   useEffect(() => {
-    getAllPosts();
+    getAllUnapprovedPosts();
   }, []);
 
   if (sessionUser.userTypeId === 1) {
@@ -20,11 +20,11 @@ export default function PostList() {
           <div className="postHeader">
             <div className="postHeaderDetails">
               <div>
-                <h1>Approved Posts</h1>
+                <h1>Unapproved Posts</h1>
               </div>
               <div>
                 <p>
-                  <a href="/posts/userview">User View</a>
+                  <Link class="btn btn-primary" to="/posts/add">New Post</Link>
                 </p>
               </div>
             
@@ -33,7 +33,7 @@ export default function PostList() {
           </div>
           <div class="toggle">
             <div>
-              <a href="/posts/unapproved" className="unapprovedPosts">View All Unapproved</a>
+              <a href="/posts" className="approvedPosts">View All Approved</a>
             </div>
           </div>
           <div className="post-container">
@@ -55,7 +55,7 @@ export default function PostList() {
                   <th></th>
                 </tr>
               </thead>
-              {posts.map(p =>
+              {unapprovedPosts.map(p =>
                 <Post key={p.id} post={p} />
               )}
             </table>
@@ -63,24 +63,5 @@ export default function PostList() {
         </div>
       </section>
     )
-  } else {
-    return (
-    <>
-      <div class="postCard">
-          <div className="postHeader">
-            <h1>Posts</h1>
-            <p>
-              <Link class="btn btn-primary" to="/posts/add">New Post</Link>
-            </p>
-          </div>
-          <section className="authorPostCards">
-            {posts.map(p =>
-              <Post key={p.id} post={p} />
-            )}
-          </section>
-      </div>
-    </>
-    )
   }
-
 }
