@@ -40,12 +40,28 @@ namespace Tabloid.Controllers
             return Ok(allposttags);
         }
 
+        [HttpGet("GetSinglePT/{id}")]
+        public IActionResult GetSinglePT(int id)
+        {
+            //postTag.Name = "yeet";
+            PostTag postTag = _postTagRepository.GetPostTagById(id);
+
+            if (postTag == null)
+            {
+                return NotFound();
+            }
+            return Ok(postTag);
+
+            //var singleposttag = _postTagRepository.GetPostTagById(id);
+            //return Ok(singleposttag);
+        }
+
 
         [HttpGet("GetPT/{id}")]
-       // public IActionResult Get(int postId, int id)
+      
           public IActionResult GetPT(int id)
         {
-            List<PostTag> postTags = _postTagRepository.GetAllTagsOnAPost(id);
+            List<PostTag> postTags = _postTagRepository.GetAllPostTagsOnAPost(id);
             if (postTags == null)
             {
                 return NotFound();
@@ -60,8 +76,14 @@ namespace Tabloid.Controllers
              //_tagRepository.GetAllTagsOnAPost(postTag.PostId);
             _postTagRepository.AddPostTag(postTag);
             return NoContent();
-            //return Ok();
            //return CreatedAtAction("Get", new { id = postTag.Id }, postTag);
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            _postTagRepository.DeletePostTag(id);
+            return NoContent();
         }
 
 

@@ -58,7 +58,7 @@ namespace Tabloid.Repositories
         }
 
 
-        public List<PostTag> GetAllTagsOnAPost(int id)
+        public List<PostTag> GetAllPostTagsOnAPost(int id)
         {
             using (var conn = Connection)
             {
@@ -103,6 +103,57 @@ namespace Tabloid.Repositories
             }
         }
 
+        public PostTag GetPostTagById(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    //cmd.CommandText = @"
+                    //    SELECT Id, TagId, PostId
+                    //        FROM PostTag 
+
+
+                    //    WHERE Id = @id";
+
+                    cmd.CommandText =
+                       @"SELECT pt.Id, pt.TagId, pt.PostId, Tag.Name 
+                            FROM PostTag pt
+                            JOIN Post ON pt.PostId = Post.Id
+                            JOIN Tag ON pt.TagId = Tag.Id
+                            WHERE pt.Id = @id
+                            ";
+
+                    cmd.Parameters.AddWithValue("@id", id);
+                    var reader = cmd.ExecuteReader();
+
+                    //Tag tag = null;
+
+                    if (reader.Read())
+                    {
+                        PostTag postTag = new PostTag()
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            TagId = reader.GetInt32(reader.GetOrdinal("TagId")),
+                            PostId = reader.GetInt32(reader.GetOrdinal("PostId")),
+                            Tag = new Tag()
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("TagId")),
+                                Name = reader.GetString(reader.GetOrdinal("Name"))
+                            }
+                        };
+
+                        reader.Close();
+                        return postTag;
+
+                    }
+                    reader.Close();
+                    return null;
+                }
+            }
+        }
+
         public void AddPostTag(PostTag postTag)
         {
             using (var conn = Connection)
@@ -136,7 +187,22 @@ namespace Tabloid.Repositories
                 }
             }
         }
+        public void DeletePostTag(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                            DELETE FROM PostTag 
+                            WHERE Id = @id";
 
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
 
     }
 }

@@ -39,23 +39,24 @@ export default function PostDetail() {
         <>
             <div className="postContainer">
                 <div className="post">
-
                     <section className="px-3">
                         <div className="row justify-content-between">
                             <div className="titleANDPostTag">
                                 <h1 className="text-secondary">{post.title}</h1>
-                                <div className="postTagLineUp">
-                                    {postTags.map(pt => <PostTag key={pt.id} PostTag={pt} />)}
-                                </div>
                             </div>
                             <h1 className="text-black-50">{post.category.name}</h1>
-
                         </div>
                         <div className="row justify-content-between">
-                            <p className="text-secondary">Written by {post.userProfile.displayName}</p>
-
+                            {/* Start PostTag Route Management */}
+                            <div className="postTagLineUp">
+                                <a href={`/posttags/add/${post.id}`} className="btn btn-outline-primary mx-1"><img src="https://img.icons8.com/officel/20/000000/add-tag.png" alt="button-generic" /></a>
+                                <a href={`/posttags/delete/${post.id}`} className="btn btn-outline-primary mx-1"><img src="https://img.icons8.com/offices/20/000000/minus.png" alt="button-generic" /></a>
+                                {postTags.map(pt => <PostTag key={pt.id} PostTag={pt} />)}
+                            </div>
+                            {/* End PostTag Route Management */}
                             <p className="text-black-50">Published on {new Intl.DateTimeFormat('en-US').format(new Date(post.publishDateTime))}</p>
                         </div>
+                        <p className="text-secondary">Written by {post.userProfile.displayName}</p>
                         <div className="row postBtns justify-content-between">
                             <div>
                                 <a href={`/posts/edit/${post.id}`} className="btn btn-outline-primary mx-1" title="Edit">
@@ -86,8 +87,6 @@ export default function PostDetail() {
 
                     {/* <a href={`/posts/details/${post.id}/posttags`} className="btn btn-outline-primary mx-1">View Tags</a> */}
                     <a href={`/post/${post.id}/comments`} className="btn btn-outline-primary mx-1">View Comments</a>
-                    <a href={`/posttags/add/${post.id}`} className="btn btn-outline-primary mx-1">Add a Tag</a>
-                    {/* <Link to={`/posttags/add/${tag.id}`}><button className="tag-btn">Add A Tag</button></Link> */}
                 </div>
             </div>
         </>
