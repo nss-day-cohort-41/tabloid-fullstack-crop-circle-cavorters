@@ -9,7 +9,7 @@ using Tabloid.Models;
 
 namespace Tabloid.Controllers
 {
-   // [Authorize]
+   [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class PostTagController : ControllerBase
