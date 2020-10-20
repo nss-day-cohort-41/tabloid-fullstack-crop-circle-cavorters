@@ -5,13 +5,16 @@ import { useParams, Link } from "react-router-dom";
 import { Button, } from "reactstrap";
 import { PostContext } from "../../providers/PostProvider";
 import Comment from "./Comment";
+//import Post from "./Post";
 import { useHistory } from "react-router-dom";
 
 export default function CommentList() {
     const { comments, getAllCommentsByPostId } = useContext(CommentContext);
+
     const { post, getPost } = useContext(PostContext)
     const { id } = useParams();
     const { history } = useHistory();
+
 
     useEffect(() => {
         getAllCommentsByPostId(id);
@@ -42,7 +45,7 @@ export default function CommentList() {
                 <p>{comments && comments.createDateTime}</p>
 
 
-                <Link to={`/posts/details/${id}`}><Button>
+                <Link to={`/posts`}><Button>
                     Back To Posts
             </Button></Link>
                 {comments.map(c => {
