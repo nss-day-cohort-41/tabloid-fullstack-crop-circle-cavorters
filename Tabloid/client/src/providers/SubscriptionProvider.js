@@ -7,9 +7,12 @@ export function SubscriptionProvider(props) {
     const { getToken } = useContext(UserProfileContext)
 
 
+
+    
+
     const getById = (id) => {
         getToken().then((token) =>
-          fetch(`/api/post/${id}`, {
+          fetch(`/api/subscription/${id}`, {
             method: "GET",
             headers: {
               Authorization: `Bearer ${token}`

@@ -43,7 +43,7 @@ namespace Tabloid.Repositories
             }
         }
 
-        public Subscription GetByUserId(int id, int authorId)
+        public Subscription GetById(int id, int authorId)
         {
             using (var conn = Connection)
             {
@@ -51,15 +51,14 @@ namespace Tabloid.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                                        SELECT 
-                                        SubscriberUserProfileId, 
-                                        ProviderUserProfileId,
-                                        BeginDateTime, EndDateTime
-                                        FROM Subscription
+                        SELECT s.Id, s.SubscriberUserProfileId, s.ProviderUserProfileId, s.BeginDateTime, s.EndDateTime
+                        FROM Subscription s
+                        LEFT JOIN UserProfile up ON s.SubscriberUserProfileId = up.id
+                        WHERE s.SubscriberUserProfileId = @FollowerId 
+                        AND s.ProviderUserProfileId = @AuthorId ";
 
-                                        WHERE Id = @id";
-
-                    DbUtils.AddParameter(cmd, "@id", id);
+                    DbUtils.AddParameter(cmd, "@FollowerId", id);
+                    DbUtils.AddParameter(cmd, "@AuthorId", authorId);
                     Subscription subscription = null;
                     var reader = cmd.ExecuteReader();
                     if (reader.Read())
@@ -77,7 +76,7 @@ namespace Tabloid.Repositories
             }
         }
         //Getting all the subscribers to one user(author) by the user's Id
-        public Subscription GetById(int id, int authorId)
+        public Subscription GetByUserId(int id, int authorId)
         {
             using (var conn = Connection)
             {
@@ -85,10 +84,11 @@ namespace Tabloid.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                       SELECT Id, SubscriberUserProfileId, ProviderUserProfileId, BeginDateTime, EndDateTime
-                        FROM Subscription
-                       WHERE SubscriberUserProfileId = @FollowerId 
-                       AND ProviderUserProfileId = @AuthorId ";
+                        SELECT s.Id, s.SubscriberUserProfileId, s.ProviderUserProfileId, s.BeginDateTime, s.EndDateTime
+                        FROM Subscription s
+                        LEFT JOIN UserProfile up ON s.SubscriberUserProfileId = up.id
+                        WHERE s.SubscriberUserProfileId = @FollowerId 
+                        AND s.ProviderUserProfileId = @AuthorId ";
 
                     DbUtils.AddParameter(cmd, "@FollowerId", id);
                     DbUtils.AddParameter(cmd, "@AuthorId", authorId);

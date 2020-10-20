@@ -47,7 +47,7 @@ namespace Tabloid.Controllers
         }
 
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}/get/{authorId}")]
         public IActionResult Get(int id, int authorId)
         {
             var subscription = _subscriptionRepository.GetById(id, authorId);
@@ -58,11 +58,11 @@ namespace Tabloid.Controllers
             return Ok(subscription);
         }
 
-        [HttpGet("{id}/get/{authorId}")]
-        public IActionResult GetByUserId(int id, int authorId)
-        {
+        //[HttpGet("{id}/get/{authorId}")]
+        //public IActionResult GetByUserId(int id, int authorId)
+        //{
 
-            return Ok(_subscriptionRepository.GetByUserId(id, authorId));
-        }
+        //    return Ok(_subscriptionRepository.GetByUserId(id, authorId));
+        //}
     }
 }
