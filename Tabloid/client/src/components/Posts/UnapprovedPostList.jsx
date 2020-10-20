@@ -24,7 +24,7 @@ export default function PostList() {
               </div>
               <div>
                 <p>
-                  <Link class="btn btn-primary" to="/posts/add">New Post</Link>
+                  <Link class="btn-red" to="/posts/userview">User View</Link>
                 </p>
               </div>
             

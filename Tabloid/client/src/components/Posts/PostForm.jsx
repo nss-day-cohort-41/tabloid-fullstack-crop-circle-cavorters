@@ -81,6 +81,7 @@ export default function PostForm() {
                                 </option>            
                             )}
                             </select>
+                            <br/>
                         <Label for="imageLocation">Image URL</Label>
                         <Input
                             type="text"

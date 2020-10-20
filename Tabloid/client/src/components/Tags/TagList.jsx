@@ -26,8 +26,8 @@ export default function TagList() {
                 <div className="tagzHeader">
                     <h2>Tagz</h2>
                     <div>
-                        <Link to={`/tags/add`}>
-                            <Button color="primary">Add New Tag</Button>
+                        <Link style={{ textDecoration: 'none' }} to={`/tags/add`}>
+                            <button className="btn-red">Add New Tag</button>
                         </Link>
                     </div>
                 </div>

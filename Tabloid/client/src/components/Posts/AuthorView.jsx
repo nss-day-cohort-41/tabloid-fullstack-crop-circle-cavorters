@@ -6,7 +6,6 @@ import { useHistory } from "react-router-dom";
 
 
 export default function Post({ post }) {
-  const sessionUser = JSON.parse(sessionStorage.getItem("userProfile"));
   const defaultImage = 'https://res.cloudinary.com/dhduglm4j/image/upload/v1602603540/tabloid_euehri.png'
 
     return (
@@ -22,9 +21,6 @@ export default function Post({ post }) {
             <img className="imageBackground" src={post.imageLocation} alt="image"/>
           </a>
           }
-          
-          { sessionUser.id === post.userProfile.id 
-          ?
           <div className="authorButtons">
             <Link className="authorBtn" style={{ textDecoration: 'none' }} to={`/posts/details/${post.id}`}>
               <img className="postAuthorBtn" src="https://res.cloudinary.com/dhduglm4j/image/upload/v1603121574/icons/eye_rimwzo.png" alt="details"/>
@@ -36,8 +32,6 @@ export default function Post({ post }) {
               <img className="postAuthorBtn" src="https://res.cloudinary.com/dhduglm4j/image/upload/v1603121902/icons/delete_mr2ko5.png" alt="delete"/>
             </Link> 
           </div> 
-          : 
-          null }
         </div>
         
         <div className="authorPostDetails">

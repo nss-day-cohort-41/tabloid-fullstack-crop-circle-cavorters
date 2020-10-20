@@ -88,15 +88,17 @@
     height: 100%;
 }
 
-.std-btn {
+.std-btn, 
+.tag-btn {
     display: block;
     color: black;
     cursor: pointer;
     outline: none;
     border: none;
-    background-color: lightgoldenrodyellow;
+    background-color: rgb(255, 255, 255);
     width: 125px;
     height: 30px;
+    border: 1px solid #9c0a0a;
     border-radius: 30px;
     font-size: .8rem;
     font-weight: 500;
@@ -104,15 +106,25 @@
 
 }
 
+.std-btn:hover,
+.tag-btn:hover{
+    background-color: black;
+    color: white;
+    border-color: black;
+    text-decoration: none;
+}
+
+
 .postAdminBtn {
     display: block;
     color: black;
     cursor: pointer;
     outline: none;
     border: none;
-    background-color: lightgoldenrodyellow;
+    background-color: rgb(255, 255, 255);
     width: auto;
     height: 30px;
+    border: 1px solid #000000;
     border-radius: 5px;
     padding: 5px;
     font-size: .8rem;
@@ -122,7 +134,9 @@
 }
 
 .postAdminBtn:hover {
-    background-color: goldenrod;
+    border: 2px solid #9c0a0a;
+    color: white;
+    text-decoration: none;
 }
 
 .postAuthorBtn {
@@ -144,26 +158,6 @@
 }
 
 .postAuthorBtn:hover {
-    background-color: goldenrod;
-}
-
-.tag-btn {
-    display: block;
-    color: black;
-    cursor: pointer;
-    outline: none;
-    border: none;
-    background-color: lightgoldenrodyellow;
-    width: 80px;
-    height: 30px;
-    border-radius: 30px;
-    font-size: .8rem;
-    font-weight: 500;
-    box-shadow: 1px 1px 2px 1px #747272;
-
-}
-
-.tag-btn:hover {
     background-color: goldenrod;
 }
 
@@ -672,4 +666,22 @@ input:checked + .slider:before {
     text-decoration: none;
     color: red;
     border-color: red;
+}
+
+.approvedPosts:active,
+.unapprovedPosts:active {
+    outline: none;
+}
+
+.btn-red {
+    background-color: #810707;
+    padding: 5px 10px;
+    color: white;
+    border-radius: 25px;
+}
+
+.btn-red:hover {
+    text-decoration: none;
+    color: white;
+    background-color: #aa0808;
 }

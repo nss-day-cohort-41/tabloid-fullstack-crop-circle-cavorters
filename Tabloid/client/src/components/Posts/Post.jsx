@@ -1,14 +1,40 @@
-import React from "react";
+import React, { useContext } from "react";
+import { PostContext } from "../../providers/PostProvider";
 import { Card, CardBody, Button } from "reactstrap";
-import { Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 
 
 export default function Post({ post }) {
   const sessionUser = JSON.parse(sessionStorage.getItem("userProfile"));
-  const defaultImage = 'https://res.cloudinary.com/dhduglm4j/image/upload/v1602603540/tabloid_euehri.png'
+  const defaultImage = 'https://res.cloudinary.com/dhduglm4j/image/upload/v1602603540/tabloid_euehri.png';
+  const { updatePost } = useContext(PostContext);
   const history = useHistory();
+
+
+  const editedPost = {
+    title: post.title,
+    content: post.content,
+    imageLocation: post.imageLocation,
+    createDateTime: post.createDateTime,
+    publishDateTime: post.publishDateTime,
+    categoryId: post.categoryId,
+    userProfileId: post.userProfileId,
+    id: post.id,
+    isApproved: post.isApproved
+  };
+
+  const approvePost = (e) => {
+    console.log(editedPost)
+    editedPost.isApproved = true;
+    debugger
+    
+    updatePost(post.id, editedPost)
+    .then(() => {
+      history.go(`/posts/unapproved`);}
+      )
+  }
+
 
   if (sessionUser.userTypeId === 2 && post.userProfile.isActive === true) {
     return (
@@ -77,7 +103,7 @@ export default function Post({ post }) {
             <td className="postDate">
               {new Intl.DateTimeFormat('en-US').format(new Date(post.publishDateTime))}
             </td>
-      
+            { post.isApproved === true ?
             <div className="adminButtons">
               <Link className="adminBtn" style={{ textDecoration: 'none' }} to={`/posts/details/${post.id}`}>
                 <img className="postAdminBtn" src="https://res.cloudinary.com/dhduglm4j/image/upload/v1603121574/icons/eye_rimwzo.png" alt="details"/>
@@ -90,12 +116,14 @@ export default function Post({ post }) {
               <Link className="adminBtn" style={{ textDecoration: 'none' }} to={`/posts/delete/${post.id}`}>
                 <img className="postAdminBtn" src="https://res.cloudinary.com/dhduglm4j/image/upload/v1603121902/icons/delete_mr2ko5.png" alt="delete"/>
               </Link>
-            </div>
+            </div> 
+            : <div className="adminButtons">
+                <button type="submit" onClick={e => {approvePost()}} className="unapprovedPosts">Approve</button>
+              </div>
+            }
           </tr>
         </tbody>
-        
       </>    
-
     );
   }
   else {

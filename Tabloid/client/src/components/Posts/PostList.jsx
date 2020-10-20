@@ -2,12 +2,15 @@
 import React, { useContext, useEffect } from "react";
 import Post from "./Post";
 import { PostContext } from "../../providers/PostProvider";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 export default function PostList() {
-  const { unapprovedPosts, posts, getAllPosts, getAllUnapprovedPosts} = useContext(PostContext);
+  const { unapprovedPosts, posts, getAllPosts, getAllUnapprovedPosts } = useContext(PostContext);
   const sessionUser = JSON.parse(sessionStorage.getItem("userProfile"));
+  
 
+  
+  
 
   useEffect(() => {
     getAllPosts();
@@ -24,12 +27,12 @@ export default function PostList() {
               </div>
               <div>
                 <p>
-                  <a href="/posts/userview">User View</a>
+                  <a class="btn-red" href="/posts/userview">User View</a>
                 </p>
               </div>
-            
+
             </div>
-            
+
           </div>
           <div class="toggle">
             <div>
@@ -65,12 +68,12 @@ export default function PostList() {
     )
   } else {
     return (
-    <>
-      <div class="postCard">
+      <>
+        <div class="postCard">
           <div className="postHeader">
             <h1>Posts</h1>
             <p>
-              <Link class="btn btn-primary" to="/posts/add">New Post</Link>
+              <Link class="btn-red" to="/posts/add">New Post</Link>
             </p>
           </div>
           <section className="authorPostCards">
@@ -78,8 +81,8 @@ export default function PostList() {
               <Post key={p.id} post={p} />
             )}
           </section>
-      </div>
-    </>
+        </div>
+      </>
     )
   }
 
