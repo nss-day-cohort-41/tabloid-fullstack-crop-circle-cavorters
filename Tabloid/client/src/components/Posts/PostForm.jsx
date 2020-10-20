@@ -3,7 +3,7 @@ import { CategoryContext } from "../../providers/CategoryProvider";
 import { PostContext } from "../../providers/PostProvider";
 import { useHistory, Link } from "react-router-dom";
 import { Button, Form, FormGroup, Label, Input, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
-import { CategoryContext } from "../../providers/CategoryProvider";
+
 
 export default function PostForm() {
     const history = useHistory();
@@ -39,9 +39,6 @@ export default function PostForm() {
         e.preventDefault();
         if (post.title === "") {
             alert("Give your post a title!")
-
-        } else if (post.categoryId === "" || post.categoryId === "default") {
-            alert("Pick a Category!")
 
         } else {
             setIsLoading(true);
@@ -101,7 +98,7 @@ export default function PostForm() {
                             placeholder="Url"
                             value={post.imageLocation}
                         />
-                        <Label for="category">Category</Label>
+                        {/* <Label for="category">Category</Label>
                         <Input
                             isOpen={dropdownOpen}
                             toggle={toggle}
@@ -114,14 +111,14 @@ export default function PostForm() {
                         >
                             <DropdownToggle caret>
                                 {/* Select Category */}
-                            </DropdownToggle>
+                        {/* </DropdownToggle>
                             <option selected value="default" >Select a Category</option>
                             {categories.map(category => {
 
                                 return <option key={category.id} value={category.id}>{category.name}</option>
-                            })}
+                            })} */}
 
-                        </Input>
+                        {/* </Input> */}
                         <Label for="content">Content</Label>
                         <Input
                             type="text"
