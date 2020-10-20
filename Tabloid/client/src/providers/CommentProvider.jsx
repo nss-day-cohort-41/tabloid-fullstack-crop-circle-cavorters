@@ -55,7 +55,7 @@ export function CommentProvider(props) {
     //Add a new comment  
     const addComment = (newComment) => {
         return getToken().then((token) => {
-            fetch("/api/comment/", {
+            fetch(apiUrl, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -69,7 +69,7 @@ export function CommentProvider(props) {
     const editComment = (comment) => {
         console.log("comment", comment)
         return getToken().then((token) => {
-            fetch(`/api/comments/edit/${comment.id}`, {
+            fetch(`${apiUrl}/edit/${comment.id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
@@ -82,7 +82,7 @@ export function CommentProvider(props) {
 
     const deleteComment = (comment) => {
         return getToken().then((token) => {
-            fetch(`/api/comment/${comment.id}`, {
+            fetch(`${apiUrl}/delete/${comment.id}`, {
                 method: "DELETE",
                 headers: {
                     Authorization: `Bearer ${token}`
