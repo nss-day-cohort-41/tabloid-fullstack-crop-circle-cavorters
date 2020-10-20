@@ -50,7 +50,7 @@ export default function PostDetail() {
                             {/* Start PostTag Route Management */}
                             <div className="postTagLineUp">
                                 <a href={`/posttags/add/${post.id}`} className="btn btn-outline-primary mx-1"><img src="https://img.icons8.com/officel/20/000000/add-tag.png" alt="button-generic" /></a>
-                                <a href={`/posttags/delete/${post.id}`} className="btn btn-outline-primary mx-1"><img src="https://img.icons8.com/offices/20/000000/minus.png" alt="button-generic" /></a>
+                                {/* <a href={`/posttags/delete/${post.id}`} className="btn btn-outline-primary mx-1"><img src="https://img.icons8.com/offices/20/000000/minus.png" alt="button-generic" /></a> */}
                                 {postTags.map(pt => <PostTag key={pt.id} PostTag={pt} />)}
                             </div>
                             {/* End PostTag Route Management */}

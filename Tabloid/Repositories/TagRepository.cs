@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Tabloid.Utils;
 using Tabloid.Models;
+using Microsoft.Data.SqlClient;
 
 namespace Tabloid.Repositories
 {
@@ -117,8 +118,24 @@ namespace Tabloid.Repositories
             }
         }
 
-        public void DeleteTag(int tagId)
+        public void DeleteTag(int id)
         {
+
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                            UPDATE PostTag
+                            SET TagId = @tagId
+                            WHERE TagId = @id
+                        ";
+                    cmd.Parameters.AddWithValue("@tagId", 1);
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.ExecuteNonQuery();
+                }
+            }
             using (var conn = Connection)
             {
                 conn.Open();
@@ -128,7 +145,7 @@ namespace Tabloid.Repositories
                             DELETE FROM Tag 
                             WHERE Id = @id";
 
-                    cmd.Parameters.AddWithValue("@id", tagId);
+                    cmd.Parameters.AddWithValue("@id", id);
                     cmd.ExecuteNonQuery();
                 }
             }
