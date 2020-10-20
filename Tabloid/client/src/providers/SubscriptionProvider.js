@@ -8,18 +8,18 @@ export function SubscriptionProvider(props) {
 
 
 
-    
 
-    const getById = (id) => {
-        getToken().then((token) =>
-          fetch(`/api/subscription/${id}`, {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${token}`
-            }
-          })).then((resp) => resp.json())
-          .then(setPost);
-      };
+
+    // const getById = (id) => {
+    //     getToken().then((token) =>
+    //       fetch(`/api/subscription/${id}`, {
+    //         method: "GET",
+    //         headers: {
+    //           Authorization: `Bearer ${token}`
+    //         }
+    //       })).then((resp) => resp.json())
+    //       .then(setPost);
+    //   };
 
     const addSubscription = (subscription) => {
         return getToken().then((token) =>

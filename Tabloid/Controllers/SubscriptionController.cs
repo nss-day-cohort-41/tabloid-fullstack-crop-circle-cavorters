@@ -58,7 +58,7 @@ namespace Tabloid.Controllers
         //    return Ok(subscription);
         //}
 
-        [HttpGet("following{authorId}")]
+        [HttpGet("following/{authorId}")]
         public IActionResult Get(int authorId)
         {
             var subscriptions = _subscriptionRepository.GetAllFollowersForAuthor(authorId);

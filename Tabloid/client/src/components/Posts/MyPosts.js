@@ -4,8 +4,6 @@ import { PostContext } from "../../providers/PostProvider";
 import { UserProfileContext } from "../../providers/UserProfileProvider";
 import { Link } from "react-router-dom";
 
-
-
 export default function UserSpecificPosts() {
     const { posts, getAllPostsByUser } = useContext(PostContext);
     const { userProfile } = useContext(UserProfileContext);
@@ -13,14 +11,11 @@ export default function UserSpecificPosts() {
     console.log("userProfile:", userProfile)
     console.log("user:", (JSON.parse(userProfile).displayName))
 
-
     useEffect(() => {
         getAllPostsByUser(JSON.parse(userProfile).id);
     }, []);
 
     console.log("userProfile:", JSON.parse(userProfile));
-
-
 
     return (
         <section>
@@ -65,5 +60,4 @@ export default function UserSpecificPosts() {
         </section>
 
     );
-
 }

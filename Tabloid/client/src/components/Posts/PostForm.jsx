@@ -1,13 +1,16 @@
 import React, { useContext, useState, useEffect } from "react";
+import { CategoryContext } from "../../providers/CategoryProvider";
 import { PostContext } from "../../providers/PostProvider";
 import { useHistory, Link } from "react-router-dom";
 import { Button, Form, FormGroup, Label, Input, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
-import { CategoryContext } from "../../providers/CategoryProvider";
+
 
 export default function PostForm() {
     const history = useHistory();
+    const { categories, getAllCategories } = useContext(CategoryContext);
     const { addPost } = useContext(PostContext);
-    const { categories, getAllCategories } = useContext(CategoryContext)
+    const [categoryId, setCategoryId] = useState();
+
     const sessionUser = JSON.parse(sessionStorage.getItem("userProfile"));
 
     const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -17,11 +20,11 @@ export default function PostForm() {
     const [post, setPost] = useState({
         title: "",
         content: "",
-        categoryId: 1,
+        categoryId: "",
         imageLocation: "",
         publishDateTime: "",
+        isApproved: true,
         userProfileId: sessionUser.id
-
     });
 
     const [isLoading, setIsLoading] = useState(false);
@@ -44,7 +47,8 @@ export default function PostForm() {
             setIsLoading(true);
         }
 
-        post.categoryId = parseInt(post.categoryId);
+        const parsedCat = parseInt(categoryId);
+        post.categoryId = parsedCat;
         addPost(post)
             .then((p) => {
                 history.push(`/posts/details/${p.id}`)
@@ -52,9 +56,13 @@ export default function PostForm() {
 
     };
 
+    const handleChange = (e) => {
+        setCategoryId(e.target.value);
+    }
+
     useEffect(() => {
         getAllCategories();
-    }, []);
+    }, [])
 
     return (
         <>
@@ -70,6 +78,20 @@ export default function PostForm() {
                             placeholder="Title"
                             value={post.title}
                         />
+                        <Label for="category">Category</Label>
+                        <br />
+                        <select className="userEditDropdown" onChange={handleChange}>
+                            {categories.map(category =>
+                                category.id === post.categoryId ?
+                                    <option selected value={category.id}>
+                                        {category.name}
+                                    </option> :
+                                    <option value={category.id}>
+                                        {category.name}
+                                    </option>
+                            )}
+                        </select>
+                        <br />
                         <Label for="imageLocation">Image URL</Label>
                         <Input
                             type="text"

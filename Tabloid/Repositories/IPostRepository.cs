@@ -12,5 +12,7 @@ namespace Tabloid.Repositories
         void DeletePost(int id);
         Post GetUserPostsById(int id, int userProfileId);
         List<Post> GetAllApprovedPostsForUser(int id);
+        List<Post> GetAllUnapprovedPosts();
+
     }
 }

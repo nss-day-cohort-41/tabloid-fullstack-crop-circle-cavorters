@@ -8,8 +8,19 @@ export default function PostEditForm() {
 
     const { getById, updatePost, post } = useContext(PostContext);
     const { categories, getAllCategories } = useContext(CategoryContext);
-    const [editedPost, setEditedPost] = useState({});
     const [categoryId, setCategoryId] = useState();
+
+    const [editedPost, setEditedPost] = useState({
+        title: "",
+        content: "",
+        imageLocation: "",
+        publishDateTime: "",
+        categoryId: "",
+        userProfileId: post.userProfileId,
+        id: post.id,
+        isApproved: post.isApproved
+    });
+
 
     //UseParams pulls in the id information from applications view 
     const { id } = useParams();
@@ -33,19 +44,26 @@ export default function PostEditForm() {
     }, [post]);
 
     const editPost = (e) => {
-
         updatePost({
             title: editedPost.title,
             content: editedPost.content,
-            headerImageUrl: editedPost.imageLocation,
+            imageLocation: editedPost.imageLocation,
             publicationDate: editedPost.publishDateTime,
             id: post.id
         })
 
         const parsedCat = parseInt(categoryId);
         editedPost.categoryId = parsedCat;
-        updatePost(editedPost.id, editedPost);
-        history.push(`/posts/details/${id}`);
+
+        if (!editedPost.categoryId) {
+            editedPost.categoryId = post.categoryId;
+        }
+
+        updatePost(editedPost.id, editedPost)
+            .then(() => {
+                history.push(`/posts/details/${id}`);
+            }
+            )
     }
 
     const handleFieldChange = e => {
@@ -73,6 +91,12 @@ export default function PostEditForm() {
                                         type="hidden"
                                         value={post.id}
                                     />
+                                    <Input
+                                        id={editedPost.isApproved}
+                                        onChange={handleFieldChange}
+                                        type="hidden"
+                                        value={post.isApproved}
+                                    />
                                 </FormGroup>
                                 <FormGroup>
                                     <Label for="content">Title</Label>
@@ -97,7 +121,7 @@ export default function PostEditForm() {
                                     />
                                 </FormGroup>
                                 <FormGroup>
-                                    <Label for="content">Category</Label>
+                                    <Label for="category">Category</Label>
                                     <br />
                                     <select className="userEditDropdown" onChange={handleChange}>
                                         {categories.map(category =>
@@ -112,7 +136,7 @@ export default function PostEditForm() {
                                     </select>
                                 </FormGroup>
                                 <FormGroup>
-                                    <Label for="content">Image Location</Label>
+                                    <Label for="imageLocation">Image Location</Label>
                                     <Input
                                         type="text"
                                         id="imageLocation"
@@ -123,7 +147,7 @@ export default function PostEditForm() {
                                     />
                                 </FormGroup>
                                 <FormGroup>
-                                    <Label for="content">Publish Date</Label>
+                                    <Label for="publishDate">Publish Date</Label>
                                     <Input
                                         type="datetime-local"
                                         id="publishDateTime"
