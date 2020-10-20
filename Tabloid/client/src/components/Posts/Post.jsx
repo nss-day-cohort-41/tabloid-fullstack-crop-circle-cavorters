@@ -34,6 +34,14 @@ export default function Post({ post }) {
           <Link style={{ textDecoration: 'none' }} to={`/posts/delete/${post.id}`}>
             <button className="post-btn">Delete</button>
           </Link>
+
+          <div class="emojibox">
+
+
+
+          </div>
+
+
         </td>
       </tr>
     </tbody>

@@ -317,3 +317,10 @@ fieldset {
 .newPost {
     width: 35%;
 }
+
+.emojibox{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50, 50%);
+}

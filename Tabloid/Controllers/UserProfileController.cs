@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using Tabloid.Models;
 using Tabloid.Repositories;
 
@@ -50,6 +50,7 @@ namespace Tabloid.Controllers
             userProfile.UserTypeId = UserType.AUTHOR_ID;
             userProfile.IsActive = true;
             _userProfileRepository.Add(userProfile);
+
             return CreatedAtAction(
                 nameof(GetUserProfile),
                 new { firebaseUserId = userProfile.FirebaseUserId },
