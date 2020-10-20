@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect, useContext } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory, Link } from "react-router-dom";
 import { CommentContext } from "../../providers/CommentProvider";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 
@@ -40,10 +40,18 @@ const CommentEditForm = () => {
     const editCurrentComment = (e) => {
         e.preventDefault();
         setIsLoading(true);
-        editComment(editedComment);
+        editComment({
+            postId: parseInt(id),
+            userProfileId: parseInt(userId),
+            subject: editComment.subject,
+            content: editComment.content,
+            createDateTime: editComment.createDateTime  
+        });
         setIsLoading(false);
         history.push(`/comments/details/${id}`);
     };
+
+
 
     return (
         <>
@@ -70,7 +78,8 @@ const CommentEditForm = () => {
                     </FormGroup>
 
                 </Form>}
-
+            <Button type="button" color="success" onClick={e => { editCurrentComment() }}>Save</Button> &nbsp;&nbsp;
+            <Link to={`/post/${id}/comments`}><Button type="button" color="warning">Cancel</Button></Link>
 
 
         </>

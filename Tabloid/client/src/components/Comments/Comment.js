@@ -27,7 +27,7 @@ export default function Comment({ comment }) {
                 {currentDateTime(comment.createDateTime)}</p> */}
                 <p>{new Intl.DateTimeFormat('en-US').format(new Date(comment.createDateTime))}</p>
 
-
+                console.log("comment.id", ${comment.id})
                 <>
                     <Button onClick={() => history.push(`/comments/edit/${comment.id}`)}>Edit </Button>
                     <Button onClick={() => history.push(`/comments/delete/${comment.id}`)}>Delete</Button>

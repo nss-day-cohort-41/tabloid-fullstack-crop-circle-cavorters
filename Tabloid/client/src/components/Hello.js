@@ -9,6 +9,7 @@ export default function Hello() {
       top: "50%",
       marginTop: "-0.5rem",
       textAlign: "center",
-    }}>hello</span>
+      fontSize: "20vh",
+    }}>hello!</span>
   );
 }

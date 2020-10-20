@@ -10,6 +10,7 @@ export function CommentProvider(props) {
     const { getToken } = useContext(UserProfileContext);
 
     const [comments, setComments] = useState([]);
+    const [comment, setComment] = useState({});
 
     //List all the Action Methods in Code Blocks Below
     //Get all Comments by id,must match API. Makes fetch calls to the API.
@@ -22,6 +23,16 @@ export function CommentProvider(props) {
                 }
             }).then(resp => resp.json())
                 .then(setComments));
+
+    const getCommentById = (id) =>
+        getToken().then((token) =>
+            fetch(apiUrl + "/post/" + id, {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }).then(resp => resp.json())
+                .then(setComment));
 
 
 
@@ -60,7 +71,7 @@ export function CommentProvider(props) {
 
     const editComment = (comment) => {
         return getToken().then((token) => {
-            fetch(`/api/comment/${comment.id}`, {
+            fetch(`/api/comment/edit/${comment.id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
@@ -85,7 +96,7 @@ export function CommentProvider(props) {
     ///Must return your catalog of actions
     return (
 
-        <CommentContext.Provider value={{ comments, getAllCommentsByPostId, addComment, editComment, deleteComment }}>
+        <CommentContext.Provider value={{ getCommentById, comment, setComment, comments, getAllCommentsByPostId, addComment, editComment, deleteComment }}>
             {props.children}
         </CommentContext.Provider>
     );

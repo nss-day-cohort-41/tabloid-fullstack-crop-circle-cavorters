@@ -26,6 +26,7 @@ export default function UserSpecificPosts() {
         <section>
             <div class="postCard">
                 <div className="postHeader">
+                    {/* adding the current sessionUser's display name to the H1 */}
                     <h1>{(JSON.parse(userProfile).displayName)}'s Posts</h1>
                     <p>
                         <Link class="btn btn-secondary" to="/posts/add">New Post</Link>

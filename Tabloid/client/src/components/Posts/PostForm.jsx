@@ -47,11 +47,7 @@ export default function PostForm() {
         post.categoryId = parseInt(post.categoryId);
         addPost(post)
             .then((p) => {
-                history.push(`/posts//details/${p.id}`)
-                // Would like for this line to read: 
-                // history.push(`/posts`)
-                // so the route would lead back to the newly created post
-                // but it breaks when i do that.
+                history.push(`/posts/details/${p.id}`)
             })
 
     };
@@ -95,7 +91,7 @@ export default function PostForm() {
                             value={post.category}
                         >
                             <DropdownToggle caret>
-                                Select Category
+                                {/* Select Category */}
                             </DropdownToggle>
                             <option selected value="default" >Select a Category</option>
                             {categories.map(category => {

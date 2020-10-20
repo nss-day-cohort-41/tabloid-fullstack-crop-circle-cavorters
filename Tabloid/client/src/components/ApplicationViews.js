@@ -30,7 +30,7 @@ import UserActivate from "./Users/UserActivate";
 import UserListDeactivated from "./Users/UserListDeactivated";
 import { CommentProvider } from "../providers/CommentProvider";
 
-//import { PostProvider } from "../providers/PostProvider"
+
 import UserEdit from "./Users/UserEdit";
 
 export default function ApplicationViews() {
@@ -60,13 +60,14 @@ export default function ApplicationViews() {
           {isLoggedIn ? <CommentList /> : <Redirect to="/login" />}
         </Route>
 
+
         <Route path="/post/:postId/comments/add">
-          {isLoggedIn ? <CommentProvider> <CommentAddForm /></CommentProvider> : <Redirect to="/login" />}
+          {isLoggedIn ? <CommentAddForm /> : <Redirect to="/login" />}
         </Route>
 
-        {/* <Route path="comment/:id/edit">
-          {isLoggedIn ? <CommentProvider> <CommentEditForm /></CommentProvider> : <Redirect to="/login" />}
-        </Route> */}
+        <Route path="comments/edit/:id" exact>
+          {isLoggedIn ? <CommentEditForm /> : <Redirect to="/login" />}
+        </Route>
 
         {/* <Route path="comment/:id/delete">
           {isLoggedIn ? <CommentProvider> <CommentDelete /></CommentProvider> : <Redirect to="/login" />}

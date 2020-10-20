@@ -24,6 +24,19 @@ namespace Tabloid.Controllers
 
         }
 
+        //[HttpGet]
+        //public IActionResult Get()
+        //{
+        //    var subscription = _subscriptionRepository.Get();
+        //    if (subscription == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return Ok(subscription);
+        //}
+
+
+
         [HttpPost]
         public IActionResult Post(Subscription subscription)
         {
@@ -35,14 +48,21 @@ namespace Tabloid.Controllers
 
 
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public IActionResult Get(int id, int authorId)
         {
-            var subscription = _subscriptionRepository.GetById(id);
+            var subscription = _subscriptionRepository.GetById(id, authorId);
             if (subscription == null)
             {
                 return NotFound();
             }
             return Ok(subscription);
+        }
+
+        [HttpGet("{id}/get/{authorId}")]
+        public IActionResult GetByUserId(int id, int authorId)
+        {
+
+            return Ok(_subscriptionRepository.GetByUserId(id, authorId));
         }
     }
 }

@@ -11,9 +11,7 @@ namespace Tabloid.Models
         public int SubscriberUserProfileId { get; set; }
         public int ProviderUserProfileId { get; set; }
         public DateTime BeginDateTime { get; set; }
-        public DateTime EndDateTime { get; set; }
-        //public static int NOT_SUBSCRIBED => 1;
-        //public static int SUBSCRIBED => 2;
-
+        public DateTime EndDateTime { get; set; }     
+        public Boolean IsSubscribed { get; set; }
     }
 }
