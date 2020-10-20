@@ -13,6 +13,19 @@ namespace Tabloid.Repositories
     { 
         public SubscriptionRepository(IConfiguration config) : base(config) { }
 
+        private Subscription NewSubscriptionFromReader(SqlDataReader reader)
+        {
+            return new Subscription()         
+            {
+                Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                SubscriberUserProfileId = reader.GetInt32(reader.GetOrdinal("SubscriberUserProfileId")),
+                ProviderUserProfileId = reader.GetInt32(reader.GetOrdinal("ProviderUserProfileId")),
+                BeginDateTime = reader.GetDateTime(reader.GetOrdinal("BeginDateTime")),
+                EndDateTime = reader.GetDateTime(reader.GetOrdinal("EndDateTime")),
+
+            };
+        }
+
         public void Add(Subscription subscription)
         {
             using (var conn = Connection)
@@ -43,40 +56,7 @@ namespace Tabloid.Repositories
             }
         }
 
-        //public Subscription GetById(int id, int authorId)
-        //{
-        //    using (var conn = Connection)
-        //    {
-        //        conn.Open();
-        //        using (var cmd = conn.CreateCommand())
-        //        {
-        //            cmd.CommandText = @"
-        //                SELECT s.Id, s.SubscriberUserProfileId, s.ProviderUserProfileId, s.BeginDateTime, s.EndDateTime
-        //                FROM Subscription s
-        //                LEFT JOIN UserProfile up ON s.SubscriberUserProfileId = up.id
-        //                WHERE s.SubscriberUserProfileId = @FollowerId 
-        //                AND s.ProviderUserProfileId = @AuthorId ";
-
-        //            DbUtils.AddParameter(cmd, "@FollowerId", id);
-        //            DbUtils.AddParameter(cmd, "@AuthorId", authorId);
-        //            Subscription subscription = null;
-        //            var reader = cmd.ExecuteReader();
-        //            if (reader.Read())
-        //            {
-        //                DbUtils.AddParameter(cmd, "@id", subscription.Id);
-        //                DbUtils.AddParameter(cmd, "@SubscriberUserProfileId", subscription.SubscriberUserProfileId);
-        //                DbUtils.AddParameter(cmd, "@ProviderUserProfileId", (subscription.ProviderUserProfileId));
-        //                DbUtils.AddParameter(cmd, "@BeginDateTime", DateTime.Now);
-        //                DbUtils.AddParameter(cmd, "@EndDateTime", DbUtils.ValueOrDBNull(subscription.EndDateTime));
-        //                                   }
-        //            reader.Close();
-
-        //            return subscription;
-        //        }
-        //    }
-        //}
-        //Getting all the subscribers to one user(author) by the user's Id
-        public Subscription GetByUserId(int id, int authorId)
+        public List<Subscription> GetAllFollowersForAuthor(int authorId)
         {
             using (var conn = Connection)
             {
@@ -87,27 +67,21 @@ namespace Tabloid.Repositories
                         SELECT s.Id, s.SubscriberUserProfileId, s.ProviderUserProfileId, s.BeginDateTime, s.EndDateTime
                         FROM Subscription s
                         LEFT JOIN UserProfile up ON s.SubscriberUserProfileId = up.id
-                        WHERE s.SubscriberUserProfileId = @FollowerId 
-                        AND s.ProviderUserProfileId = @AuthorId ";
+                        WHERE s.ProviderUserProfileId = @AuthorId ";
 
-                    DbUtils.AddParameter(cmd, "@FollowerId", id);
                     DbUtils.AddParameter(cmd, "@AuthorId", authorId);
-
+                    //Subscription subscription = null;
                     var reader = cmd.ExecuteReader();
+                    var subscriptions = new List<Subscription>();
 
                     if (reader.Read())
                     {
-                        Subscription subscription = new Subscription
-                        {
-                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                            SubscriberUserProfileId = reader.GetInt32(reader.GetOrdinal("SubscriberUserProfileId")),
-                            ProviderUserProfileId = reader.GetInt32(reader.GetOrdinal("ProviderUserProfileId")),
-                            BeginDateTime = reader.GetDateTime(reader.GetOrdinal("BeginDateTime")),
-                            EndDateTime = reader.GetDateTime(reader.GetOrdinal("EndDateTime")),
 
+                        {
+                            subscriptions.Add(NewSubscriptionFromReader(reader));
                         };
                         reader.Close();
-                        return subscription;
+                        return subscriptions;
 
                     }
                     else
@@ -117,7 +91,49 @@ namespace Tabloid.Repositories
                     }
                 }
             }
-        }
+            //Getting all the subscribers to one user(author) by the user's Id
+            //public Subscription GetByUserId(int id, int authorId)
+            //{
+            //    using (var conn = Connection)
+            //    {
+            //        conn.Open();
+            //        using (var cmd = conn.CreateCommand())
+            //        {
+            //            cmd.CommandText = @"
+            //                SELECT s.Id, s.SubscriberUserProfileId, s.ProviderUserProfileId, s.BeginDateTime, s.EndDateTime
+            //                FROM Subscription s
+            //                LEFT JOIN UserProfile up ON s.SubscriberUserProfileId = up.id
+            //                WHERE s.SubscriberUserProfileId = @FollowerId 
+            //                AND s.ProviderUserProfileId = @AuthorId ";
 
+            //            DbUtils.AddParameter(cmd, "@FollowerId", id);
+            //            DbUtils.AddParameter(cmd, "@AuthorId", authorId);
+
+            //            var reader = cmd.ExecuteReader();
+
+            //            if (reader.Read())
+            //            {
+            //                Subscription subscription = new Subscription
+            //                {
+            //                    Id = reader.GetInt32(reader.GetOrdinal("Id")),
+            //                    SubscriberUserProfileId = reader.GetInt32(reader.GetOrdinal("SubscriberUserProfileId")),
+            //                    ProviderUserProfileId = reader.GetInt32(reader.GetOrdinal("ProviderUserProfileId")),
+            //                    BeginDateTime = reader.GetDateTime(reader.GetOrdinal("BeginDateTime")),
+            //                    EndDateTime = reader.GetDateTime(reader.GetOrdinal("EndDateTime")),
+
+            //                };
+            //                reader.Close();
+            //                return subscription;
+
+            //            }
+            //            else
+            //            {
+            //                reader.Close();
+            //                return null;
+            //            }
+            //        }
+            //    }
+            //}
+        }
     }
 }

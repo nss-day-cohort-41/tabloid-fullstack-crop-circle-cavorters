@@ -47,22 +47,27 @@ namespace Tabloid.Controllers
         }
 
 
-        [HttpGet("{id}/get/{authorId}")]
-        public IActionResult Get(int id, int authorId)
+        //[HttpGet("{id}/following/{authorId}")]
+        //public IActionResult Get(int id, int authorId)
+        //{
+        //    var subscription = _subscriptionRepository.GetByUserId(id, authorId);
+        //    if (subscription == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return Ok(subscription);
+        //}
+
+        [HttpGet("following{authorId}")]
+        public IActionResult Get(int authorId)
         {
-            var subscription = _subscriptionRepository.GetByUserId(id, authorId);
-            if (subscription == null)
+            var subscriptions = _subscriptionRepository.GetAllFollowersForAuthor(authorId);
+            if (subscriptions == null)
             {
                 return NotFound();
             }
-            return Ok(subscription);
+            return Ok(subscriptions);
         }
-
-        //[HttpGet("{id}/get/{authorId}")]
-        //public IActionResult GetByUserId(int id, int authorId)
-        //{
-
-        //    return Ok(_subscriptionRepository.GetByUserId(id, authorId));
-        //}
+       
     }
 }
