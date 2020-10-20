@@ -4,6 +4,7 @@ import { UserProfileProvider } from "./providers/UserProfileProvider";
 import { PostProvider } from "./providers/PostProvider";
 import { CommentProvider } from "./providers/CommentProvider";
 import { CategoryProvider } from "./providers/CategoryProvider";
+import { PostTagProvider } from "./providers/PostTagProvider";
 import { TagProvider } from "./providers/TagProvider";
 import Header from "./components/Header";
 import ApplicationViews from "./components/ApplicationViews";
@@ -13,7 +14,8 @@ function App() {
   return (
     <Router>
       <UserProfileProvider>
-        <PostProvider>
+      <PostTagProvider>
+        <PostProvider>         
           <TagProvider>
             <CommentProvider>
               <CategoryProvider>
@@ -23,6 +25,7 @@ function App() {
             </CommentProvider>
           </TagProvider>
         </PostProvider>
+        </PostTagProvider>
       </UserProfileProvider>
     </Router >
   );

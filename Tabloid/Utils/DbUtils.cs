@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using Microsoft.Data.SqlClient;
 
 namespace Tabloid.Utils

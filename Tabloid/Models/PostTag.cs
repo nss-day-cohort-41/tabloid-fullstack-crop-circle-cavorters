@@ -10,13 +10,14 @@ using System.Runtime.InteropServices;
 
 namespace Tabloid.Models
 {
-    public class Tag
+    public class PostTag
     {
-        //public PostTag postTag { get; set; }
+        public Tag Tag { get; set; }
         public int Id { get; set; }
 
-        [Required]
-        [MaxLength(50)]
-        public string Name { get; set; }
+        public int TagId { get; set; }
+        public int PostId { get; set; }
+      
     }
 }
+

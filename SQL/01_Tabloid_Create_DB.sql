@@ -108,6 +108,7 @@ CREATE TABLE [Reaction] (
   [ImageLocation] nvarchar(255) NOT NULL
 )
 
+
 CREATE TABLE [PostReaction] (
   [Id] integer PRIMARY KEY IDENTITY,
   [PostId] integer NOT NULL,
