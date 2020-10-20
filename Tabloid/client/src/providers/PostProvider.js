@@ -9,6 +9,7 @@ export const PostProvider = (props) => {
 
   const [posts, setPosts] = useState([]);
   const [post, setPost] = useState({});
+  const [searchedPost, setSearchedPost] = useState({});
 
   const getAllPosts = () => {
     getToken().then((token) =>
@@ -73,9 +74,23 @@ export const PostProvider = (props) => {
 
       }))
 
+      // const searchforEmPostTags = (criterion) => {
+      //   fetch(`/api/post/search?q=${criterion}`)
+      //     .then(resp => resp.json())
+      //     .then(setSearchedPost);
+      // };
+
+      const searchforEmPostTags = (criterion) => {
+      getToken().then((token) => 
+        fetch(`/api/post/search?q=${criterion}`))
+          .then(resp => resp.json())
+          .then(setPosts);
+      };
+
+
   return (
     <PostContext.Provider value={{
-      post, posts, getAllPosts, getById, addPost, updatePost, deletePost, setPost
+      post, posts, getAllPosts, getById, addPost, updatePost, deletePost, setPost, searchforEmPostTags
     }}>
       {props.children}
     </PostContext.Provider>

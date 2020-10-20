@@ -391,3 +391,20 @@ fieldset {
 
   
 /* PostTag CSS end */
+
+
+/* SEARCH FEATURE FOR POST TAGS CSS start */
+.post-search__form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .post-search__form button {
+    padding: 4px;
+  }
+  
+  .post-search__form input {
+    flex: 1;
+  }
+
+/* SEARCH FEATURE FOR POST TAGS CSS end */

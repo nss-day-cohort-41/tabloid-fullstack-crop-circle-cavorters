@@ -51,6 +51,17 @@ namespace Tabloid.Controllers
             return CreatedAtAction("Get", new { id = post.Id }, post);
         }
 
+        [HttpGet("search")]
+        public IActionResult Search(string q)
+        {
+            if (string.IsNullOrEmpty(q))
+            {
+                return Ok(_postRepository.GetAllApprovedPosts());
+            }
+
+            return Ok(_postRepository.SearchPostsFORTAGS(q));
+        }
+
         [HttpPut("edit/{id}")]
         public IActionResult Put(int id, Post post)
         {

@@ -205,5 +205,76 @@ namespace Tabloid.Repositories
                 }
             }
         }
+
+
+        //START SEARCH FEATURE FOR POSTS via PostTags
+        public List<Post> SearchPostsFORTAGS(string criterion)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                              SELECT 
+
+                                pt.Id, pt.TagId, pt.PostId, 
+
+                                t.Name AS TagName,
+
+                                  p.Id, p.Title, p.Content, 
+                                  p.ImageLocation AS HeaderImage,
+                                  p.CreateDateTime, p.PublishDateTime, p.IsApproved,
+                                  p.CategoryId, p.UserProfileId,
+                              
+                                  c.[Name] AS CategoryName,
+                                  u.FirstName, u.LastName, u.DisplayName, 
+                                  u.Email, u.CreateDateTime, u.ImageLocation AS AvatarImage,
+                                  u.UserTypeId, 
+
+                                  ut.[Name] AS UserTypeName
+
+                             
+                              FROM PostTag pt
+                                
+                              LEFT JOIN Tag t ON pt.TagId = t.Id         
+                              LEFT JOIN Post p ON pt.PostId = p.Id
+                              LEFT JOIN Category c ON p.CategoryId = c.id
+                              LEFT JOIN UserProfile u ON p.UserProfileId = u.id
+                              LEFT JOIN UserType ut ON u.UserTypeId = ut.id
+                              WHERE t.Name LIKE @criterion";
+                    
+
+                    cmd.Parameters.AddWithValue("@criterion", $"%{criterion}%");
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    List<Post> posts = new List<Post>();
+
+                    while (reader.Read())
+                    {
+                        posts.Add(NewPostFromReader(reader));
+
+                        PostTag postTag = new PostTag()
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            TagId = reader.GetInt32(reader.GetOrdinal("TagId")),
+                            PostId = reader.GetInt32(reader.GetOrdinal("PostId")),
+                            Tag = new Tag()
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("TagId")),
+                                Name = reader.GetString(reader.GetOrdinal("Name"))
+                            }
+                        };
+                    }
+
+                    reader.Close();
+
+                    return posts;
+                }
+            }
+        }
+
+        //End SEARCH FEATURE FOR POSTS via PostTags
+
     }
 }

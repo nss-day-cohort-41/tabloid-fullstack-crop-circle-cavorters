@@ -12,6 +12,7 @@ import CommentDelete from "./Comments/CommentDelete";
 import PostDetail from "./Posts/PostDetail";
 import PostForm from "./Posts/PostForm";
 import PostEditForm from "./Posts/PostEditForm";
+import TagSearchEmPosts from "./Posts/TagSearchEmPosts";
 import PostDelete from "./Posts/PostDelete";
 import PostTagList from "./Tags/PostTagList";
 import TagList from "./Tags/TagList";
@@ -118,6 +119,12 @@ export default function ApplicationViews() {
           {isLoggedIn ? <PostDelete /> : <Redirect to="/login" />}
         </Route>
         {/* END POST ROUTES */}
+
+        {/* POST SEARCH ROUTE */}
+        <Route path="/posts/search">
+          {isLoggedIn ? <TagSearchEmPosts /> : <Redirect to="/login" />}
+        </Route>
+        {/* POST SEARCH ROUTE */}
 
 
         <Route path="/users" exact>

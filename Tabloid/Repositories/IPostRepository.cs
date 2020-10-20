@@ -10,5 +10,7 @@ namespace Tabloid.Repositories
         void Add(Post post);
         void UpdatePost(Post post);
         void DeletePost(int id);
+
+        List<Post> SearchPostsFORTAGS(string criterion);
     }
 }
