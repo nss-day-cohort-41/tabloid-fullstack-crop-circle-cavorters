@@ -21,16 +21,21 @@ const CommentEditForm = () => {
     const [editedComment, setEditedComment] = useState();
     console.log(editedComment);
 
+
     //useEffect has to happen after a page is rendered.
     useEffect(() => {
         getCommentById(id);
-    }, []);
+    }, [id]);
 
+
+    ///console.log("Hello World", id)
+    ////console.log(JSON.parse(comment.id))
     const handleEditFieldChange = (e) => {
         const stateToChange = { ...editedComment };
         stateToChange[e.target.id] = e.target.value;
         setEditedComment(stateToChange);
     };
+
 
     useEffect(() => {
         setEditedComment(comment);
@@ -38,15 +43,31 @@ const CommentEditForm = () => {
 
     //Edit comment and push to details on posts.
     const editCurrentComment = (e) => {
+
         e.preventDefault();
         setIsLoading(true);
-        editComment(editedComment);
+        console.log("edited Comment", editedComment)
+        editComment({
+            subject: editedComment.subject,
+            content: editedComment.content,
+            userProfileId: editedComment.userProfileId,
+            id: editedComment.id,
+            postId: editedComment.postId,
+            createDateTime: editedComment.createDateTime
+
+        });
+        console.log("edited Commofoment", editedComment)
+
         setIsLoading(false);
-        history.push(`/comments/details/${id}`);
+        //editComment(editedComment.Id, editedComment)
+        //history.push(`/post/${id}/comment`);
+        editComment(editedComment).then(() =>
+            history.push(`/post/${comment.postId}/comments`))
     };
 
     return (
         <>
+            <p>Hello World</p>
             {comment &&
                 <Form>
                     <h3> Edit Comment </h3>
@@ -72,9 +93,13 @@ const CommentEditForm = () => {
                 </Form>}
 
 
+            <Button className="submitComment" type="button" color="success" isLoading={isLoading} onClick={editCurrentComment}>
+                {'Save Updated Comment'}
+            </Button>
+
 
         </>
     );
 }
 
-export default CommentEditForm;
+export default CommentEditForm; 

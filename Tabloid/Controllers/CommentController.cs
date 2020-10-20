@@ -32,7 +32,7 @@ namespace Tabloid.Controllers
         {
             comment.CreateDateTime = DateTime.Now;
             _commentRepository.Add(comment);
-            return CreatedAtAction("Get", new { id = comment.Id }, comment);
+            return base.Created("", comment); //returns the comment, not including headers
         }
 
 
@@ -70,12 +70,12 @@ namespace Tabloid.Controllers
 
 
         // POST api/<CommentController>
-        [HttpPost]
-        public IActionResult Add(Comment comment)
-        {
-            _commentRepository.Add(comment);
-            return base.Created("", comment); //returns the comment, not including headers
-        }
+        //[HttpPost]
+        //public IActionResult Add(Comment comment)
+        //{
+        //    _commentRepository.Add(comment);
+        //    return base.Created("", comment); //returns the comment, not including headers
+        //}
 
 
 

@@ -101,7 +101,7 @@ namespace Tabloid.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        SELECT c.Id, c.PostId, c.UserProfileId, c.Subject, c.Content, c.CreateDateTime, up.FirstName, up.LastName
+                        SELECT c.Id, c.PostId, c.UserProfileId, c.Subject, c.Content, c.CreateDateTime,up.Email,up.DisplayName, up.FirstName, up.LastName
                         FROM Comment c
                         LEFT JOIN UserProfile up on c.UserProfileId = up.Id
                         WHERE c.Id = @id
@@ -124,6 +124,8 @@ namespace Tabloid.Repositories
                             UserProfile = new UserProfile()
                             {
                                 Id = DbUtils.GetInt(reader, "UserProfileId"),
+                                Email = DbUtils.GetString(reader, "Email"),
+                                DisplayName = DbUtils.GetString(reader, "DisplayName"),
                                 FirstName = DbUtils.GetString(reader, "FirstName"),
                                 LastName = DbUtils.GetString(reader, "LastName")
                             },

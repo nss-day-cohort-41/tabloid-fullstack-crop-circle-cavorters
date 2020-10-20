@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { CommentContext } from "../../providers/CommentProvider";
@@ -11,17 +11,34 @@ const DeleteComment = () => {
     const { id } = useParams();
     console.log(id);
     const history = useHistory();
-    const { comment, deleteComment, getCommentById } = useContext(CommentContext);
-    console.log(comment);
+    const [comment, setComment] = useState();
+    const { getCommentById, deleteComment } = useContext(CommentContext);
+    const { postId, commentId } = useParams();
 
     useEffect(() => {
-        getCommentById(id);
-    }, [])
+        getCommentById(commentId).then(setComment);
+    }, []);
+
+    const currentUser = JSON.parse(sessionStorage.getItem('userProfile')).id;
 
     //delete comment function
-    const deleteAComment = () => {
-        deleteComment(id).then(history.goBack())
+    const deleteAComment = (id) => {
+        deleteComment(commentId)
+            .then(() => history.push(`/posts/${postId}/comments`))
     }
+
+    if (!comment) {
+        return null;
+    }
+
+    if (currentUser !== comment.userProfileId) {
+        return null;
+    }
+
+    const publishDate = new Date(comment.createDateTime)
+    console.log(publishDate);
+    const CreateDate = `${publishDate.getMonth() + 1}/${publishDate.getDate()}/${publishDate.getFullYear()}`
+
 
     return (
         <>
@@ -32,6 +49,10 @@ const DeleteComment = () => {
                     <p>{comment && comment.subject}</p>
                     <h6>Comment</h6>
                     <p>{comment && comment.content}</p>
+                    <h6>Author</h6>
+                    <p>Author: {comment.userProfile.firstName} {comment.userProfile.lastName}</p>
+                    <h6>Date</h6>
+                    <div>Created on: {CreateDate}</div>
                 </CardBody>
                 <Button block className="deleteCommentButton" type="button" color="danger" onClick={deleteAComment}>
                     {'Delete Comment'}

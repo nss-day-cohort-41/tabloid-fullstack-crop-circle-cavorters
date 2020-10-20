@@ -21,7 +21,7 @@ import UserList from "./Users/UserList";
 import CategoryList from "./Categories/CategoryList";
 import CategoryAddForm from "./Categories/CategoryAddForm";
 import CategoryEditForm from "./Categories/CategoryEditForm";
- import CategoryProvider from "../providers/CategoryProvider";
+import CategoryProvider from "../providers/CategoryProvider";
 import DeleteCategoryAlert from "./Categories/CategoryDelete";
 import UserDetails from "./Users/UserDetails";
 import UserDeactivate from "./Users/UserDeactivate";
@@ -60,17 +60,17 @@ export default function ApplicationViews() {
           {isLoggedIn ? <CommentList /> : <Redirect to="/login" />}
         </Route>
 
-        <Route path="/post/:postId/comments/add">
-          {isLoggedIn ? <CommentProvider> <CommentAddForm /></CommentProvider> : <Redirect to="/login" />}
+        <Route path="/post/:postId/comments/add" exact>
+          {isLoggedIn ? <CommentAddForm /> : <Redirect to="/login" />}
         </Route>
 
-        {/* <Route path="comment/:id/edit">
-          {isLoggedIn ? <CommentProvider> <CommentEditForm /></CommentProvider> : <Redirect to="/login" />}
-        </Route> */}
+        <Route path="/comments/edit/:id" exact>
+          {isLoggedIn ? <CommentEditForm /> : <Redirect to="/login" />}
+        </Route>
 
-        {/* <Route path="comment/:id/delete">
-          {isLoggedIn ? <CommentProvider> <CommentDelete /></CommentProvider> : <Redirect to="/login" />}
-        </Route> */}
+        <Route path="/comments/:id/delete" exact>
+          {isLoggedIn ? <CommentDelete /> : <Redirect to="/login" />}
+        </Route>
 
         {/* ---- POST ROUTES ---- */}
         <Route path="/posts" exact>
