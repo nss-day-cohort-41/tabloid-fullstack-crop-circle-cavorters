@@ -3,70 +3,70 @@ import { UserProfileContext } from "../../providers/UserProfileProvider";
 import { useHistory, useParams, Link } from "react-router-dom";
 
 const UserEdit = () => {
-  const history = useHistory();
-  const [ user, setUser ] = useState();
-  const [ userTypeId, setUserTypeId ] = useState();
-  const { updateUser, getUserId, userTypes, getAllUserTypes } = useContext(UserProfileContext);
-  const { id } = useParams();
+    const history = useHistory();
+    const [user, setUser] = useState();
+    const [userTypeId, setUserTypeId] = useState();
+    const { updateUser, getUserId, userTypes, getAllUserTypes } = useContext(UserProfileContext);
+    const { id } = useParams();
 
-  const editUser = (e) => {
-    e.preventDefault();
-    const parsedUserType = parseInt(userTypeId)
-    user.userTypeId = parsedUserType;
-    updateUser(user)
-        .then(() => history.push("/users"));
-  }
+    const editUser = (e) => {
+        e.preventDefault();
+        const parsedUserType = parseInt(userTypeId)
+        user.userTypeId = parsedUserType;
+        updateUser(user)
+            .then(() => history.push("/users"));
+    }
 
-  const handleChange = (e) => {
-    setUserTypeId(e.target.value);
-  }
-  
-  useEffect(() => {
-    getUserId(id)
-    .then((users) => {
-        getAllUserTypes()
-        setUser(users)
-    })
-  }, []);
+    const handleChange = (e) => {
+        setUserTypeId(e.target.value);
+    }
 
-  if (!user) {
-    return null;
-  }  
+    useEffect(() => {
+        getUserId(id)
+            .then((users) => {
+                getAllUserTypes()
+                setUser(users)
+            })
+    }, []);
 
-  return (
-    <>
-        <main className="editUsersContainer">
-            <section className="users-table">
-                <h1>Change User Type</h1>
+    if (!user) {
+        return null;
+    }
 
-                <h4>Select a user type for {user.fullName}</h4>
-                <hr />
+    return (
+        <>
+            <main className="editUsersContainer">
+                <section className="users-table">
+                    <h1>Change User Type</h1>
 
-                <select className="userEditDropdown" onChange={handleChange}> 
-                {userTypes.map(userType =>
-                    user.userTypeId === userType.id ?
-                    <option selected value={userType.id}>
-                        {userType.name}
-                    </option> :    
-                    <option value={userType.id}>
-                        {userType.name}
-                    </option>            
-                )}
-                </select>
-                <div className="row">
-                    <div className="actionBtns">
-                        <div className="form-group">
-                            <input type="submit" onClick={editUser} value="Confirm" className="btn btn-primary" />&nbsp;&nbsp;|&nbsp;&nbsp;
+                    <h4>Select a user type for {user.fullName}</h4>
+                    <hr />
+
+                    <select className="userEditDropdown" onChange={handleChange}>
+                        {userTypes.map(userType =>
+                            user.userTypeId === userType.id ?
+                                <option selected value={userType.id}>
+                                    {userType.name}
+                                </option> :
+                                <option value={userType.id}>
+                                    {userType.name}
+                                </option>
+                        )}
+                    </select>
+                    <div className="row">
+                        <div className="actionBtns">
+                            <div className="form-group">
+                                <input type="submit" onClick={editUser} value="Confirm" className="btn-red" />&nbsp;&nbsp;|&nbsp;&nbsp;
                             <Link to="/users">
-                                Cancel
+                                    Cancel
                             </Link>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </section>
-        </main>
-    </>
-  );
+                </section>
+            </main>
+        </>
+    );
 }
 
 export default UserEdit;

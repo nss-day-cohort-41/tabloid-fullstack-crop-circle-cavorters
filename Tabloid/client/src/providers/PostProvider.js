@@ -8,6 +8,7 @@ export const PostProvider = (props) => {
   const { getToken } = useContext(UserProfileContext);
 
   const [posts, setPosts] = useState([]);
+  const [unapprovedPosts, setUnapprovedPosts] = useState([]);
   const [post, setPost] = useState({});
 
   const getAllPosts = () => {
@@ -32,6 +33,18 @@ export const PostProvider = (props) => {
         }
       }).then((resp) => resp.json())
         .then(setPosts));
+  }
+
+  const getAllUnapprovedPosts = () => {
+    getToken().then((token) =>
+      fetch(`${apiUrl}/unapproved`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }).then(resp => resp.json())
+        .then(setUnapprovedPosts));
+
   };
 
   const getById = (id) => {
@@ -57,7 +70,6 @@ export const PostProvider = (props) => {
       }).then(resp => {
         if (resp.ok) {
           return resp.json();
-
         }
         throw new Error("Unauthorized");
       }))
@@ -88,7 +100,8 @@ export const PostProvider = (props) => {
 
   return (
     <PostContext.Provider value={{
-      post, posts, getAllPosts, getById, addPost, updatePost, deletePost, setPost, getAllPostsByUser
+      post, posts, getAllPosts, getById, addPost, updatePost, deletePost, setPost, getAllPostsByUser,
+      unapprovedPosts, getAllUnapprovedPosts
     }}>
       {props.children}
     </PostContext.Provider>
