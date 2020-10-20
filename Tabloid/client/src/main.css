@@ -490,6 +490,16 @@ fieldset {
     color: #1e0997
 }
 
+.approved {
+    color: green;
+    margin: 0;
+}
+
+.unapproved {
+    color: red;
+    margin: 0;
+}
+
 .postsAuthor {
     font-family: sans-serif;
     color: #373737
@@ -523,7 +533,6 @@ fieldset {
 
 .authorButtons {
     position: absolute;
-    /* bottom: 0; */
     left: -5;
     right: 0;
     overflow: hidden;
@@ -546,6 +555,7 @@ fieldset {
     display: inline-block;
     width: 60px;
     height: 34px;
+    margin: 0 10px;
 }
   
   /* Hide default HTML checkbox */
@@ -563,7 +573,7 @@ fieldset {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #ccc;
+    background-color: #2196F3;
     -webkit-transition: .4s;
     transition: .4s;
 }
@@ -600,4 +610,40 @@ input:checked + .slider:before {
 
 .slider.round:before {
     border-radius: 50%;
+}
+
+.postHeader {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.postHeaderDetails {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: 0;
+    padding: 0;
+}
+
+.postHeaderDetails > div > h1 {
+    margin: 0;
+}
+
+.postHeaderDetails > div,
+.postHeaderDetails > div > p {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    margin: 0;
+}
+
+.toggle {
+    display: flex;
+    justify-content: center;
+    width: 30%;
+}
+
+.toggle > div > p {
+    font-size: 14px;
 }

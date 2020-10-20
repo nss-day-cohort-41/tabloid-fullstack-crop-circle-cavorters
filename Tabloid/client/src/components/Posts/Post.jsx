@@ -64,12 +64,6 @@ export default function Post({ post }) {
       <> 
         <tbody className="postCard-details">
           <tr>
-          <td className="postTitle">
-              {post.isApproved == true ?
-              <input type="checkbox" id="scales" name="scales"
-              checked/> : <input type="checkbox" id="scales" name="scales"
-              />}
-            </td>
             <td className="postTitle">
               <strong>{post.title}</strong>
             </td>
@@ -77,7 +71,8 @@ export default function Post({ post }) {
               <a href={`/users/${post.userProfile.firebaseUserId}`}>{post.userProfile.fullName}</a>
             </td>
             <td className="postCategory">
-              {post.category.name}
+            {post.isApproved == true ?
+              <p className="approved">Approved</p> : <p className="unapproved">Not Approved</p>}
             </td>
             <td className="postDate">
               {new Intl.DateTimeFormat('en-US').format(new Date(post.publishDateTime))}

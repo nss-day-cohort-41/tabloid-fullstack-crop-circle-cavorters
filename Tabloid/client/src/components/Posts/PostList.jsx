@@ -5,25 +5,32 @@ import { PostContext } from "../../providers/PostProvider";
 import { Link } from "react-router-dom";
 
 export default function PostList() {
-  const { posts, getAllPosts } = useContext(PostContext);
+  const { unapprovedPosts, posts, getAllPosts, getAllUnapprovedPosts} = useContext(PostContext);
   const sessionUser = JSON.parse(sessionStorage.getItem("userProfile"));
 
-  document.addEventListener('DOMContentLoaded', function () {
-    var checkbox = document.querySelector('.viewToggle');
+
+  let val = false;
   
-    checkbox.addEventListener('change', function () {
-      if (checkbox.checked) {
-        // do this
-        console.log('Checked');
-      } else {
-        // do that
-        console.log('Not checked');
-      }
-    });
-  });
+  const togglePosts = () => {   
+    if (val == false) {
+      console.log('switch to unapproved');
+      val = true;
+    } else {
+      console.log('switch to approved');
+      val = false;
+    }
+  };
+  
+  let strval = val.toString()
+  let checked = strval
+  console.log("val:", val)
+  console.log("string val:", checked)
+  let viewStatus = document.querySelectorAll("#viewToggle");
+  let status = viewStatus.value;
 
   useEffect(() => {
     getAllPosts();
+    getAllUnapprovedPosts();
   }, []);
 
   if (sessionUser.userTypeId === 1) {
@@ -31,30 +38,40 @@ export default function PostList() {
       <section>
         <div class="postCard">
           <div className="postHeader">
-            <h1>Posts</h1>
-            <p>
-              <Link class="btn btn-primary" to="/posts/add">New Post</Link>
-            </p>
+            <div className="postHeaderDetails">
+              <div>
+                <h1>Posts</h1>
+              </div>
+              <div>
+                <p>
+                  <Link class="btn btn-primary" to="/posts/add">New Post</Link>
+                </p>
+              </div>
+            
+            </div>
+            
           </div>
-          {sessionUser.userTypeId === 1 ?
-            <label class="switch">
-              <input className="viewToggle" type="checkbox"/>
-              <span class="slider round"></span>
-            </label> : null
-          }
-          
+          <div class="toggle">
+            <div>
+              <p className="approvedPosts">Approved</p>
+            </div>
+            <label className="switch">
+              <input id="viewToggle" type="checkbox" onclick={togglePosts} value={checked} />
+              <span className="slider round"></span>
+            </label>
+            <div>
+              <p className="unapprovedPosts">Unapproved</p>
+            </div>
+          </div>
           <div className="post-container">
-            <table class="postTable">
+            <table className="postTable">
               <thead className="postTableHeader">
                 <tr>
-                  <th className="postApproved-header">
-                    Approved
-                </th>
                   <th className="postTitle-header">
                     Title
                 </th>
                   <th className="postUserName-header">
-                    Posted by
+                    Author
                 </th>
                   <th className="postCategory-header">
                     Category
@@ -65,9 +82,11 @@ export default function PostList() {
                   <th></th>
                 </tr>
               </thead>
-              {posts.map(p =>
+              {status == "false" ?
+              posts.map(p =>
                 <Post key={p.id} post={p} />
-              )}
+              ) : unapprovedPosts.map(p =>
+                <Post key={p.id} post={p} />)}
             </table>
           </div>
         </div>
