@@ -39,7 +39,7 @@ export function CommentProvider(props) {
 
                 }
             }).then(res => res.json())
-                .then(setComment));
+        );
 
 
     //Add a new comment  
@@ -70,9 +70,10 @@ export function CommentProvider(props) {
         })
     }
 
-    const deleteComment = (comment) => {
+    //Talking back to the api,changes the database.
+    const deleteComment = (id) => {
         return getToken().then((token) => {
-            fetch(`${apiUrl}/delete/${comment.id}`, {
+            fetch(`${apiUrl}/delete/${id}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",

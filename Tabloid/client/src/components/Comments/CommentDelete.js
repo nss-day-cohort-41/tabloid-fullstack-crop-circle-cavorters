@@ -3,13 +3,12 @@ import { useParams } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { CommentContext } from "../../providers/CommentProvider";
 import { Card, CardBody, Button } from "reactstrap";
+import { Link } from "react-router-dom";
 
-const DeleteComment = () => {
+const CommentDelete = () => {
     let userId = sessionStorage.userProfileId
-    console.log(userId);
+
     //id of comment to delete
-    const { id } = useParams();
-    console.log(id);
     const history = useHistory();
     const [comment, setComment] = useState();
     const { getCommentById, deleteComment } = useContext(CommentContext);
@@ -19,26 +18,27 @@ const DeleteComment = () => {
         getCommentById(commentId).then(setComment);
     }, []);
 
+    console.log(comment)
     const currentUser = JSON.parse(sessionStorage.getItem('userProfile')).id;
 
     //delete comment function
     const deleteAComment = (id) => {
         deleteComment(commentId)
-            .then(() => history.push(`/posts/${postId}/comments`))
+            .then(() => history.push(`/post/${postId}/comments`))
     }
 
     if (!comment) {
+        console.log("testing")
         return null;
     }
 
-    if (currentUser !== comment.userProfileId) {
-        return null;
-    }
+    // if (currentUser !== comment.userProfileId) {
+    //     return null;
+    // }
 
     const publishDate = new Date(comment.createDateTime)
     console.log(publishDate);
     const CreateDate = `${publishDate.getMonth() + 1}/${publishDate.getDate()}/${publishDate.getFullYear()}`
-
 
     return (
         <>
@@ -54,13 +54,12 @@ const DeleteComment = () => {
                     <h6>Date</h6>
                     <div>Created on: {CreateDate}</div>
                 </CardBody>
-                <Button block className="deleteCommentButton" type="button" color="danger" onClick={deleteAComment}>
-                    {'Delete Comment'}
-                </Button>
+                {(currentUser === comment.userProfileId) ?
+                    <Button onClick={deleteAComment} color="danger" className="commentButton">Delete</Button> : <p>a</p>}
 
-                <Button block className="returnToListButton" type="button" color="success" onClick={() => history.goBack()}>
-                    {'Cancel'}
-                </Button>
+                <Link to={`/post/${postId}/comments`}>
+                    <Button color="secondary" className="commentButton">Back</Button>
+                </Link>
 
             </Card>
         </>
@@ -68,4 +67,4 @@ const DeleteComment = () => {
 
 };
 
-export default DeleteComment;
+export default CommentDelete;

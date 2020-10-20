@@ -12,15 +12,15 @@ export default function CommentList() {
     const { comments, getAllCommentsByPostId } = useContext(CommentContext);
 
     const { post, getPost } = useContext(PostContext)
-    const { id } = useParams();
+    const { postId } = useParams();
     const { history } = useHistory();
 
 
     useEffect(() => {
-        getAllCommentsByPostId(id);
+        getAllCommentsByPostId(postId);
         //getPost(id);
     }, []);
-    console.log("id", id);
+    console.log("id", postId);
 
 
 
