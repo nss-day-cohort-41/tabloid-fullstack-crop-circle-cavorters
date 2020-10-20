@@ -26,9 +26,7 @@ export default function Post({ post }) {
 
   const approvePost = (e) => {
     console.log(editedPost)
-    editedPost.isApproved = true;
-    debugger
-    
+    editedPost.isApproved = true;    
     updatePost(post.id, editedPost)
     .then(() => {
       history.go(`/posts/unapproved`);}
