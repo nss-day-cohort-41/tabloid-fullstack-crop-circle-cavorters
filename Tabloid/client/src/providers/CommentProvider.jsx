@@ -35,10 +35,7 @@ export function CommentProvider(props) {
             }).then(resp => resp.json())
                 .then(setComment));
 
-
-
-
-    //Get Comment By Single Id
+    // Get Comment By Single Id
 
     const getCommentById = (id) =>
         getToken().then((token) =>
