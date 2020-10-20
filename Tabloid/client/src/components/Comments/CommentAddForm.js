@@ -40,7 +40,7 @@ const CommentAddForm = () => {
     const user = JSON.parse(sessionStorage.getItem("userProfile")).id
 
     const submit = () => {
-        if (subject === "" ||content === "") {
+        if (subject === "" || content === "") {
             alert("Subject and Content Required Fields");
         } else {
             setIsLoading(true);
