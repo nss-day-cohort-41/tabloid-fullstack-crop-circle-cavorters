@@ -10,7 +10,7 @@ import { useHistory } from "react-router-dom";
 
 export default function CommentList() {
     const { comments, getAllCommentsByPostId } = useContext(CommentContext);
-   
+
     const { post, getPost } = useContext(PostContext)
     const { id } = useParams();
     const { history } = useHistory();
@@ -45,7 +45,7 @@ export default function CommentList() {
                 <p>{comments && comments.createDateTime}</p>
 
 
-                <Link to={`/posts/comments/${id}`}><Button>
+                <Link to={`/posts`}><Button>
                     Back To Posts
             </Button></Link>
                 {comments.map(c => {

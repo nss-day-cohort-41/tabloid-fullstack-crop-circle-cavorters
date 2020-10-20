@@ -43,38 +43,38 @@ namespace Tabloid.Repositories
             }
         }
 
-        public Subscription GetById(int id, int authorId)
-        {
-            using (var conn = Connection)
-            {
-                conn.Open();
-                using (var cmd = conn.CreateCommand())
-                {
-                    cmd.CommandText = @"
-                        SELECT s.Id, s.SubscriberUserProfileId, s.ProviderUserProfileId, s.BeginDateTime, s.EndDateTime
-                        FROM Subscription s
-                        LEFT JOIN UserProfile up ON s.SubscriberUserProfileId = up.id
-                        WHERE s.SubscriberUserProfileId = @FollowerId 
-                        AND s.ProviderUserProfileId = @AuthorId ";
+        //public Subscription GetById(int id, int authorId)
+        //{
+        //    using (var conn = Connection)
+        //    {
+        //        conn.Open();
+        //        using (var cmd = conn.CreateCommand())
+        //        {
+        //            cmd.CommandText = @"
+        //                SELECT s.Id, s.SubscriberUserProfileId, s.ProviderUserProfileId, s.BeginDateTime, s.EndDateTime
+        //                FROM Subscription s
+        //                LEFT JOIN UserProfile up ON s.SubscriberUserProfileId = up.id
+        //                WHERE s.SubscriberUserProfileId = @FollowerId 
+        //                AND s.ProviderUserProfileId = @AuthorId ";
 
-                    DbUtils.AddParameter(cmd, "@FollowerId", id);
-                    DbUtils.AddParameter(cmd, "@AuthorId", authorId);
-                    Subscription subscription = null;
-                    var reader = cmd.ExecuteReader();
-                    if (reader.Read())
-                    {
-                        DbUtils.AddParameter(cmd, "@id", subscription.Id);
-                        DbUtils.AddParameter(cmd, "@SubscriberUserProfileId", subscription.SubscriberUserProfileId);
-                        DbUtils.AddParameter(cmd, "@ProviderUserProfileId", (subscription.ProviderUserProfileId));
-                        DbUtils.AddParameter(cmd, "@BeginDateTime", DateTime.Now);
-                        DbUtils.AddParameter(cmd, "@EndDateTime", DbUtils.ValueOrDBNull(subscription.EndDateTime));
-                                           }
-                    reader.Close();
+        //            DbUtils.AddParameter(cmd, "@FollowerId", id);
+        //            DbUtils.AddParameter(cmd, "@AuthorId", authorId);
+        //            Subscription subscription = null;
+        //            var reader = cmd.ExecuteReader();
+        //            if (reader.Read())
+        //            {
+        //                DbUtils.AddParameter(cmd, "@id", subscription.Id);
+        //                DbUtils.AddParameter(cmd, "@SubscriberUserProfileId", subscription.SubscriberUserProfileId);
+        //                DbUtils.AddParameter(cmd, "@ProviderUserProfileId", (subscription.ProviderUserProfileId));
+        //                DbUtils.AddParameter(cmd, "@BeginDateTime", DateTime.Now);
+        //                DbUtils.AddParameter(cmd, "@EndDateTime", DbUtils.ValueOrDBNull(subscription.EndDateTime));
+        //                                   }
+        //            reader.Close();
 
-                    return subscription;
-                }
-            }
-        }
+        //            return subscription;
+        //        }
+        //    }
+        //}
         //Getting all the subscribers to one user(author) by the user's Id
         public Subscription GetByUserId(int id, int authorId)
         {

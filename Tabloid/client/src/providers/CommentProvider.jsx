@@ -25,15 +25,15 @@ export function CommentProvider(props) {
             }).then(resp => resp.json())
                 .then(setComments));
 
-    const getCommentById = (id) =>
-        getToken().then((token) =>
-            fetch(apiUrl + "/post/" + id, {
-                method: "GET",
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            }).then(resp => resp.json())
-                .then(setComment));
+    // const getCommentById = (id) =>
+    //     getToken().then((token) =>
+    //         fetch(apiUrl + "/post/" + id, {
+    //             method: "GET",
+    //             headers: {
+    //                 Authorization: `Bearer ${token}`
+    //             }
+    //         }).then(resp => resp.json())
+    //             .then(setComment));
 
     // Get Comment By Single Id
 

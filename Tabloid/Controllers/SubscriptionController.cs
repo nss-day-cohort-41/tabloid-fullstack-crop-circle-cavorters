@@ -50,7 +50,7 @@ namespace Tabloid.Controllers
         [HttpGet("{id}/get/{authorId}")]
         public IActionResult Get(int id, int authorId)
         {
-            var subscription = _subscriptionRepository.GetById(id, authorId);
+            var subscription = _subscriptionRepository.GetByUserId(id, authorId);
             if (subscription == null)
             {
                 return NotFound();

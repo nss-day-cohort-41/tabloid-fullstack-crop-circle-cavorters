@@ -18,10 +18,10 @@ function App() {
           <TagProvider>
             <CommentProvider>
               <CategoryProvider>
-                <SubscriptionProvider>
-                  <Header />
-                  <ApplicationViews />
-                </SubscriptionProvider>
+
+                <Header />
+                <ApplicationViews />
+
               </CategoryProvider>
             </CommentProvider>
           </TagProvider>
