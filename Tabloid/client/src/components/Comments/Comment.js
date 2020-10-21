@@ -1,12 +1,15 @@
 import React from "react";
 import { Card, CardBody, Button } from "reactstrap";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
+
 
 
 
 export default function Comment({ comment }) {
     //let userId = sessionStorage.userProfileId
     const history = useHistory();
+    const { postId, commentId } = useParams();
+
     return (
         <Card className="m-4">
 
@@ -29,7 +32,7 @@ export default function Comment({ comment }) {
 
                 <>
                     <Button onClick={() => history.push(`/comments/edit/${comment.id}`)}>Edit </Button>
-                    <Button onClick={() => history.push(`/comments/delete/${comment.id}`)}>Delete</Button>
+                    <Button onClick={() => history.push(`/post/${postId}/comments/delete/${comment.id}`)}>Delete</Button>
                 </>
 
             </CardBody>
