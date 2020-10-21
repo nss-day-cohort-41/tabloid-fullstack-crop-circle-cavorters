@@ -32,7 +32,7 @@ export default function DeletePostPage() {
                     <div className="row">
                         <div className="actionBtns">
                             <div className="form-group">
-                                <input type="submit" onClick={deleteThisPost} value="Confirm" className="btn btn-primary" />&nbsp;&nbsp;|&nbsp;&nbsp;
+                                <input type="submit" onClick={deleteThisPost} value="Confirm" className="btn-red" />&nbsp;&nbsp;|&nbsp;&nbsp;
                                 <Link to={`/posts/details/${id}`}>
                                     Cancel
                                 </Link>

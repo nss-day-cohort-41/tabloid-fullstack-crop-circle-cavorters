@@ -1,20 +1,30 @@
 import React, { useContext, useState, useEffect } from "react";
+import { CategoryContext } from "../../providers/CategoryProvider";
 import { PostContext } from "../../providers/PostProvider";
-import { useHistory } from "react-router-dom";
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { useHistory, Link } from "react-router-dom";
+import { Button, Form, FormGroup, Label, Input, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+
 
 export default function PostForm() {
     const history = useHistory();
+    const { categories, getAllCategories } = useContext(CategoryContext);
     const { addPost } = useContext(PostContext);
+    const [categoryId, setCategoryId] = useState();
+
     const sessionUser = JSON.parse(sessionStorage.getItem("userProfile"));
+
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+
+    const toggle = () => setDropdownOpen(prevState => !prevState);
+
     const [post, setPost] = useState({
         title: "",
         content: "",
-        categoryId: 2,
+        categoryId: "",
         imageLocation: "",
         publishDateTime: "",
+        isApproved: true,
         userProfileId: sessionUser.id
-
     });
 
     const [isLoading, setIsLoading] = useState(false);
@@ -29,16 +39,27 @@ export default function PostForm() {
         e.preventDefault();
         if (post.title === "") {
             alert("Give your post a title!")
+
         } else {
             setIsLoading(true);
         }
 
+        const parsedCat = parseInt(categoryId);
+        post.categoryId = parsedCat;
         addPost(post)
             .then((p) => {
                 history.push(`/posts/details/${p.id}`)
             })
 
     };
+
+    const handleChange = (e) => {
+        setCategoryId(e.target.value);
+    }
+
+    useEffect(() => {
+        getAllCategories();
+    }, [])
 
     return (
         <>
@@ -54,6 +75,20 @@ export default function PostForm() {
                             placeholder="Title"
                             value={post.title}
                         />
+                        <Label for="category">Category</Label>
+                        <br />
+                        <select className="userEditDropdown" onChange={handleChange}>
+                            {categories.map(category =>
+                                category.id === post.categoryId ?
+                                    <option selected value={category.id}>
+                                        {category.name}
+                                    </option> :
+                                    <option value={category.id}>
+                                        {category.name}
+                                    </option>
+                            )}
+                        </select>
+                        <br />
                         <Label for="imageLocation">Image URL</Label>
                         <Input
                             type="text"
@@ -63,6 +98,27 @@ export default function PostForm() {
                             placeholder="Url"
                             value={post.imageLocation}
                         />
+                        {/* <Label for="category">Category</Label>
+                        <Input
+                            isOpen={dropdownOpen}
+                            toggle={toggle}
+
+                            required
+                            type="select"
+                            onChange={handleFieldChange}
+                            id="categoryId"
+                            value={post.category}
+                        >
+                            <DropdownToggle caret>
+                                {/* Select Category */}
+                        {/* </DropdownToggle>
+                            <option selected value="default" >Select a Category</option>
+                            {categories.map(category => {
+
+                                return <option key={category.id} value={category.id}>{category.name}</option>
+                            })} */}
+
+                        {/* </Input> */}
                         <Label for="content">Content</Label>
                         <Input
                             type="text"
@@ -89,6 +145,7 @@ export default function PostForm() {
                                 disabled={isLoading}
                                 onClick={createNewPost}
                             >Submit</Button>
+                            <Link to={`/posts`}><Button type="button" color="warning">Cancel</Button></Link>
                         </div>
                     </div>
                 </FormGroup>

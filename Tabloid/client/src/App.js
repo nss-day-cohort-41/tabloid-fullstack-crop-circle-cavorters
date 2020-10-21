@@ -5,6 +5,7 @@ import { PostProvider } from "./providers/PostProvider";
 import { CommentProvider } from "./providers/CommentProvider";
 import { CategoryProvider } from "./providers/CategoryProvider";
 import { TagProvider } from "./providers/TagProvider";
+import { SubscriptionProvider } from "./providers/SubscriptionProvider";
 import Header from "./components/Header";
 import ApplicationViews from "./components/ApplicationViews";
 import "./main.css"
@@ -17,8 +18,10 @@ function App() {
           <TagProvider>
             <CommentProvider>
               <CategoryProvider>
+
                 <Header />
                 <ApplicationViews />
+
               </CategoryProvider>
             </CommentProvider>
           </TagProvider>

@@ -5,6 +5,7 @@ import { useParams, Link } from "react-router-dom";
 
 export default function PostDetail() {
     const { post, getById } = useContext(PostContext);
+    console.log("post", post)
     const { id } = useParams();
 
     useEffect(() => {
@@ -21,6 +22,9 @@ export default function PostDetail() {
     return (
 
         <>
+            <Link style={{ textDecoration: 'none' }} to={`/posts`}>
+              <button className="std-btn">&#x2190; Back to Posts</button>
+            </Link>
             <div className="postContainer">
                 <div className="post">
                     <section className="px-3">
@@ -34,6 +38,7 @@ export default function PostDetail() {
                             <p className="text-black-50">Published on {new Intl.DateTimeFormat('en-US').format(new Date(post.publishDateTime))}</p>
                         </div>
                         <div className="row postBtns justify-content-between">
+                            <Link to={`/posts`}><Button type="button" color="warning">Back to Posts</Button></Link>
                             <div>
                                 <a href={`/posts/edit/${post.id}`} className="btn btn-outline-primary mx-1" title="Edit">
                                     <i className="fas fa-pencil-alt">Edit</i>
@@ -47,10 +52,10 @@ export default function PostDetail() {
                             <div>
                                 <img src={post.imageLocation} />
                             </div>
-                        </section>                        
+                        </section>
                     </section>
                     <hr />
-                    
+
                     <section className="row post__content">
                         <p className="col-sm-12 mt-5">{post.content}</p>
                     </section>

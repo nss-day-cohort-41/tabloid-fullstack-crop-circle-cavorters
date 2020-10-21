@@ -9,7 +9,7 @@ using Tabloid.Repositories;
 
 namespace Tabloid.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class PostController : ControllerBase
@@ -28,6 +28,13 @@ namespace Tabloid.Controllers
         public IActionResult Get()
         {
             var posts = _postRepository.GetAllApprovedPosts();
+            return Ok(posts);
+        }
+
+        [HttpGet("unapproved")]
+        public IActionResult GetUnapproved()
+        {
+            var posts = _postRepository.GetAllUnapprovedPosts();
             return Ok(posts);
         }
 
@@ -68,6 +75,17 @@ namespace Tabloid.Controllers
             _postRepository.DeletePost(id);
             return NoContent();
         }
+
+        // **Add the id with no slash before it in the route and do the same in the provider with the fetch call. 
+        // Because React doesn't like it when it has to go down more than one level for the id.
+        [HttpGet("myposts{id}")]
+        public IActionResult GetUserPosts(int id)
+        {
+            var posts = _postRepository.GetAllApprovedPostsForUser(id);
+            return Ok(posts);
+        }
+
+        
 
     }
 }

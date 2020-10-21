@@ -10,9 +10,12 @@ import CommentAddForm from "./Comments/CommentAddForm";
 import CommentEditForm from "./Comments/CommentEditForm.js";
 import CommentDelete from "./Comments/CommentDelete";
 import PostDetail from "./Posts/PostDetail";
+import UnapprovedPostList from "./Posts/UnapprovedPostList";
+import AuthorViewList from "./Posts/AuthorViewList";
 import PostForm from "./Posts/PostForm";
 import PostEditForm from "./Posts/PostEditForm";
 import PostDelete from "./Posts/PostDelete";
+import MyPosts from "./Posts/MyPosts";
 import TagList from "./Tags/TagList";
 import TagForm from "./Tags/TagForm";
 import TagEditForm from "./Tags/TagEditForm";
@@ -29,7 +32,7 @@ import UserActivate from "./Users/UserActivate";
 import UserListDeactivated from "./Users/UserListDeactivated";
 import { CommentProvider } from "../providers/CommentProvider";
 
-//import { PostProvider } from "../providers/PostProvider"
+
 import UserEdit from "./Users/UserEdit";
 
 export default function ApplicationViews() {
@@ -53,7 +56,6 @@ export default function ApplicationViews() {
         </Route>
 
 
-
         {/* Comment Routes */}
 
         <Route path="/post/:id/comments" exact>
@@ -72,44 +74,45 @@ export default function ApplicationViews() {
           {isLoggedIn ? <CommentDelete /> : <Redirect to="/login" />}
         </Route>
 
-        {/* ---- POST ROUTES ---- */}
-        <Route path="/posts" exact>
-          {isLoggedIn ? <PostList /> : <Redirect to="/login" />}
-        </Route>
 
         {/* CATEGORIES ROUTES */}
         <Route path="/categories" exact>
-          {isLoggedIn ? <CategoryList /> : <Redirect to="/login" />}
+          {isLoggedIn && sessionUser.userTypeId === 1 ? <CategoryList /> : <Redirect to="/login" />}
         </Route>
 
         <Route path="/categories/add">
-          {isLoggedIn ? <CategoryAddForm /> : <Redirect to="/login" />}
+          {isLoggedIn && sessionUser.userTypeId === 1 ? <CategoryAddForm /> : <Redirect to="/login" />}
         </Route>
 
         <Route path="/categories/:id" exact>
-          {isLoggedIn ? <CategoryEditForm /> : <Redirect to="/login" />}
+          {isLoggedIn && sessionUser.userTypeId === 1 ? <CategoryEditForm /> : <Redirect to="/login" />}
         </Route>
 
         <Route path="/categories/delete/:id" exact>
-          {isLoggedIn ? <DeleteCategoryAlert /> : <Redirect to="/login" />}
+          {isLoggedIn && sessionUser.userTypeId === 1 ? <DeleteCategoryAlert /> : <Redirect to="/login" />}
         </Route>
 
         {/* TAGS ROUTES */}
         <Route path="/tags" exact>
-          {isLoggedIn ? <TagList /> : <Redirect to="/login" />}
+          {isLoggedIn && sessionUser.userTypeId === 1 ? <TagList /> : <Redirect to="/login" />}
         </Route>
 
         <Route path="/tags/add">
-          {isLoggedIn ? <TagForm /> : <Redirect to="/login" />}
+          {isLoggedIn && sessionUser.userTypeId === 1 ? <TagForm /> : <Redirect to="/login" />}
         </Route>
 
         <Route path="/tags/:id" exact>
           {/* <Route path= "`/api/tags/edit/${id}`"> */}
-          {isLoggedIn ? <TagEditForm /> : <Redirect to="/login" />}
+          {isLoggedIn && sessionUser.userTypeId === 1 ? <TagEditForm /> : <Redirect to="/login" />}
         </Route>
 
         <Route path="/tags/delete/:id" exact>
-          {isLoggedIn ? <DeleteTagPrompt /> : <Redirect to="/login" />}
+          {isLoggedIn && sessionUser.userTypeId === 1 ? <DeleteTagPrompt /> : <Redirect to="/login" />}
+        </Route>
+
+        {/* ---- POST ROUTES ---- */}
+        <Route path="/posts" exact>
+          {isLoggedIn ? <PostList /> : <Redirect to="/login" />}
         </Route>
 
         <Route exact path="/posts/details/:id">
@@ -120,6 +123,14 @@ export default function ApplicationViews() {
           {isLoggedIn ? <PostForm /> : <Redirect to="/login" />}
         </Route>
 
+        <Route path="/posts/unapproved" exact>
+          {isLoggedIn && sessionUser.userTypeId === 1 ? <UnapprovedPostList /> : <Redirect to="/login" />}
+        </Route>
+
+        <Route path="/posts/userview" exact>
+          {isLoggedIn && sessionUser.userTypeId === 1 ? <AuthorViewList /> : <Redirect to="/login" />}
+        </Route>
+
         <Route path="/posts/edit/:id">
           {isLoggedIn ? <PostEditForm /> : <Redirect to="/login" />}
         </Route>
@@ -127,8 +138,11 @@ export default function ApplicationViews() {
         <Route path="/posts/delete/:id">
           {isLoggedIn ? <PostDelete /> : <Redirect to="/login" />}
         </Route>
-        {/* END POST ROUTES */}
 
+        <Route path="/posts/myposts/:id" exact>
+          {isLoggedIn ? <MyPosts /> : <Redirect to="/login" />}
+        </Route>
+        {/* END POST ROUTES */}
 
         <Route path="/users" exact>
           {isLoggedIn && sessionUser.userTypeId === 1 ? <UserList /> : <Redirect to="/login" />}
@@ -154,23 +168,8 @@ export default function ApplicationViews() {
           {isLoggedIn && sessionUser.userTypeId === 1 ? <UserEdit /> : <Redirect to="/login" />}
         </Route>
 
-        {/* TAGS ROUTES */}
-        <Route path="/tags" exact>
-          {isLoggedIn ? <TagList /> : <Redirect to="/login" />}
-        </Route>
-        <Route path="/tags/add">
-          {isLoggedIn ? <TagForm /> : <Redirect to="/login" />}
-        </Route>
-        <Route path="/tags/:id" exact>
-          {/* <Route path= "`/api/tags/edit/${id}`"> */}
-          {isLoggedIn ? <TagEditForm /> : <Redirect to="/login" />}
-        </Route>
-        <Route path="/tags/delete/:id" exact>
-          {isLoggedIn ? <DeleteTagPrompt /> : <Redirect to="/login" />}
-        </Route>
-        {/* END TAGS ROUTES */}
-
       </Switch>
     </main>
   );
-};
+}
+

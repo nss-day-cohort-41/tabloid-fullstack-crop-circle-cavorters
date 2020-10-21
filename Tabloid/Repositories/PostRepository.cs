@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using Tabloid.Models;
@@ -22,6 +23,7 @@ namespace Tabloid.Repositories
                 ImageLocation = DbUtils.GetNullableString(reader, "HeaderImage"),
                 CreateDateTime = reader.GetDateTime(reader.GetOrdinal("CreateDateTime")),
                 PublishDateTime = DbUtils.GetNullableDateTime(reader, "PublishDateTime"),
+                IsApproved = reader.GetBoolean(reader.GetOrdinal("IsApproved")),
                 CategoryId = reader.GetInt32(reader.GetOrdinal("CategoryId")),
                 Category = new Category()
                 {
@@ -34,10 +36,12 @@ namespace Tabloid.Repositories
                     Id = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
                     FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
                     LastName = reader.GetString(reader.GetOrdinal("LastName")),
+                    FirebaseUserId = reader.GetString(reader.GetOrdinal("FirebaseUserId")),
                     DisplayName = reader.GetString(reader.GetOrdinal("DisplayName")),
                     Email = reader.GetString(reader.GetOrdinal("Email")),
                     CreateDateTime = reader.GetDateTime(reader.GetOrdinal("CreateDateTime")),
                     ImageLocation = DbUtils.GetNullableString(reader, "AvatarImage"),
+                    IsActive = reader.GetBoolean(reader.GetOrdinal("IsActive")),
                     UserTypeId = reader.GetInt32(reader.GetOrdinal("UserTypeId")),
                     UserType = new UserType()
                     {
@@ -62,9 +66,9 @@ namespace Tabloid.Repositories
                               
                               c.[Name] AS CategoryName,
 
-                              u.FirstName, u.LastName, u.DisplayName, 
+                              u.FirstName, u.LastName, u.DisplayName, u.FirebaseUserId,
                               u.Email, u.CreateDateTime, u.ImageLocation AS AvatarImage,
-                              u.UserTypeId, 
+                              u.UserTypeId, u.IsActive,
 
                               ut.[Name] AS UserTypeName
                          FROM Post p
@@ -88,6 +92,111 @@ namespace Tabloid.Repositories
                 }
             };
         }
+
+        //created for "myposts"
+        //Ordered by CreateDateTime DESC
+        public List<Post> GetAllApprovedPostsForUser(int userProfileId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                       SELECT p.Id, p.Title, p.Content, 
+                              p.ImageLocation AS HeaderImage,
+                              p.CreateDateTime, p.PublishDateTime, p.IsApproved,
+                              p.CategoryId, p.UserProfileId,
+                              
+                              u.FirstName, u.LastName, u.DisplayName, u.FirebaseUserId,
+                              u.Email, u.CreateDateTime, u.ImageLocation AS AvatarImage,
+                              u.UserTypeId, u.IsActive,
+
+                              ut.[Name] AS UserTypeName,
+                              c.[Name] AS CategoryName
+                         FROM Post p
+                              LEFT JOIN Category c ON p.CategoryId = c.id  
+                              LEFT JOIN UserProfile u ON p.UserProfileId = u.id
+                              LEFT JOIN UserType ut ON u.UserTypeId = ut.id
+                        WHERE p.UserProfileId = @userProfileId
+                        ORDER BY u.CreateDateTime DESC";
+
+                    DbUtils.AddParameter(cmd, "@userProfileId", userProfileId);
+
+                    var reader = cmd.ExecuteReader();
+
+                    var posts = new List<Post>();
+
+                    while (reader.Read())
+                    {
+                        posts.Add(NewPostFromReader(reader));
+                    }
+
+                    reader.Close();
+
+                    return posts;
+                }
+            };
+        }
+
+        public List<Post> GetAllUnapprovedPosts()
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                       SELECT p.Id, p.Title, p.Content, 
+                              p.ImageLocation AS HeaderImage,
+                              p.CreateDateTime, p.PublishDateTime, p.IsApproved,
+                              p.CategoryId, p.UserProfileId,
+                              
+                              c.[Name] AS CategoryName,
+                              u.FirstName, u.LastName, u.DisplayName, u.FirebaseUserId,
+                              u.Email, u.CreateDateTime, u.ImageLocation AS AvatarImage,
+                              u.UserTypeId, u.IsActive,
+                              ut.[Name] AS UserTypeName
+                         FROM Post p
+                              LEFT JOIN Category c ON p.CategoryId = c.id
+                              LEFT JOIN UserProfile u ON p.UserProfileId = u.id
+                              LEFT JOIN UserType ut ON u.UserTypeId = ut.id
+                        WHERE IsApproved = 0 AND PublishDateTime < SYSDATETIME()
+                        ORDER BY PublishDateTime DESC";
+                    var reader = cmd.ExecuteReader();
+
+                    var posts = new List<Post>();
+
+                    while (reader.Read())
+                    {
+                        posts.Add(NewPostFromReader(reader));
+                    }
+
+                    reader.Close();
+
+                    return posts;
+                }
+            };
+        }
+
+
+        //public List<Post> GetAllUnapprovedPosts()
+
+
+        //      c.[Name] AS CategoryName,
+
+        //      u.FirstName, u.LastName, u.DisplayName, u.FirebaseUserId,
+        //      u.Email, u.CreateDateTime, u.ImageLocation AS AvatarImage,
+        //      u.UserTypeId, u.IsActive,
+
+        //      ut.[Name] AS UserTypeName
+        // FROM Post p
+        //      LEFT JOIN Category c ON p.CategoryId = c.id
+        //      LEFT JOIN UserProfile u ON p.UserProfileId = u.id
+        //      LEFT JOIN UserType ut ON u.UserTypeId = ut.id
+        //WHERE IsApproved = 0 AND PublishDateTime < SYSDATETIME()
+        //ORDER BY PublishDateTime DESC";
+
         public Post GetPublishedPostById(int id)
         {
             using (var conn = Connection)
@@ -100,10 +209,13 @@ namespace Tabloid.Repositories
                               p.ImageLocation AS HeaderImage,
                               p.CreateDateTime, p.PublishDateTime, p.IsApproved,
                               p.CategoryId, p.UserProfileId,
+
                               c.[Name] AS CategoryName,
-                              u.FirstName, u.LastName, u.DisplayName, 
+
+                              u.FirstName, u.LastName, u.DisplayName, u.FirebaseUserId,
                               u.Email, u.CreateDateTime, u.ImageLocation AS AvatarImage,
-                              u.UserTypeId, 
+                              u.UserTypeId, u.IsActive,
+
                               ut.[Name] AS UserTypeName
                          FROM Post p
                               LEFT JOIN Category c ON p.CategoryId = c.id
@@ -129,6 +241,47 @@ namespace Tabloid.Repositories
             }
         }
 
+        public Post GetUserPostsById(int id, int userProfileId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                       SELECT p.Id, p.Title, p.Content, 
+                              p.ImageLocation AS HeaderImage,
+                              p.CreateDateTime, p.PublishDateTime, p.IsApproved,
+                              p.CategoryId, p.UserProfileId,
+                              c.[Name] AS CategoryName,
+                              u.FirstName, u.LastName, u.DisplayName, 
+                              u.Email, u.CreateDateTime, u.ImageLocation AS AvatarImage,
+                              u.UserTypeId, 
+                              ut.[Name] AS UserTypeName
+                         FROM Post p
+                              LEFT JOIN Category c ON p.CategoryId = c.id
+                              LEFT JOIN UserProfile u ON p.UserProfileId = u.id
+                              LEFT JOIN UserType ut ON u.UserTypeId = ut.id
+                        WHERE p.id = @id AND p.UserProfileId = @userProfileId";
+
+                    DbUtils.AddParameter(cmd, "@id", id);
+                    DbUtils.AddParameter(cmd, "@userProfileId", userProfileId);
+                    var reader = cmd.ExecuteReader();
+
+                    Post post = null;
+
+                    if (reader.Read())
+                    {
+                        post = NewPostFromReader(reader);
+                    }
+
+                    reader.Close();
+
+                    return post;
+                }
+            }
+        }
+
 
         public void Add(Post post)
         {
@@ -139,12 +292,15 @@ namespace Tabloid.Repositories
                 {
                     cmd.CommandText = @"
                         INSERT INTO Post (
-                            Title, Content, ImageLocation, CreateDateTime, PublishDateTime,
-                            IsApproved, CategoryId, UserProfileId )
+                                Title, Content, ImageLocation,
+                                CreateDateTime, PublishDateTime,
+                                IsApproved, CategoryId, UserProfileId )
                         OUTPUT INSERTED.ID
                         VALUES (
-                            @Title, @Content, @ImageLocation, @CreateDateTime, @PublishDateTime,
-                            @IsApproved, @CategoryId, @UserProfileId )";
+                                @Title, @Content, @ImageLocation, 
+                                @CreateDateTime, @PublishDateTime,
+                                @IsApproved, @CategoryId, @UserProfileId )";
+
                     DbUtils.AddParameter(cmd, "@Title", post.Title);
                     DbUtils.AddParameter(cmd, "@Content", post.Content);
                     DbUtils.AddParameter(cmd, "@ImageLocation", DbUtils.ValueOrDBNull(post.ImageLocation));
