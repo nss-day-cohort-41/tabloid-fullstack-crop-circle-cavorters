@@ -29,10 +29,10 @@ export default function UserSpecificPosts() {
                     {/* adding the current sessionUser's display name to the H1 */}
                     <h1>{(JSON.parse(userProfile).displayName)}'s Posts</h1>
                     <p>
-                        <Link class="btn btn-secondary" to="/posts/add">New Post</Link>
+                        {/* <Link class="btn btn-secondary" to="/posts/add">New Post</Link> */}
                         {/* </p>
                     <p> */}
-                        <Link class="btn btn-primary" to={`/posts/`}>All Posts</Link>
+                        <Link class="approvedPosts" to={`/posts/`}>All Posts</Link>
                     </p>
                 </div>
                 <div className="post-container">

@@ -108,9 +108,9 @@ namespace Tabloid.Repositories
                               p.CreateDateTime, p.PublishDateTime, p.IsApproved,
                               p.CategoryId, p.UserProfileId,
                               
-                              u.FirstName, u.LastName, u.DisplayName, 
+                              u.FirstName, u.LastName, u.DisplayName, u.FirebaseUserId,
                               u.Email, u.CreateDateTime, u.ImageLocation AS AvatarImage,
-                              u.UserTypeId, 
+                              u.UserTypeId, u.IsActive,
 
                               ut.[Name] AS UserTypeName,
                               c.[Name] AS CategoryName
