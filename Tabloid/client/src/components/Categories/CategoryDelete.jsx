@@ -34,7 +34,7 @@ const DeleteCategoryAlert = () => {
                     <div className="row">
                         <div className="col-md-4">
                             <div className="form-group">
-                                <input type="submit" onClick={deleteIndividualCategory} value="Confirm" className="btn btn-primary" />&nbsp;&nbsp;|&nbsp;&nbsp;
+                                <input type="submit" onClick={deleteIndividualCategory} value="Confirm" className="btn-red" />&nbsp;&nbsp;|&nbsp;&nbsp;
                             <Link to="/categories">
                                     Cancel
                             </Link>

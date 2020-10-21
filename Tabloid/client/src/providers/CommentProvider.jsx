@@ -10,7 +10,7 @@ export function CommentProvider(props) {
     const { getToken } = useContext(UserProfileContext);
 
     const [comments, setComments] = useState([]);
-    const [comment, setComment] = useState({})
+    const [comment, setComment] = useState({});
 
     //List all the Action Methods in Code Blocks Below
     //Get all Comments by id,must match API. Makes fetch calls to the API.
@@ -25,10 +25,17 @@ export function CommentProvider(props) {
             }).then(resp => resp.json())
                 .then(setComments));
 
+    // const getCommentById = (id) =>
+    //     getToken().then((token) =>
+    //         fetch(apiUrl + "/post/" + id, {
+    //             method: "GET",
+    //             headers: {
+    //                 Authorization: `Bearer ${token}`
+    //             }
+    //         }).then(resp => resp.json())
+    //             .then(setComment));
 
-
-
-    //Get Comment By Single Id
+    // Get Comment By Single Id
 
     const getCommentById = (id) =>
         getToken().then((token) =>

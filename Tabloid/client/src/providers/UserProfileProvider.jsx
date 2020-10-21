@@ -12,7 +12,7 @@ export function UserProfileProvider(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(userProfile != null);
   const [users, setUsers] = useState([]);
 
-  const [ userTypes, setUserTypes ] = useState([]);
+  const [userTypes, setUserTypes] = useState([]);
 
   const [isFirebaseReady, setIsFirebaseReady] = useState(false);
   useEffect(() => {
@@ -130,10 +130,10 @@ export function UserProfileProvider(props) {
       }).then(resp => resp.json())
         .then(setUserTypes));
 
-  
+
 
   return (
-    <UserProfileContext.Provider value={{ users, isLoggedIn, login, logout, register, getToken, setUsers, getAllUsers, getUserProfile, updateUser, getUserId, getAllInactiveUsers, userTypes, getAllUserTypes }}>
+    <UserProfileContext.Provider value={{ users, isLoggedIn, userProfile, login, logout, register, getToken, setUsers, getAllUsers, getUserProfile, updateUser, getUserId, getAllInactiveUsers, userTypes, getAllUserTypes }}>
       {isFirebaseReady
         ? props.children
         : <Spinner className="app-spinner dark" />}

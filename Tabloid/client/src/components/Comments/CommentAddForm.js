@@ -62,7 +62,7 @@ const CommentAddForm = () => {
                     type="text"
                     name="subject"
                     id="subject"
-                    required=""
+                    required
                 />
             </FormGroup>
             <>

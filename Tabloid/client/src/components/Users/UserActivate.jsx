@@ -4,7 +4,7 @@ import { useHistory, useParams, Link } from "react-router-dom";
 
 const UserDeactivate = () => {
   const history = useHistory();
-  const [ user, setUser ] = useState();
+  const [user, setUser] = useState();
   const { updateUser, getUserId } = useContext(UserProfileContext);
   const { id } = useParams();
 
@@ -12,40 +12,40 @@ const UserDeactivate = () => {
     e.preventDefault();
     user.isActive = true;
     updateUser(user)
-        .then(() => history.push("/inactive"));
+      .then(() => history.push("/inactive"));
   }
-  
+
   useEffect(() => {
     getUserId(id)
-    .then((user) => {
+      .then((user) => {
         setUser(user)
-    })
+      })
   }, []);
 
   if (!user) {
     return null;
-  }  
+  }
 
   return (
     <>
-        <main className="usersContainer">
-          <section className="users-table">
-            <h1>Deactivate</h1>
+      <main className="usersContainer">
+        <section className="users-table">
+          <h1>Deactivate</h1>
 
-            <h4>Are you sure you want to activate {user.fullName}?</h4>
-            <hr />
-            <div className="row">
-              <div className="actionBtns">
-                <div className="form-group">
-                  <input type="submit" onClick={activateUser} value="Confirm" className="btn btn-primary" />&nbsp;&nbsp;|&nbsp;&nbsp;
+          <h4>Are you sure you want to activate {user.fullName}?</h4>
+          <hr />
+          <div className="row">
+            <div className="actionBtns">
+              <div className="form-group">
+                <input type="submit" onClick={activateUser} value="Confirm" className="btn-red" />&nbsp;&nbsp;|&nbsp;&nbsp;
                   <Link to="/inactive">
-                    Cancel
+                  Cancel
                   </Link>
-                </div>
               </div>
             </div>
-          </section>
-        </main>
+          </div>
+        </section>
+      </main>
     </>
   );
 }
