@@ -44,7 +44,7 @@ const CommentEditForm = () => {
     //Edit comment and push to details on posts.
     const editCurrentComment = (e) => {
 
-        e.preventDefault();
+        // e.preventDefault();
         setIsLoading(true);
         console.log("edited Comment", editedComment)
         editComment({

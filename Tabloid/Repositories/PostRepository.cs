@@ -180,23 +180,6 @@ namespace Tabloid.Repositories
         }
 
 
-        //public List<Post> GetAllUnapprovedPosts()
-
-
-        //      c.[Name] AS CategoryName,
-
-        //      u.FirstName, u.LastName, u.DisplayName, u.FirebaseUserId,
-        //      u.Email, u.CreateDateTime, u.ImageLocation AS AvatarImage,
-        //      u.UserTypeId, u.IsActive,
-
-        //      ut.[Name] AS UserTypeName
-        // FROM Post p
-        //      LEFT JOIN Category c ON p.CategoryId = c.id
-        //      LEFT JOIN UserProfile u ON p.UserProfileId = u.id
-        //      LEFT JOIN UserType ut ON u.UserTypeId = ut.id
-        //WHERE IsApproved = 0 AND PublishDateTime < SYSDATETIME()
-        //ORDER BY PublishDateTime DESC";
-
         public Post GetPublishedPostById(int id)
         {
             using (var conn = Connection)
